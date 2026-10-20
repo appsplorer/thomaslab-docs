@@ -1,0 +1,298 @@
+site_name: Thomas Lab Research Handbook
+site_description: Independent, reproducible clinical research methods documentation for Thomas Lab collaborators.
+site_url: https://appsplorer.github.io/thomaslab-docs/
+repo_url: https://github.com/appsplorer/thomaslab-docs
+repo_name: appsplorer/thomaslab-docs
+edit_uri: edit/main/docs/
+copyright: Research-use documentation only. Not a medical device, clinical decision support, or institutional data-use approval.
+docs_dir: docs
+site_dir: site
+strict: true
+
+theme:
+  name: material
+  language: en
+  icon:
+    logo: material/book-open-page-variant
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - navigation.tracking
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: blue
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: blue
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search:
+      lang: en
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - 'Start here':
+      - 'Home': index.md
+      - 'First Session': getting-started/first-session.md
+      - 'Installation': getting-started/installation.md
+      - 'Quickstart': getting-started/quickstart.md
+      - 'Local Validation': getting-started/local-validation.md
+      - 'Reproducibility': getting-started/reproducibility.md
+  - 'Tutorials':
+      - 'Dataset Onboarding': tutorials/dataset-onboarding.md
+      - 'Scientific Review': tutorials/scientific-review.md
+      - 'README': new-dataset/README.md
+      - 'Full Pipeline': full-pipeline.md
+  - 'Curated examples':
+      - 'README': examples/README.md
+      - 'Causal': examples/causal.md
+      - 'Clinical NLP': examples/clinical-nlp.md
+      - 'New Dataset': examples/new-dataset.md
+      - 'Notebook Map': examples/notebook-map.md
+      - 'PGX': examples/pgx.md
+      - 'Prediction Validation': examples/prediction-validation.md
+      - 'Self Service Cookbook': examples/self-service-cookbook.md
+  - 'Lab workflows':
+      - 'Advanced Clinical NLP': guides/advanced-clinical-nlp.md
+      - 'Advanced Survival': guides/advanced-survival.md
+      - 'Annotation Adjudication': guides/annotation-adjudication.md
+      - 'Audit Traceability': guides/audit-traceability.md
+      - 'Bleeding Risk': guides/bleeding-risk.md
+      - 'Causal Epi Workflow': guides/causal-epi-workflow.md
+      - 'Causal Inference': guides/causal-inference.md
+      - 'Causal Mediation': guides/causal-mediation.md
+      - 'Causal Robustness': guides/causal-robustness.md
+      - 'Clinical NLP': guides/clinical-nlp.md
+      - 'Data Quality': guides/data-quality.md
+      - 'Dataset Splitting': guides/dataset-splitting.md
+      - 'Deep Models': guides/deep-models.md
+      - 'Drug Safety Surveillance': guides/drug-safety-surveillance.md
+      - 'EHR Cleaning': guides/ehr-cleaning.md
+      - 'EHR Workflow': guides/ehr-workflow.md
+      - 'Evaluation': guides/evaluation.md
+      - 'External Validation': guides/external-validation.md
+      - 'FHIR': guides/fhir.md
+      - 'Gformula': guides/gformula.md
+      - 'Governed Notebook Use': guides/governed-notebook-use.md
+      - 'Hcru Economics': guides/hcru-economics.md
+      - 'Heterogeneous Effects': guides/heterogeneous-effects.md
+      - 'High Performance': guides/high-performance.md
+      - 'Lab Validation Release Criteria': guides/lab-validation-release-criteria.md
+      - 'Leakage Protection': guides/leakage-protection.md
+      - 'Longitudinal Causal': guides/longitudinal-causal.md
+      - 'Longitudinal Dr': guides/longitudinal-dr.md
+      - 'Medication Claims': guides/medication-claims.md
+      - 'Missing Temporal': guides/missing-temporal.md
+      - 'Multi Treatment': guides/multi-treatment.md
+      - 'Multisite Codes': guides/multisite-codes.md
+      - 'New Dataset Onboarding': guides/new-dataset-onboarding.md
+      - 'Nontechnical Notebooks': guides/nontechnical-notebooks.md
+      - 'Notebook Workbench Quickstart': guides/notebook-workbench-quickstart.md
+      - 'OMOP': guides/omop.md
+      - 'PGX Foundation': guides/pgx-foundation.md
+      - 'PGX Implementation': guides/pgx-implementation.md
+      - 'PGX': guides/pgx.md
+      - 'Phenotype Endpoints': guides/phenotype-endpoints.md
+      - 'PKPD Platelet': guides/pkpd-platelet.md
+      - 'Precision Registry': guides/precision-registry.md
+      - 'Pycharm Lab Workbench': guides/pycharm-lab-workbench.md
+      - 'Quasi Experimental': guides/quasi-experimental.md
+      - 'Recurrent Censoring': guides/recurrent-censoring.md
+      - 'Reporting': guides/reporting.md
+      - 'Reproducible Research Workflow': guides/reproducible-research-workflow.md
+      - 'Researcher Usability Protocol': guides/researcher-usability-protocol.md
+      - 'Schema Adapters': guides/schema-adapters.md
+      - 'SDOH Enrichment': guides/sdoh-enrichment.md
+      - 'Self Controlled Safety': guides/self-controlled-safety.md
+      - 'Staggered Did': guides/staggered-did.md
+      - 'Target Trial': guides/target-trial.md
+      - 'Transportability': guides/transportability.md
+      - 'V1 Self Service': guides/v1-self-service.md
+  - 'API topic index':
+      - 'Annotation': api/annotation.md
+      - 'Bleeding': api/bleeding.md
+      - 'Cardiovascular': api/cardiovascular.md
+      - 'Causal Mediation': api/causal-mediation.md
+      - 'Causal Robustness': api/causal-robustness.md
+      - 'Causal Workflows': api/causal-workflows.md
+      - 'Causal': api/causal.md
+      - 'Censoring': api/censoring.md
+      - 'Claims': api/claims.md
+      - 'Cleaning': api/cleaning.md
+      - 'Codes': api/codes.md
+      - 'Contracts': api/contracts.md
+      - 'Data': api/data.md
+      - 'Dataset': api/dataset.md
+      - 'Drug Safety': api/drug-safety.md
+      - 'Drugs': api/drugs.md
+      - 'Easy': api/easy.md
+      - 'Economics': api/economics.md
+      - 'Epi': api/epi.md
+      - 'Eval': api/eval.md
+      - 'Gformula': api/gformula.md
+      - 'Harmonize': api/harmonize.md
+      - 'Hcru': api/hcru.md
+      - 'Heterogeneous Effects': api/heterogeneous-effects.md
+      - 'Implementation': api/implementation.md
+      - 'API overview': api/index.md
+      - 'Integrated Workflow': api/integrated-workflow.md
+      - 'Interop': api/interop.md
+      - 'Leakage': api/leakage.md
+      - 'Longitudinal Causal': api/longitudinal-causal.md
+      - 'Longitudinal Dr': api/longitudinal-dr.md
+      - 'Missing': api/missing.md
+      - 'Models': api/models.md
+      - 'Multi Treatment': api/multi-treatment.md
+      - 'NLP Context': api/nlp-context.md
+      - 'NLP Medications': api/nlp-medications.md
+      - 'NLP Phenotypes': api/nlp-phenotypes.md
+      - 'NLP': api/nlp.md
+      - 'Onboard': api/onboard.md
+      - 'PGX Assay': api/pgx-assay.md
+      - 'PGX Core': api/pgx-core.md
+      - 'PGX Cyp2c19': api/pgx-cyp2c19.md
+      - 'PGX Cyp2d6': api/pgx-cyp2d6.md
+      - 'PGX Guidelines': api/pgx-guidelines.md
+      - 'PGX Phenoconversion': api/pgx-phenoconversion.md
+      - 'PGX': api/pgx.md
+      - 'Pharmacoepi': api/pharmacoepi.md
+      - 'Phenotypes': api/phenotypes.md
+      - 'PKPD': api/pkpd.md
+      - 'Platelet': api/platelet.md
+      - 'Precision': api/precision.md
+      - 'Quality': api/quality.md
+      - 'Quasi Experimental': api/quasi-experimental.md
+      - 'Recurrent': api/recurrent.md
+      - 'Registry': api/registry.md
+      - 'Release': api/release.md
+      - 'Reproducibility': api/reproducibility.md
+      - 'Research Bundle': api/research-bundle.md
+      - 'SDOH': api/sdoh.md
+      - 'Self Controlled': api/self-controlled.md
+      - 'Splits': api/splits.md
+      - 'Staggered Did': api/staggered-did.md
+      - 'Study Spec': api/study-spec.md
+      - 'Surveillance': api/surveillance.md
+      - 'Survival': api/survival.md
+      - 'Target Trial': api/target-trial.md
+      - 'Temporal': api/temporal.md
+      - 'Transportability': api/transportability.md
+      - 'Validation': api/validation.md
+      - 'Viz': api/viz.md
+  - 'Complete function reference':
+      - 'All modules': reference/functions/README.md
+      - 'Annotation': reference/functions/annotation.md
+      - 'Bleeding': reference/functions/bleeding.md
+      - 'Cardiovascular': reference/functions/cardiovascular.md
+      - 'Causal': reference/functions/causal.md
+      - 'Causal Mediation': reference/functions/causal_mediation.md
+      - 'Causal Robustness': reference/functions/causal_robustness.md
+      - 'Causal Workflows': reference/functions/causal_workflows.md
+      - 'Censoring': reference/functions/censoring.md
+      - 'Claims': reference/functions/claims.md
+      - 'Cleaning': reference/functions/cleaning.md
+      - 'Codes': reference/functions/codes.md
+      - 'Contracts': reference/functions/contracts.md
+      - 'Data': reference/functions/data.md
+      - 'Dataset': reference/functions/dataset.md
+      - 'Drug Safety': reference/functions/drug_safety.md
+      - 'Drugs': reference/functions/drugs.md
+      - 'Easy': reference/functions/easy.md
+      - 'Economics': reference/functions/economics.md
+      - 'Epi': reference/functions/epi.md
+      - 'Eval': reference/functions/eval.md
+      - 'Gformula': reference/functions/gformula.md
+      - 'Harmonize': reference/functions/harmonize.md
+      - 'Hcru': reference/functions/hcru.md
+      - 'Heterogeneous Effects': reference/functions/heterogeneous_effects.md
+      - 'Implementation': reference/functions/implementation.md
+      - 'Integrated Workflow': reference/functions/integrated_workflow.md
+      - 'Interop': reference/functions/interop.md
+      - 'Leakage': reference/functions/leakage.md
+      - 'Longitudinal Causal': reference/functions/longitudinal_causal.md
+      - 'Longitudinal Dr': reference/functions/longitudinal_dr.md
+      - 'Missing': reference/functions/missing.md
+      - 'Models': reference/functions/models.md
+      - 'Multi Treatment': reference/functions/multi_treatment.md
+      - 'NLP': reference/functions/nlp.md
+      - 'NLP Context': reference/functions/nlp_context.md
+      - 'NLP Medications': reference/functions/nlp_medications.md
+      - 'NLP Phenotypes': reference/functions/nlp_phenotypes.md
+      - 'Onboard': reference/functions/onboard.md
+      - 'PGX': reference/functions/pgx.md
+      - 'PGX Assay': reference/functions/pgx_assay.md
+      - 'PGX Core': reference/functions/pgx_core.md
+      - 'PGX Cyp2c19': reference/functions/pgx_cyp2c19.md
+      - 'PGX Cyp2d6': reference/functions/pgx_cyp2d6.md
+      - 'PGX Guidelines': reference/functions/pgx_guidelines.md
+      - 'PGX Phenoconversion': reference/functions/pgx_phenoconversion.md
+      - 'Pharmacoepi': reference/functions/pharmacoepi.md
+      - 'Phenotypes': reference/functions/phenotypes.md
+      - 'PKPD': reference/functions/pkpd.md
+      - 'Platelet': reference/functions/platelet.md
+      - 'Precision': reference/functions/precision.md
+      - 'Quality': reference/functions/quality.md
+      - 'Quasi Experimental': reference/functions/quasi_experimental.md
+      - 'Recurrent': reference/functions/recurrent.md
+      - 'Registry': reference/functions/registry.md
+      - 'Release': reference/functions/release.md
+      - 'Reproducibility': reference/functions/reproducibility.md
+      - 'Research Bundle': reference/functions/research_bundle.md
+      - 'SDOH': reference/functions/sdoh.md
+      - 'Self Controlled': reference/functions/self_controlled.md
+      - 'Splits': reference/functions/splits.md
+      - 'Staggered Did': reference/functions/staggered_did.md
+      - 'Study Spec': reference/functions/study_spec.md
+      - 'Surveillance': reference/functions/surveillance.md
+      - 'Survival': reference/functions/survival.md
+      - 'Target Trial': reference/functions/target_trial.md
+      - 'Temporal': reference/functions/temporal.md
+      - 'Transportability': reference/functions/transportability.md
+      - 'Validation': reference/functions/validation.md
+      - 'Viz': reference/functions/viz.md
+  - 'Research and release policies':
+      - 'API Stability': reference/api-stability.md
+      - 'Clinical Assumptions': reference/clinical-assumptions.md
+      - 'Documentation Quality': reference/documentation-quality.md
+      - 'Release Checklist': reference/release-checklist.md
+      - 'Research Use': reference/research-use.md
+      - 'Github Pages': publishing/github-pages.md
+      - 'Public site maintenance': publishing/public-site-maintenance.md

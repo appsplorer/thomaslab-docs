@@ -1,0 +1,63 @@
+name: Publish Thomas Lab Research Handbook
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install standalone documentation dependencies
+        run: python -m pip install -r requirements-docs.txt
+      - name: Public content preflight
+        run: python scripts/check_public_docs.py
+      - name: Build MkDocs site strictly
+        run: mkdocs build --strict
+      - name: Check essential output pages
+        run: |
+          test -s site/index.html
+          test -s site/getting-started/first-session/index.html
+          test -s site/tutorials/dataset-onboarding/index.html
+          test -s site/reference/functions/index.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: built-documentation
+          path: site/
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: built-documentation
+          path: site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
