@@ -60,6 +60,21 @@ python3.9 scripts/kaggle_hpc.py stage --root "$KAGGLE_ROOT" \
   --limit 16 --max-mib 512 --execute
 ~~~
 
+**Resumable Kaggle staging:** Once an approved source has been downloaded, repeating `stage` verifies the stored receipt, source identity, file inventory, archive safety and SHA-256 before reusing it. `ALREADY_STAGED_VERIFIED` means the exact cached source bytes are intact; **no new Kaggle download is performed**. Mutated, missing or unexpected extra files produce `BLOCK_EXISTING_INTEGRITY_FAILURE` and are not automatically overwritten. This is an archive integrity check, not scientific review or a fresh verification of the Kaggle provider's current license terms.
+
+For an incremental pilot, request a few candidates at a time:
+
+~~~bash
+python3.9 scripts/kaggle_hpc.py inventory --root "$KAGGLE_ROOT" \
+  --id heart_failure_clinical
+
+python3.9 scripts/kaggle_hpc.py stage --root "$KAGGLE_ROOT" \
+  --id heart_failure_clinical --id medical_insurance \
+  --id breast_cancer_wisconsin --max-mib 512 --execute
+~~~
+
+The batch continues through individual blocked candidates, but still returns a nonzero process status if any requested source is unavailable, unlicensed or unsafe. Full scientific or independent-source acceptance requires researcher-approved gold mappings and separate validation.
+
 **CC BY 4.0 name normalization:** Kaggle metadata can return `Attribution 4.0 International (CC BY 4.0)` for the same license the project calls `CC-BY-4.0`. The private downloader now recognizes that **exact verified display name only**, preserves the original and canonical names in the checksum receipt, and continues to block unapproved, noncommercial, ShareAlike or NoDerivatives licenses. A CC BY license is already offered to the public; no purchase or author acceptance step is normally needed. Researchers must preserve required attribution. The [Heart Failure Prediction Kaggle dataset](https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data) requests credit to Davide Chicco and Giuseppe Jurman (2020). Read the [CC BY 4.0 terms](https://creativecommons.org/licenses/by/4.0/). Copyright permission is separate from institutional, ethics and privacy compliance.
 
 **Expected blocking cases are not bugs.** Kaggle licenses such as unknown, "other", copyright-authors and CC BY-NC-SA are not automatically allowed by the acquisition policy. A candidate whose preferred file is not found must be corrected after running `kaggle datasets files <owner/slug>`. Large BRFSS files may exceed 512 MiB even individually. The size limit is verified *after* the Kaggle CLI returns; use project quota and site transfer limits before downloading a potentially large file. Never launch bulk downloads on Slurm compute nodes if the institution requires a designated transfer node.
