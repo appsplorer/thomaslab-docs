@@ -473,3 +473,19 @@ These fixes are committed in private Core PR #32 but have **not yet been rerun a
 **Every-module / every-function policy:** importing a Python module is not testing its functions. The private `hpc_callable_evidence.py --require-all-observed` flag now makes the next integrated CPU acceptance **FAIL** if any named declared Python function or class method (public, private or nested) lacks a freshly measured pytest-executed body line. An accompanying negative regression test confirms incomplete coverage blocks this strict gate. The detailed evidence JSON identifies each unobserved function and source module for targeted test authoring. This still cannot prove full branch coverage, reference numerical accuracy, clinical correctness, safety across unseen datasets, or user-task usability. Lambda-generated/dynamic callables are outside this declaration ledger and must be covered separately where clinically relevant.
 
 **No automatic merge** has taken place. Before Core PR #32 can be considered for technical merging, the *same candidate SHA* must show: zero Python 3.9 screen findings; passing Ruff, mypy, full pytest and coverage quality gate; complete 106-source-module import validation; a complete strict named-callable execution ledger; and passing packaging, notebook and documentation checks. Scientific approval remains separately blocked by independent licensing, gold mappings, real clinical provenance, IRB/DUA and domain-review requirements.
+
+
+## Actual 21 October 2026 CPU acceptance: 106/106 modules import, full release still blocked
+
+The Herts HPC integrated CPU job **2498833** at private core commit `228ee2696fd60a581dc5c83a5be8ac34bbe0ec98` ended **FAILED 1:0** after **12 minutes 38 seconds**. Its report recorded **17 PASS**, **three FAIL** and **two NOT_RUN** phases.
+
+- The recursively discovered Python module import gate achieved **106/106 PASS**, up from 101/106. This is not evidence that each function or each scientific branch executed.
+- PASS: Python 3.9 compatibility, isolated dependency audit, targeted regression tests, source package provenance, ten synthetic adaptation families, 100K-row synthetic scale test, three Kaggle SHA-256 checks and all three original-quarantine schema profiles.
+- FAIL: `full_pytest`, `quick_quality`, and `full_quality`; their individual logs and root causes were **not** included in this summary.
+- NOT_RUN: strict per-function execution ledger (no fresh coverage file because the quick quality gate exited early) and independent expert-approved gold-mapping matrix.
+
+The private core acceptance runner was improved *after that run* so `full_pytest` independently produces coverage JSON within the unique per-job private report directory and the strict per-function ledger reads it **before** the subsequent lint/type-quality sequence. A new regression test guards this evidence ordering. It will still fail acceptance if tests or declared function execution remain incomplete; scientific correctness is not inferred from code coverage. This change has **not yet been verified on HPC**.
+
+**Merge sequencing matters:** The private Core PR stack is adaptive platform **#25 → scientific integrity #27 → Python 3.9 HPC #30 → final Kaggle/HPC #32**. Each is still draft and unmerged; PR #32 does not target `main` directly. All current and combined final target checks need verified success before a controlled integration to main can be recommended.
+
+Existing `full_pytest.log`, `quick_quality.log` and `full_quality.log` from job 2498833 are the next evidence to retrieve before another CPU submission. Even full technical pass would not confer institutional patient-data, IRB/DUA, external gold-mapping or clinical deployment authorization.
