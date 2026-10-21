@@ -361,3 +361,19 @@ A real authorized UH Slurm run produced **different outcomes** for GPU and CPU, 
 The exact CPU source checkout was `1994be20b90393db9d6eecc9029501a55579d0f1`. The private CPU report recorded `cpu_technical_status=FAIL` and `scientific_validation=NOT_ASSESSED`. The user-supplied console excerpt did not include the static check's underlying file/line issues; its private `python39-static.json` and log are needed before determining the cause.
 
 The integrated runner was updated so a failed static screen remains a **FAIL** but does not suppress all *independent* follow-up gates if Python 3.9 compilation and targeted tests still work. A failed compile or essential targeted regression continues to stop the run before dataset access. The GPU smoke already passed and need not be repeated without a changed CUDA environment. Neither result establishes clinical accuracy, full model coverage, or independent-source gold mapping approval.
+
+
+## Identified Python 3.9 static compatibility finding
+
+The 21 October 2026 UH HPC report inspected **126 Python source files** and isolated its first integrated CPU failure to one use of `zip(..., strict=True)` in the private causal matching module (line 438 at the earlier source commit). This keyword was introduced in Python 3.10; the HPC uses Python 3.9.
+
+The private core feature branch now checks the lengths of the treated-order, selected-match and distance arrays **before using ordinary `zip`**, preserving the original strict pairing invariant. Normal NumPy matching and kernel-length mismatch regression tests have been added. The correction is **not yet confirmed on HPC**; the next acceptance step is the Python 3.9 static check plus targeted tests before repeating the integrated CPU Slurm validation. The separate A100 GPU synthetic smoke previously passed and is unaffected by this static compatibility finding.
+
+~~~bash
+python3.9 scripts/python39_compat.py
+python3.9 -m pytest -q \
+  tests/test_python39_compat.py tests/test_causal.py \
+  tests/test_kaggle_hpc.py tests/test_kaggle_review_manifest.py
+~~~
+
+As before, technical compatibility does not establish scientific, clinical or independent-data acceptance.
