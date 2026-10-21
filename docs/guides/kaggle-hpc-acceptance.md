@@ -305,3 +305,44 @@ A benchmark PASS measures documented structural agreement, **not** correct pharm
 Kaggle copies do not establish true FHIR resource coverage, EHR-plus-claims-plus-genotype joins, validated adverse-event phenotypes, prescription exposure semantics, de-identification, specialist causal inference assumptions, or PGx assay and guideline version accuracy. Add specific licensed benchmark data, reviewed gold labels and method-specific synthetic contracts for those components. Multiple Kaggle representations of the same underlying UCI data must not count as independent source evidence.
 
 **Outstanding external release gates:** 15–20 genuinely independent and approved unseen dataset studies, five independent nontechnical researcher task trials, HPC storage/account policy review, privacy/legal/IRB or DUA authorization where needed, manuscript-level numerical baselines, and expert scientific interpretation. Mark unexecuted items `NOT_RUN`, not PASS.
+
+
+## Combined CPU acceptance and optional GPU smoke
+
+Real Herts HPC testing on 21 October 2026 confirmed that the Kaggle source checksum gates were working and the heart-failure clinical dataset profiled at **299 rows × 13 columns**. The movie ratings and diabetes CSV profiles instead raised `UnicodeDecodeError`. Their transferred file sizes were much smaller than the listed CSV sizes, consistent with ZIP-compressed Kaggle downloads saved under `.csv` names (byte signatures are still awaiting HPC confirmation). The private source parser now identifies ZIP content regardless of suffix; a guarded repair path preserves original pre-fix quarantines and creates correctly decompressed, SHA-256-pinned replacements **without scientific autoapproval**.
+
+The new private `scripts/hpc_integrated_acceptance.sh` and `slurm/thomaslab_integrated_cpu.sbatch` run a single **technical CPU validation job** consisting of Python 3.9/shell checks, target/full pytest, dependency preflight, module imports, synthetic/scale benchmarks, the quick and optional full quality gates, and all three source integrity and schema profiles. It writes separate per-phase logs and a `summary.txt` under the HPC `benchmarks/integrated_acceptance` folder, outside Git. It performs **no Kaggle downloads**. Legacy ZIP-as-CSV quarantine repairs require an explicit `THOMASLAB_REPAIR_MISLABELED=1`; the original archived evidence is preserved under `reviewed_recovery`.
+
+After pulling the audited feature branch, running targeted tests and checking local account/partition limits, one example authorized CPU submission is:
+
+~~~bash
+cd /path/to/approved-research/thomaslab_hpc/core/thomaslab-core
+git switch audit/kaggle-hpc-final-20261021
+git pull --ff-only
+python3.9 -m pytest -q tests/test_kaggle_hpc.py tests/test_kaggle_review_manifest.py
+bash -n scripts/hpc_integrated_acceptance.sh slurm/thomaslab_integrated_cpu.sbatch
+sinfo -o "%P %a %l %D"
+
+export THOMASLAB_HPC_ROOT="/path/to/approved-research/thomaslab_hpc"
+export THOMASLAB_EXPECTED_SHA="$(git rev-parse HEAD)"
+export THOMASLAB_PYTHON39=python3.9
+export THOMASLAB_FULL=1
+export THOMASLAB_REPAIR_MISLABELED=1
+sbatch --account=eng --partition=core256 --cpus-per-task=16 \
+  --mem=48G --time=08:00:00 --export=ALL \
+  slurm/thomaslab_integrated_cpu.sbatch
+~~~
+
+The `eng` account and `core256` partition are examples requiring live site verification, not guarantees of user allocation. **Do not use login-node resources for the heavy job.** The full gate may legitimately fail when scientific dependencies, wheel-build requirements or the notebook runtime have not yet been installed. Dependencies must be installed through a separately authorized workflow, not fetched on compute nodes.
+
+GPU work is separate and optional. The private `scripts/hpc_gpu_smoke.py` checks only a reproducible synthetic PyTorch CUDA matrix multiplication and gradient, not clinical models or all GPU software. If authorized on the normal `gpu` batch partition:
+
+~~~bash
+sbatch --account=eng --partition=gpu --gres=gpu:1 \
+  --cpus-per-task=4 --mem=16G --time=01:00:00 \
+  slurm/thomaslab_gpu_smoke.sbatch
+~~~
+
+The reported `gpu-interactive` partition is **interactive-only**, with **one GPU per user**, **one job per user**, and **12 hours maximum**, not five concurrently allocatable user GPUs. Use `srun --partition=gpu-interactive --gres=gpu:1 --pty bash` only if authorized; inside the allocated shell, run `python3.9 scripts/hpc_gpu_smoke.py --output /absolute/approved/new-file.json`. Never submit an `sbatch` job to the interactive-only partition.
+
+Even if every available CPU and CUDA technical phase passes, *publication-level validity*, human-approved gold mappings, the other blocked Kaggle licenses and identities, and 15–20 independently sourced unseen datasets remain separately unverified. The report must not be described as complete clinical or all-function scientific acceptance.
