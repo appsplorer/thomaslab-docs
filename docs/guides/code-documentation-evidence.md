@@ -11,7 +11,7 @@
 | Private `thomaslab-core` | Implementation, notebooks, tests, data contracts, software-release gates | Source inspection, executable tests, package metadata, scientific safeguards | Automatic external validity, independent researcher usability, IRB/DUA approval |
 | Local or hosted test artifacts | Exact Git commit and runner environment | Actual observed test output and release evidence | Universal correctness across unseen datasets |
 
-**Source review performed:** private feature branch `feature/lab-adaptive-notebook-platform`, with further corrective work under `audit/code-doc-contracts-20261021` (October 2026). The most recently *previously reported* broad local checkpoint was 981 passing tests at an earlier commit. That historical result must **not** be substituted for CI at a newly modified commit.
+**Source review performed:** private `thomaslab-core` development branches, including `audit/kaggle-hpc-final-20261021` (not merged into `main` as of the documented October 2026 checkpoint). The real Herts Python 3.9 CPU job `2498939`, at source commit `1ff0a055c43db0c5023b03a953cb92b08fb847ad`, passed full pytest, quick/full quality gates, and all 106 module imports. Its strict callable evidence gate reported **940/955 observed** and therefore the CPU technical status was **FAIL**. Later regression tests targeted those 15 functions; without a new exact-commit full report their acceptance cannot be claimed. Separately, independent clinical dataset/method approval is `NOT_ASSESSED`.
 
 ## Traceability matrix: P0 / P1 engineering safeguards
 
@@ -33,9 +33,9 @@ Use the private repository and choose a clean, isolated interpreter. Do **not** 
 ```powershell
 git clone https://github.com/appsplorer/thomaslab-core.git
 cd thomaslab-core
-git switch audit/code-doc-contracts-20261021
-py -3.11 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e ".[dev,notebooks,docs]"
+git switch audit/kaggle-hpc-final-20261021
+py -3.9 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -c constraints/python39.txt -e ".[dev,notebooks,docs]"
 .\.venv\Scripts\python.exe -m pytest -q tests/test_scientific_input_contracts.py tests/test_code_docs_audit.py tests/test_pgx_guidelines_v08.py tests/test_survival_v16.py
 .\.venv\Scripts\python.exe scripts/audit_code_docs.py --output code-doc-audit-local.json
 .\.venv\Scripts\python.exe scripts/local_quality_gate.py --quick
