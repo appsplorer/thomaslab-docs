@@ -9,7 +9,7 @@ A stable thomaslab-core release is ready only when all of the following are true
 5. Public package modules import in the release CI environment.
 6. Wheel and source distributions build successfully.
 7. The v1 self-service reference notebook executes successfully.
-8. Python 3.10 compatibility checks pass.
+8. Python 3.9 runtime and static compatibility checks pass for the exact tested SHA; Python 3.10/3.11 checks are separately verified where applicable.
 9. The complete pytest suite and coverage/public-callable execution audits pass.
 10. `python scripts/local_quality_gate.py` passes on a clean checkout bound to an exact Git commit.
 11. Strict MkDocs documentation builds successfully.

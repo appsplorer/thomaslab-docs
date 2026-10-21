@@ -73,6 +73,7 @@ nav:
       - 'Home': index.md
       - 'First Session': getting-started/first-session.md
       - 'Installation': getting-started/installation.md
+      - 'Python Compatibility': getting-started/python-compatibility.md
       - 'Quickstart': getting-started/quickstart.md
       - 'Local Validation': getting-started/local-validation.md
       - 'Reproducibility': getting-started/reproducibility.md

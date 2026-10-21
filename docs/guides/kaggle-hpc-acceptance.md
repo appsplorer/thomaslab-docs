@@ -1,5 +1,10 @@
 # Kaggle and HPC: independent dataset acceptance
 
+
+!!! info "Current Python 3.9 guide and evidence status"
+    **Use [the current isolated Python 3.9 Slurm procedure](hpc-python39.md)** for new acceptance runs. Earlier sections below preserve historical investigation commands (including legacy Slurm entry points and pre-repair diagnostics) as archival evidence; do **not** copy obsolete `slurm/python39_validation.sbatch`, `THOMASLAB_INSTALL`, or shared-environment examples to initiate a new run. The unmerged private Core development branch declares Python **3.9+** (while `main` still requires **3.10+**); the integrated Herts runner specifically requires Python **3.9**. The last fully reported integrated job `2498939` passed full pytest, both quality gates, and **106/106** imports but failed the strict callable gate (**940/955** observed), so was **not** technical PASS. Focused subsequent tests at `469c120` passed; job `2499042` was submitted but its complete result is not in the available evidence. Dataset approvals and expert scientific validation remain **NOT_ASSESSED**.
+
+
 !!! warning "Do not equate a downloaded Kaggle dataset with clinical or publication validation"
     Kaggle is a hosting/distribution platform. Copies can have uncertain origin, restrictive licenses, inaccurate labels, obsolete clinical meanings or real identifiers. Only explicitly licensed, permitted sources may be staged; only independently reviewed source schema and gold mappings may be benchmarked. No Kaggle data is presumed appropriate for patient-level decisions.
 
