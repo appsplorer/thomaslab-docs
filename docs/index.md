@@ -4,6 +4,8 @@
 
 This public website teaches the Thomas Lab notebook-based research workflows. The **source-code repository is private** and only available to authorized collaborators. Every tutorial here uses fabricated, non-patient data.
 
+**Supported core interpreters:** Python **3.9+** (3.9, 3.10 and 3.11 documented and tested at specific development commits). Start with the [Python compatibility guide](getting-started/python-compatibility.md) and [installation instructions](getting-started/installation.md). This published documentation does not imply that the current private development PRs have merged.
+
 !!! danger "Research software only"
     thomaslab-core is not an approved medical device or clinical decision support system. Successful calculations, unit tests, and synthetic experiments **do not** constitute clinical, scientific-publication, or institutional-data approval.
 
