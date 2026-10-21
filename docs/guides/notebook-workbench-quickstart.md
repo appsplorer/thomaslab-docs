@@ -8,10 +8,10 @@ This is a Python library and notebook interface, not a Streamlit service.
 
 ## Install and open locally (PyCharm or JupyterLab)
 
-Use Python 3.10 or later in a dedicated virtual environment:
+Use **Python 3.9 or later** in a dedicated virtual environment (for Python 3.9, apply the private repository's `constraints/python39.txt` to installation):
 
 ```bash
-python -m pip install -e ".[notebooks]"
+python -m pip install -c constraints/python39.txt -e ".[notebooks]"
 jupyter lab
 ```
 
