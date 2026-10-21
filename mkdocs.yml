@@ -116,6 +116,7 @@ nav:
       - 'Heterogeneous Effects': guides/heterogeneous-effects.md
       - 'High Performance': guides/high-performance.md
       - 'HPC Python 3.9 and Slurm': guides/hpc-python39.md
+      - 'Kaggle HPC Validation': guides/kaggle-hpc-acceptance.md
       - 'Lab Validation Release Criteria': guides/lab-validation-release-criteria.md
       - 'Code Versus Documentation Evidence': guides/code-documentation-evidence.md
       - 'Leakage Protection': guides/leakage-protection.md
