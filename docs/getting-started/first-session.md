@@ -13,7 +13,7 @@ In **PyCharm Terminal / PowerShell**:
 py -3.9 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-python -m pip install -e ".[notebooks]"
+python -m pip install -c constraints/python39.txt -e ".[notebooks]"
 python -c "import thomaslab; print('Thomas Lab ready')"
 ```
 
