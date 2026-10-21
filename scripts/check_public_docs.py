@@ -19,6 +19,8 @@ REQUIRED = (
     "index.md", "getting-started/first-session.md",
     "tutorials/dataset-onboarding.md", "tutorials/scientific-review.md",
     "guides/notebook-workbench-quickstart.md",
+    "getting-started/python-compatibility.md",
+    "guides/hpc-python39.md",
     "guides/governed-notebook-use.md",
     "reference/functions/README.md",
 )
@@ -41,6 +43,31 @@ def main() -> int:
         data = (DOCS / path).read_text(encoding="utf-8") if (DOCS / path).exists() else ""
         if "python" not in data or "Expected" not in data:
             problems.append("missing code and expected output: " + path)
+    # Prevent a stale minimum-version claim from reappearing on user-facing pages.
+    minimum_claims = (
+        re.compile(r"requires Python\\s*\\*\\*3\\.10 or newer", re.I),
+        re.compile(r"Use Python 3\\.10 or later", re.I),
+        re.compile(r"with Python 3\\.10\\+", re.I),
+    )
+    for relative in (
+        "getting-started/installation.md",
+        "getting-started/first-session.md",
+        "getting-started/local-validation.md",
+        "guides/notebook-workbench-quickstart.md",
+        "guides/pycharm-lab-workbench.md",
+    ):
+        path = DOCS / relative
+        if not path.is_file():
+            problems.append("missing compatibility guide: " + relative)
+            continue
+        body = path.read_text(encoding="utf-8")
+        if any(pattern.search(body) for pattern in minimum_claims):
+            problems.append("obsolete Python 3.10 minimum: " + relative)
+    matrix = DOCS / "getting-started/python-compatibility.md"
+    if matrix.is_file():
+        content = matrix.read_text(encoding="utf-8")
+        if "Python 3.9" not in content or "NOT_ASSESSED" not in content:
+            problems.append("compatibility matrix missing Python 3.9 or evidence limits")
     for p in problems:
         print("ERROR:", p)
     if not problems:
