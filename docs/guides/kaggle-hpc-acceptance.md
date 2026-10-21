@@ -36,11 +36,11 @@ command -v kaggle
 kaggle --version
 ~~~
 
-Use the existing Kaggle login/CLI environment; never copy \`kaggle.json\`, bearer tokens or institutional patient data into GitHub, published docs, notebooks or SLURM logs. A currently installed Kaggle CLI may use a newer interpreter: the staging code invokes that CLI as a separate executable, while the research virtual environment can remain Python 3.9.
+Use the existing Kaggle login/CLI environment; never copy `kaggle.json`, bearer tokens or institutional patient data into GitHub, published docs, notebooks or SLURM logs. A currently installed Kaggle CLI may use a newer interpreter: the staging code invokes that CLI as a separate executable, while the research virtual environment can remain Python 3.9.
 
 ## Inspect and stage the 16 candidate handles
 
-The catalog \`benchmarks/kaggle/candidates.json\` is **discovery-only**: no source or license is preapproved. Current candidate handles cover diabetes, breast cancer, liver disease, stroke, heart failure (two distinct distributions), health insurance, appointment attendance, cardiovascular risk, temporal credit payments, relational movie ratings, COVID surveillance, drug-review NLP, diabetes readmissions, CDC BRFSS and CMS hospital ratings.
+The catalog `benchmarks/kaggle/candidates.json` is **discovery-only**: no source or license is preapproved. Current candidate handles cover diabetes, breast cancer, liver disease, stroke, heart failure (two distinct distributions), health insurance, appointment attendance, cardiovascular risk, temporal credit payments, relational movie ratings, COVID surveillance, drug-review NLP, diabetes readmissions, CDC BRFSS and CMS hospital ratings.
 
 ~~~bash
 KAGGLE_ROOT="$THOMASLAB_HPC_ROOT/datasets/kaggle"
@@ -60,7 +60,7 @@ python3.9 scripts/kaggle_hpc.py stage --root "$KAGGLE_ROOT" \
   --limit 16 --max-mib 512 --execute
 ~~~
 
-**Expected blocking cases are not bugs.** Kaggle licenses such as unknown, "other", copyright-authors and CC BY-NC-SA are not automatically allowed by the acquisition policy. A candidate whose preferred file is not found must be corrected after running \`kaggle datasets files <owner/slug>\`. Large BRFSS files may exceed 512 MiB even individually. The size limit is verified *after* the Kaggle CLI returns; use project quota and site transfer limits before downloading a potentially large file. Never launch bulk downloads on Slurm compute nodes if the institution requires a designated transfer node.
+**Expected blocking cases are not bugs.** Kaggle licenses such as unknown, "other", copyright-authors and CC BY-NC-SA are not automatically allowed by the acquisition policy. A candidate whose preferred file is not found must be corrected after running `kaggle datasets files <owner/slug>`. Large BRFSS files may exceed 512 MiB even individually. The size limit is verified *after* the Kaggle CLI returns; use project quota and site transfer limits before downloading a potentially large file. Never launch bulk downloads on Slurm compute nodes if the institution requires a designated transfer node.
 
 A source distributed through Kaggle does not automatically count as an independent dataset. Check original provenance and overlap/duplicate cohort membership, and preserve required attribution.
 
@@ -83,10 +83,10 @@ For a Kaggle dataset with a different actual filename, inspect Kaggle's current 
 
 To count an independently reviewed case, the lab supplies **two files per candidate** in:
 
-\`$THOMASLAB_HPC_ROOT/benchmarks/gold_mappings/\`
+`$THOMASLAB_HPC_ROOT/benchmarks/gold_mappings/`
 
-- \`<id>.mapping.json\`: JSON object of actual source-column names to canonical roles, independently verified against original data dictionary and units.
-- \`<id>.approval.json\`: named reviewer, source SHA-256 (from \`review-receipt.json\`), source license, reviewed domain, \`status: "APPROVED"\`, and \`independent_source_review: "COMPLETE"\`.
+- `<id>.mapping.json`: JSON object of actual source-column names to canonical roles, independently verified against original data dictionary and units.
+- `<id>.approval.json`: named reviewer, source SHA-256 (from `review-receipt.json`), **gold mapping SHA-256** (from `sha256sum <id>.mapping.json`), source license, reviewed domain, `status: "APPROVED"`, and `independent_source_review: "COMPLETE"`.
 
 A safe initial approval template is **PENDING**, not approved:
 
@@ -95,6 +95,7 @@ A safe initial approval template is **PENDING**, not approved:
   "status": "PENDING",
   "reviewer": "",
   "dataset_sha256": "",
+  "gold_mapping_sha256": "",
   "license": "UNVERIFIED",
   "independent_source_review": "NOT_ASSESSED",
   "domain": ""
@@ -105,7 +106,7 @@ Never promote the template automatically. Use a real expert review and the curre
 
 ## Execute the full software gate
 
-Use an authorized CPU partition (the \`eng\` account and \`core32\` examples require verification against current HPC policies).
+Use an authorized CPU partition (the example Slurm account and CPU partition require verification against current HPC policies).
 
 ~~~bash
 export THOMASLAB_EXPECTED_SHA="$(git rev-parse HEAD)"
@@ -115,7 +116,7 @@ sbatch --account=eng --partition=core32 --cpus-per-task=8 \
   --mem=32G --time=06:00:00 slurm/python39_validation.sbatch
 ~~~
 
-The hardened script now includes an independent import audit for every source module and extra Kaggle provenance tests. Its existing 40 guided callbacks, 19 legacy registrations, 10 synthetic families, 100,000-row streaming benchmark, full pytest and 84% coverage checks remain part of the quality gate. Full release mode (\`THOMASLAB_FULL=1\`) also requires the compatible PyTorch/notebook/docs toolchain.
+The hardened script now includes an independent import audit for every source module and extra Kaggle provenance tests. Its existing 40 guided callbacks, 19 legacy registrations, 10 synthetic families, 100,000-row streaming benchmark, full pytest and 84% coverage checks remain part of the quality gate. Full release mode (`THOMASLAB_FULL=1`) also requires the compatible PyTorch/notebook/docs toolchain.
 
 ## Run the Kaggle-reviewed matrix in Slurm
 
@@ -127,12 +128,14 @@ sbatch --account=eng --partition=core32 --cpus-per-task=8 \
   --mem=32G --time=06:00:00 slurm/kaggle_reviewed_matrix.sbatch
 ~~~
 
-A complete 16-candidate run fails on any missing, unapproved, unlicensed or mutated source. For **exploratory diagnostics only**, set \`THOMASLAB_ALLOW_PARTIAL_BENCHMARK=1\`: all excluded sources stay explicitly \`NOT_RUN\` or \`BLOCK\`, and partial results cannot establish 16-dataset acceptance.
+A complete 16-candidate run fails on any missing, unapproved, unlicensed or mutated source. For **exploratory diagnostics only**, set `THOMASLAB_ALLOW_PARTIAL_BENCHMARK=1`: all excluded sources stay explicitly `NOT_RUN` or `BLOCK`, and partial results cannot establish 16-dataset acceptance.
 
-The manifest uses **exact source SHA-256**, approved source and gold directories, at least 0.80 mapping-fidelity threshold, and fail-closed CLI exit codes. A benchmark PASS measures documented structural agreement, **not** correct pharmacotherapy, PGx guideline interpretation, clinical causal identification, drug-safety effects or external validity.
+The manifest uses **exact source SHA-256**, approved source and gold directories, at least 0.80 mapping-fidelity threshold, and fail-closed CLI exit codes. The eager mapping benchmark defaults to **64 MiB maximum source size** (`--max-source-mib`, upper bound 256 MiB). Larger BRFSS/EHR sources must use chunked full validation and approved large-scale methods rather than unbounded pandas materialization.
+
+A benchmark PASS measures documented structural agreement, **not** correct pharmacotherapy, PGx guideline interpretation, clinical causal identification, drug-safety effects or external validity.
 
 ## What the 16 candidate sources do not cover
 
 Kaggle copies do not establish true FHIR resource coverage, EHR-plus-claims-plus-genotype joins, validated adverse-event phenotypes, prescription exposure semantics, de-identification, specialist causal inference assumptions, or PGx assay and guideline version accuracy. Add specific licensed benchmark data, reviewed gold labels and method-specific synthetic contracts for those components. Multiple Kaggle representations of the same underlying UCI data must not count as independent source evidence.
 
-**Outstanding external release gates:** 15–20 genuinely independent and approved unseen dataset studies, five independent nontechnical researcher task trials, HPC storage/account policy review, privacy/legal/IRB or DUA authorization where needed, manuscript-level numerical baselines, and expert scientific interpretation. Mark unexecuted items \`NOT_RUN\`, not PASS.
+**Outstanding external release gates:** 15–20 genuinely independent and approved unseen dataset studies, five independent nontechnical researcher task trials, HPC storage/account policy review, privacy/legal/IRB or DUA authorization where needed, manuscript-level numerical baselines, and expert scientific interpretation. Mark unexecuted items `NOT_RUN`, not PASS.
