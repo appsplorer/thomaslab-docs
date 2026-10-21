@@ -346,3 +346,18 @@ sbatch --account=eng --partition=gpu --gres=gpu:1 \
 The reported `gpu-interactive` partition is **interactive-only**, with **one GPU per user**, **one job per user**, and **12 hours maximum**, not five concurrently allocatable user GPUs. Use `srun --partition=gpu-interactive --gres=gpu:1 --pty bash` only if authorized; inside the allocated shell, run `python3.9 scripts/hpc_gpu_smoke.py --output /absolute/approved/new-file.json`. Never submit an `sbatch` job to the interactive-only partition.
 
 Even if every available CPU and CUDA technical phase passes, *publication-level validity*, human-approved gold mappings, the other blocked Kaggle licenses and identities, and 15–20 independently sourced unseen datasets remain separately unverified. The report must not be described as complete clinical or all-function scientific acceptance.
+
+
+## Observed first CPU and GPU acceptance jobs (21 October 2026)
+
+A real authorized UH Slurm run produced **different outcomes** for GPU and CPU, which must not be combined into a single PASS.
+
+| Gate | Slurm accounting | Verified outcome |
+|---|---|---|
+| Standard GPU smoke (`2493696`) | `COMPLETED 0:0` | **PASS**: one NVIDIA A100 80GB PCIe, PyTorch 2.8.0+cu128, CUDA matrix forward/gradient finite, maximum absolute CPU–GPU difference 1.71661376953125e-05 |
+| Integrated CPU acceptance (`2493645`) | `FAILED 1:0` | **FAIL**: `shell_syntax` PASS; `python39_static` FAIL, exit 1 |
+| Full CPU pytest, module import checks, synthetic performance, three reviewed CSV profiles | Not reached | **NOT_RUN**, not failures or passes |
+
+The exact CPU source checkout was `1994be20b90393db9d6eecc9029501a55579d0f1`. The private CPU report recorded `cpu_technical_status=FAIL` and `scientific_validation=NOT_ASSESSED`. The user-supplied console excerpt did not include the static check's underlying file/line issues; its private `python39-static.json` and log are needed before determining the cause.
+
+The integrated runner was updated so a failed static screen remains a **FAIL** but does not suppress all *independent* follow-up gates if Python 3.9 compilation and targeted tests still work. A failed compile or essential targeted regression continues to stop the run before dataset access. The GPU smoke already passed and need not be repeated without a changed CUDA environment. Neither result establishes clinical accuracy, full model coverage, or independent-source gold mapping approval.
