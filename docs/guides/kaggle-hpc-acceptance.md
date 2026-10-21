@@ -377,3 +377,28 @@ python3.9 -m pytest -q \
 ~~~
 
 As before, technical compatibility does not establish scientific, clinical or independent-data acceptance.
+
+
+## Integrated CPU job 2494199: benchmark subprocess import failure
+
+The 21 October 2026 UH HPC CPU acceptance job at private-core commit `e389ecd55e96d2f99b5e552ca23ee98afd200283` ended after 12 seconds with `FAILED 1:0`. The validated phase record was `shell_syntax PASS`, `python39_static PASS`, `compile PASS`, and `targeted FAIL`. Two targeted `tests/test_adaptive_benchmark.py` subprocess tests failed because `scripts/run_lab_adaptation_benchmark.py` raised `ModuleNotFoundError: No module named 'thomaslab'` before any benchmark data analysis.
+
+The project has a `src/thomaslab` source layout. Pytest's configuration makes that package importable within pytest, but this setting is not automatically inherited by a new Python process. This was an HPC execution setup defect, **not** a failed scientific outcome.
+
+The private core branch now:
+- Supplies the current checkout's `src` package path to the two standalone benchmark CLI subprocess tests.
+- Exports that `src` path for nested Python processes in the integrated CPU runner.
+- Adds a mandatory `package_origin` gate confirming the resolved `thomaslab` package belongs to the exact Git checkout under test, preventing accidental use of a different installed release.
+
+Before submitting another Slurm allocation, verify the private branch on Python 3.9:
+
+~~~bash
+git switch audit/kaggle-hpc-final-20261021
+git pull --ff-only
+python3.9 -m pytest -q \
+  tests/test_adaptive_benchmark.py \
+  tests/test_kaggle_hpc.py \
+  tests/test_kaggle_review_manifest.py
+~~~
+
+The corrected source is **not yet HPC-verified**. Missing mandatory scientific dependencies, full pytest, module imports, old ZIP quarantine repairs and three schema profiles remain independent gates. No protected dataset rows, private node paths, user credentials or approved gold mappings are included in the public documentation.
