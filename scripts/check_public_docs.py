@@ -45,9 +45,9 @@ def main() -> int:
             problems.append("missing code and expected output: " + path)
     # Prevent a stale minimum-version claim from reappearing on user-facing pages.
     minimum_claims = (
-        re.compile(r"requires Python\\s*\\*\\*3\\.10 or newer", re.I),
-        re.compile(r"Use Python 3\\.10 or later", re.I),
-        re.compile(r"with Python 3\\.10\\+", re.I),
+        re.compile(r"requires Python\s*\*\*3\.10 or newer", re.I),
+        re.compile(r"Use Python 3\.10 or later", re.I),
+        re.compile(r"with Python 3\.10\+", re.I),
     )
     for relative in (
         "getting-started/installation.md",
