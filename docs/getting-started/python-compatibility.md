@@ -15,10 +15,10 @@ Real October 2026 Herts HPC acceptance logs on the private development branch es
 
 - An isolated **Python 3.9.25** environment passed `pip check`, with `lifelines 0.29.0`, `numpy 1.26.4`, `pyarrow 18.1.0`, `torch 2.8.0`, and the development tools available.
 - Source commit `1ff0a055c43db0c5023b03a953cb92b08fb847ad` passed full pytest, Ruff, mypy, the complete quality gate, and imports of **106/106** discovered source modules. The strict callable execution inventory found **940 of 955** function and method bodies observed, so its final CPU technical status remained **FAIL**.
-- New tests targeting the 15 previously unobserved callables passed on a separate CPU allocation at source commit `469c120a81bdf5957911550dea4075fbf577ab61`. The subsequent full integrated CPU job `2499042` was submitted, but its final report was **not available in the supplied evidence**.
+- At source commit `469c120a81bdf5957911550dea4075fbf577ab61`, focused CPU regression job `2499039` completed **PASS** (`0:0`, 32 seconds); full integrated CPU job **`2499042` completed PASS** (`0:0`, 16 minutes 51 seconds). All **21 executed technical phases passed**, including full pytest, Ruff/mypy and full quality, **106/106 imported modules** and **955/955 declared named function/method bodies observed**, with **zero unobserved functions**. The separate `reviewed_gold_matrix` phase remains **`NOT_RUN_REQUIRES_NAMED_APPROVAL`**.
 - A previously performed NVIDIA A100 smoke test passed synthetic tensor arithmetic and gradient checks. It does not establish universal GPU compatibility.
 
-These statements document specific test runs. They are not an assertion that the private branch has merged into `main`, that GitHub CI is green, or that clinical outcomes have been validated. The independent clinical and scientific validation status remains **`NOT_ASSESSED`** until approved data mappings, independent studies and named expert sign-off are available.
+These statements document specific test runs. **Even 955/955 function bodies being observed is not 100% branch coverage, proven numerical correctness, or scientific validation.** They do not assert that the private branch has merged into `main` or that GitHub CI is green; the three-version GitHub Actions matrix still reports failures at the tested source SHA. Clinical outcomes have not been independently validated. The independent clinical and scientific validation status remains **`NOT_ASSESSED`** until approved data mappings, independent studies and named expert sign-off are available.
 
 ## Python 3.9 dependency resolution
 
