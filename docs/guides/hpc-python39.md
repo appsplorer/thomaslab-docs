@@ -1,6 +1,6 @@
 # Python 3.9 and Slurm: Thomas Lab HPC validation
 
-**Current canonical procedure for Python 3.9 development validation.** This page supersedes the older `slurm/python39_validation.sbatch`, `THOMASLAB_INSTALL`, and shared-environment instructions. The private package declares **Python 3.9+** support; the current *integrated Herts CPU runner* specifically requires **Python 3.9** in an isolated environment.
+**Current canonical procedure for Python 3.9 development validation.** This page supersedes the older `slurm/python39_validation.sbatch`, `THOMASLAB_INSTALL`, and shared-environment instructions. The unmerged private Core development branch declares **Python 3.9+** support, while `thomaslab-core/main` still requires **Python 3.10+**; the current *integrated Herts CPU runner* specifically requires **Python 3.9** in an isolated environment.
 
 !!! warning "Not a clinical or release approval"
     Technical validation runs against synthetic/test fixtures and only separately authorized public source profiles. No data-use permissions, institutional accounts, validated external clinical mappings, independent researcher task trials or manuscript-level scientific validity follow from a Slurm PASS.
