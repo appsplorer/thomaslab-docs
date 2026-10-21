@@ -213,6 +213,38 @@ Extraction is deliberately separate from acquisition and preserves the source ZI
 
 For a Kaggle dataset with a different actual filename, inspect Kaggle's current file listing and update the reviewed candidate selection before retrying. No direct identifiers or row samples should appear in downloadable benchmark reports.
 
+## Three Kaggle HPC sources downloaded and structurally quarantined
+
+At the October 2026 Herts HPC checkpoint, the private Python 3.9 Kaggle suite passed. The real source-download and SHA-256 inventory outcomes are:
+
+| Candidate | Original Kaggle file selected | Downloaded bytes | Integrity |
+|---|---|---:|---|
+| Heart-failure clinical | `heart_failure_clinical_records_dataset.csv` | 12,239 | Passed (quarantined earlier) |
+| Movie ratings small | `ratings_small.csv` | 675,002 | Passed |
+| Diabetes readmissions candidate | `diabetic_data.csv` | 3,314,619 | Passed |
+
+The downloaded byte counts may represent **compressed ZIP payloads**, not the CSV file sizes. Real Kaggle license and owner verification exists for these three handles, but clinical validity, readmission outcomes, independent cohort identity and expert mappings remain **NOT_ASSESSED**.
+
+To begin schema review, the private core now offers `profile` for checksum-pinned quarantined CSV/TSV data. The workflow rechecks staged and quarantined SHA-256 receipts, streams input with a bounded row size, reports row and column counts and row-width consistency, and never prints patient-level row values. Suspicious column headers are positionally redacted. It does **not** self-approve schema mappings.
+
+~~~bash
+# If not already quarantined, extract the original selected CSVs
+python3.9 scripts/kaggle_hpc.py extract --root "$KAGGLE_ROOT" \
+  --id movie_ratings_small --member ratings_small.csv --execute
+python3.9 scripts/kaggle_hpc.py extract --root "$KAGGLE_ROOT" \
+  --id diabetes_readmissions --member diabetic_data.csv --execute
+
+# Profile only the reviewed-area files; this does not authorize scientific claims
+python3.9 scripts/kaggle_hpc.py profile --root "$KAGGLE_ROOT" \
+  --id heart_failure_clinical --max-mib 64 --execute
+python3.9 scripts/kaggle_hpc.py profile --root "$KAGGLE_ROOT" \
+  --id movie_ratings_small --max-mib 64 --execute
+python3.9 scripts/kaggle_hpc.py profile --root "$KAGGLE_ROOT" \
+  --id diabetes_readmissions --max-mib 64 --execute
+~~~
+
+The diagnostic continues to block five unverified Kaggle publisher identities and the inaccessible Pima handle; a public display name is not a verified account slug. License and scientific review remain independent gates. The `brandao/diabetes` dataset's hospital/readmission provenance has not yet been reviewed and must not be called an accepted external EHR cohort.
+
 ## Researcher-controlled gold mappings and approval
 
 To count an independently reviewed case, the lab supplies **two files per candidate** in:
