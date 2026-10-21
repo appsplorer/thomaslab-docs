@@ -431,3 +431,14 @@ export THOMASLAB_PYTHON39="$THOMASLAB_VENV/bin/python"
 The integrated CPU runner now requires this exact isolated interpreter and an early passing environment gate. Required missing packages, inherited system site packages and inconsistent dependency resolutions must be treated as failures, not silently skipped. The venv preparation may need substantial storage for PyTorch; verify institutional node/storage/pip-index policy first and report any missing compatible wheels instead of relaxing project constraints. The previous A100 GPU arithmetic smoke is already PASS and need not be repeated just to isolate the CPU environment.
 
 Scientific correctness, independent clinical data, source licensing, expert-reviewed mappings, and production authorization remain separate acceptance gates.
+
+
+## Module imports versus individual function execution
+
+The private integrated acceptance pipeline imports every discovered source Python module in a clean subprocess and inventories public functions/methods. Its quick quality gate runs the pytest suite with at least **84% aggregate line coverage**, requires observed execution of at least one body line in each audited **top-level public** function/method, and smoke-tests the 59 notebook workflows (40 guided callbacks and 19 legacy widget interfaces). **Import success is not function correctness.** Neither line coverage nor a single executed function-body line establishes all code paths, mathematical correctness, clinical safety or publication readiness.
+
+The user-supplied latest isolated environment log shows Python 3.9.25, `lifelines 0.29.0`, zero dependency conflicts and passing targeted regression tests. It shows that Slurm job **2495601 was submitted**, not that full module/coverage tests finished. Its outcome must be read from the actual job report.
+
+For the *next* pinned run, the private core branch adds `scripts/hpc_callable_evidence.py`, a source-wide function evidence ledger. The script inventories named Python functions and class methods, including nested-package and private declarations, and records `BODY_LINE_OBSERVED`, `BODY_NOT_OBSERVED`, `NO_COVERAGE_RECORD` or `NO_EXECUTABLE_BODY` from **fresh** pytest coverage. It writes a per-symbol JSON file outside the source repository alongside the integrated CPU reports. It excludes anonymous lambdas and dynamically generated functions and deliberately does not execute arbitrary user functions or assert scientific validity.
+
+**This new ledger was committed after job 2495601 was submitted and therefore is not part of that existing job.** Do not pull a moving branch into an active job's checkout. Evaluate its final report first; if another run is necessary, pin the new source SHA and collect the ledger then. Even an all-observed report must not be represented as 100% branch or clinical validity.
