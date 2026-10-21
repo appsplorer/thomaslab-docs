@@ -10,11 +10,11 @@ From PowerShell:
 git clone https://github.com/appsplorer/thomaslab-core.git
 cd thomaslab-core
 
-py -3.11 -m venv .venv
+py -3.9 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 
 python -m pip install --upgrade pip
-python -m pip install -e ".[dev,docs,notebooks]"
+python -m pip install -c constraints/python39.txt -e ".[dev,docs,notebooks]"
 python -m pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu "torch>=2.1.0"
 ```
 
@@ -23,6 +23,8 @@ In PyCharm, set the project interpreter to:
 ```text
 <repository>\.venv\Scripts\python.exe
 ```
+
+These example commands select **Python 3.9**. The private package also declares 3.10 and 3.11 compatibility; choose a dedicated virtual environment for each interpreter rather than reusing a shared scientific environment. For 3.9, `constraints/python39.txt` supplies conservative resolution bounds, not a reproducible lockfile. See the [compatibility matrix](../getting-started/python-compatibility.md).
 
 ## One-command full quality gate
 
