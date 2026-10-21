@@ -1,5 +1,5 @@
-# Index API reference
+# API reference
 
-This public API index points to the **[documented `thomaslab.index` functions](../reference/functions/index.md)**, including parameters, signatures, examples, limitations and research-use conditions.
+Browse the complete [static function reference](../reference/functions/README.md) for **571 documented callables across 69 modules**, including signatures, inputs, examples, and research-use limitations.
 
-The underlying Python implementation is maintained in a **private repository** and is accessible only to approved Thomas Lab collaborators. This documentation does not grant permission to access institutional data or use these utilities for clinical decisions.
+The implementation repository is private. Publication of this documentation does not authorize access to institutional records or clinical decision-making. For teaching, begin with the [synthetic first session](../getting-started/first-session.md).
