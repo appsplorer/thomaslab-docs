@@ -316,14 +316,14 @@ The new private `scripts/hpc_integrated_acceptance.sh` and `slurm/thomaslab_inte
 After pulling the audited feature branch, running targeted tests and checking local account/partition limits, one example authorized CPU submission is:
 
 ~~~bash
-cd /beegfs/general/$USER/research_workplace/Projects/thomaslab_hpc/core/thomaslab-core
+cd /path/to/approved-research/thomaslab_hpc/core/thomaslab-core
 git switch audit/kaggle-hpc-final-20261021
 git pull --ff-only
 python3.9 -m pytest -q tests/test_kaggle_hpc.py tests/test_kaggle_review_manifest.py
 bash -n scripts/hpc_integrated_acceptance.sh slurm/thomaslab_integrated_cpu.sbatch
 sinfo -o "%P %a %l %D"
 
-export THOMASLAB_HPC_ROOT="/beegfs/general/$USER/research_workplace/Projects/thomaslab_hpc"
+export THOMASLAB_HPC_ROOT="/path/to/approved-research/thomaslab_hpc"
 export THOMASLAB_EXPECTED_SHA="$(git rev-parse HEAD)"
 export THOMASLAB_PYTHON39=python3.9
 export THOMASLAB_FULL=1
