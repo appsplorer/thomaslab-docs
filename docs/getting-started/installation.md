@@ -4,7 +4,7 @@ The **research code** is maintained in the private `appsplorer/thomaslab-core` r
 
 ## Supported Python versions
 
-The private package declares **Python 3.9 or newer** (`requires-python = ">=3.9"`) and identifies Python **3.9, 3.10 and 3.11** in its package metadata. The examples here choose Python **3.9** to match the verified Herts HPC environment. Python 3.10 and 3.11 can be used in their own clean environments; future versions need their own compatibility checks.
+The **unmerged Core development branch** declares **Python 3.9 or newer** (`requires-python = ">=3.9"`) and lists Python **3.9, 3.10 and 3.11**. The current private **`main` branch still declares Python 3.10+** (`requires-python = ">=3.10"`). Choose Python 3.9 **only after checking out the development branch** until those changes are merged. The examples here choose Python **3.9** to match the verified Herts HPC environment. Python 3.10 and 3.11 can be used in their own clean environments; future versions need their own compatibility checks.
 
 For Python 3.9, apply the private repository's [conservative version constraints](https://github.com/appsplorer/thomaslab-core/blob/audit/kaggle-hpc-final-20261021/constraints/python39.txt). The constraints are **not** a fully pinned lockfile; record resolved versions for reproducibility.
 
@@ -19,6 +19,7 @@ These commands assume you are an **authorized collaborator** with access to the 
 ```powershell
 git clone git@github.com:appsplorer/thomaslab-core.git
 cd thomaslab-core
+git switch audit/kaggle-hpc-final-20261021
 py -3.9 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
 .\.venv\Scripts\python.exe -m pip install -c constraints/python39.txt -e ".[dev,notebooks]"
@@ -33,6 +34,7 @@ In PyCharm, select `.venv\Scripts\python.exe` as the project interpreter and use
 ```bash
 git clone git@github.com:appsplorer/thomaslab-core.git
 cd thomaslab-core
+git switch audit/kaggle-hpc-final-20261021
 python3.9 -m venv .venv
 .venv/bin/python -m pip install --upgrade pip
 .venv/bin/python -m pip install -c constraints/python39.txt -e '.[dev,notebooks]'
