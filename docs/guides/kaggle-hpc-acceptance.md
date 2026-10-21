@@ -64,6 +64,35 @@ python3.9 scripts/kaggle_hpc.py stage --root "$KAGGLE_ROOT" \
 
 A source distributed through Kaggle does not automatically count as an independent dataset. Check original provenance and overlap/duplicate cohort membership, and preserve required attribution.
 
+## Kaggle 1.7.x metadata object validation
+
+An actual HPC run on Kaggle API 1.7.4.5 returned a JSON string rather than the expected dataset metadata object. The private ingestion implementation now handles a nested JSON-encoded object when present, but **blocks all unstructured strings**, missing source identity, invalid license metadata, and malformed JSON. This prevents unsupported responses from being interpreted as license permission. Each candidate produces an independent status instead of stopping the entire 16-source staging attempt.
+
+For a `BLOCK_METADATA_SHAPE` response, run the following on an institution-approved Kaggle CLI login/transfer node. This prints **type and key names only**, never the raw payload, data rows or access token:
+
+~~~bash
+DIAG_DIR="$THOMASLAB_HPC_ROOT/datasets/kaggle/metadata/heart-failure-debug"
+mkdir -p "$DIAG_DIR"
+chmod 700 "$DIAG_DIR"
+kaggle datasets metadata andrewmvd/heart-failure-clinical-data -p "$DIAG_DIR"
+python3.9 - "$DIAG_DIR/dataset-metadata.json" <<'PY'
+import json, sys
+from pathlib import Path
+data = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+print("outer_type:", type(data).__name__)
+print("outer_keys:", sorted(data) if isinstance(data, dict) else "not-object")
+if isinstance(data, str):
+    try:
+        nested = json.loads(data)
+        print("nested_type:", type(nested).__name__)
+        print("nested_keys:", sorted(nested) if isinstance(nested, dict) else "not-object")
+    except (ValueError, TypeError):
+        print("nested_type: not-valid-json-object")
+PY
+~~~
+
+A valid dataset reference plus an explicitly allowlisted license are still required. An unresolved metadata string is a **BLOCK**, not a downloadable or scientifically validated dataset.
+
 ## Check source integrity and quarantine one member
 
 ~~~bash
