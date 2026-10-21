@@ -128,10 +128,10 @@ At the recorded 21 October 2026 development checkpoint:
 | Herts job `2498939` on Core SHA `1ff0a055c43db0c5023b03a953cb92b08fb847ad` | Full pytest, quality gates, and 106/106 module imports **PASS** |
 | Same job, strict function-ledger phase | **FAIL:** 940/955 function/method bodies observed; 15 unobserved |
 | Subsequent focused tests at Core SHA `469c120a81bdf5957911550dea4075fbf577ab61`, job `2499039` | **PASS** for executed targeted test modules |
-| Subsequent integrated job `2499042` | **Submitted** in supplied evidence; its final status and callable ledger were not provided |
+| Subsequent integrated job `2499042`, same SHA `469c120a81bdf5957911550dea4075fbf577ab61` | **COMPLETED 0:0** in 16m51s; **21/21 executed technical phases PASS, 0 FAIL**, full pytest/quality, **106/106** source modules imported, **955/955** named function/method bodies observed, **0 unobserved** |
 | Scientific reviewer-approved external mappings | **NOT_ASSESSED / NOT_RUN** |
 | Independent broad unseen-source benchmarks and five-researcher usability evaluation | **Not established** |
 
-**Do not merge or claim technical release acceptance from a previous SHA.** The public documents and MkDocs build are independent of the private Core PR stack; private Core CI and scientific validity still need separate evidence.
+**At the exact tested SHA, Python 3.9 integrated CPU technical acceptance is PASS.** That is not a full scientific or institutional data-approval decision. The public documents and MkDocs build are independent of the private Core PR stack; GitHub Actions Python-version checks still fail for the tested SHA and the stacked Core PRs remain unmerged. Scientific validity still needs separate evidence.
 
 For details on Kaggle source identity, license reviews and historic individual tests, read [Kaggle/HPC acceptance evidence](kaggle-hpc-acceptance.md). For software-versus-science decisions, see [lab validation gates](lab-validation-release-criteria.md).
