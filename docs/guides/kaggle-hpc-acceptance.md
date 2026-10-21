@@ -168,6 +168,36 @@ python3.9 scripts/kaggle_hpc.py stage --root "$KAGGLE_ROOT" \
 
 These last two catalog entries are **candidate classifications only**. In particular, the scientific suitability and original cohort of `brandao/diabetes` must be checked before calling it a diabetes-readmissions dataset. Do not override unknown, noncommercial or legally complex licenses merely to complete a matrix of 16 rows.
 
+## Kaggle organization display names and CSV-file confirmation
+
+The latest Herts HPC metadata-only diagnostics show five expected Kaggle references whose provider `ownerUser` is a **string** but not a username-style slug. A publicly named Kaggle organization can be displayed as `UCI Machine Learning` despite having canonical URL slug `uciml`. This is a possible explanation, **not a verified metadata owner mapping**. The private CLI now displays a bounded, safely filtered `owner_display_label` for research diagnosis, always with `display_label_confirms_owner_slug: false`. No source acquisition authorization is inferred from a display name alone.
+
+The HPC Kaggle file-list commands confirmed:
+- `rounakbanik/the-movies-dataset` contains `ratings_small.csv` (2,438,266 bytes). Its much larger `ratings.csv` is not the selected benchmark file.
+- `brandao/diabetes` contains `diabetic_data.csv` (19,159,383 bytes) and `description.pdf`. The CSV filename matches the candidate catalog, **but the upstream hospital cohort, clinical semantics and independent source provenance are not yet reviewed**.
+
+After independently verifying access rights and institutional transfer-node policy, these two allowlisted single-file candidates may be staged in the private restricted HPC data area:
+
+~~~bash
+python3.9 scripts/kaggle_hpc.py stage --root "$KAGGLE_ROOT" \
+  --id movie_ratings_small --id diabetes_readmissions \
+  --max-mib 64 --execute
+
+python3.9 scripts/kaggle_hpc.py inventory --root "$KAGGLE_ROOT" \
+  --id movie_ratings_small --id diabetes_readmissions
+~~~
+
+For owner-label and Pima CLI-error diagnosis **without downloading source data**:
+
+~~~bash
+python3.9 scripts/kaggle_hpc.py metadata --root "$KAGGLE_ROOT" \
+  --id breast_cancer_wisconsin --id indian_liver \
+  --id credit_default_temporal --id brfss_surveys \
+  --id cms_hospital_quality --id pima_diabetes
+~~~
+
+The data remain `NOT_ASSESSED` scientifically until named expert mappings and provenance reviews, including any privacy and rights checks, are completed.
+
 ## Check source integrity and quarantine one member
 
 ~~~bash
