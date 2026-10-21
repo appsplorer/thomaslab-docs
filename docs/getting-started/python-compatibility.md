@@ -1,6 +1,6 @@
 # Python compatibility and reproducible environments
 
-**Thomas Lab Core supports Python 3.9 or newer** according to the private package's `pyproject.toml` (`requires-python = ">=3.9"`). Python 3.9, 3.10 and 3.11 appear in its package classifiers. This is a software **version-support claim**, not a claim that every future interpreter, wheel, method or dataset has been independently validated.
+**The private Core development branch supports Python 3.9 or newer** according to its `pyproject.toml` (`requires-python = ">=3.9"`). **The currently released private `main` branch still declares `requires-python = ">=3.10"`.** Do not install Python 3.9 against `main` before the validated development changes have been merged. Python 3.9, 3.10 and 3.11 appear in its package classifiers. This is a software **version-support claim**, not a claim that every future interpreter, wheel, method or dataset has been independently validated.
 
 | Environment | Recommended Python | What this means |
 | --- | --- | --- |
@@ -22,9 +22,10 @@ These statements document specific test runs. They are not an assertion that the
 
 ## Python 3.9 dependency resolution
 
-For core installation in an authorized, private source checkout:
+For installation in an authorized private checkout of `audit/kaggle-hpc-final-20261021` (not `main`):
 
 ```bash
+git switch audit/kaggle-hpc-final-20261021
 python3.9 -m venv .venv
 .venv/bin/python -m pip install --upgrade pip
 .venv/bin/python -m pip install -c constraints/python39.txt -e '.[dev,notebooks]'
