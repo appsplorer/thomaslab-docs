@@ -11,6 +11,8 @@ The public site is hosted at https://appsplorer.github.io/thomaslab-docs/ and bu
 5. Confirm the PR's **build** job passes with `mkdocs build --strict`.
 6. Merge reviewed docs into `main`. GitHub Actions builds and deploys the static site.
 
+The standalone documentation requirements and GitHub Actions checks must work on **Python 3.9 and Python 3.11**. The release-site build interpreter does not determine the private package's Python minimum. See [Python compatibility](../getting-started/python-compatibility.md). Never clone, publish or import the private repository in the public-docs CI.
+
 ## Local preview
 
 ```bash
