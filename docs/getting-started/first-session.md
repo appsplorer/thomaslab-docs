@@ -7,7 +7,7 @@
 
 ## 1. Install from your authorized private checkout
 
-In **PyCharm Terminal / PowerShell**:
+In **PyCharm Terminal / PowerShell**, first select the **unmerged Python 3.9 development branch** of your authorized private checkout (`git switch audit/kaggle-hpc-final-20261021`). The private `main` branch still requires Python 3.10+ until that work is merged:
 
 ```powershell
 py -3.9 -m venv .venv
