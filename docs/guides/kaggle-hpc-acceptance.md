@@ -134,6 +134,40 @@ The output is limited to public Kaggle identity fields, observed license labels,
 
 The [Open Data Commons DbCL 1.0](https://opendatacommons.org/licenses/dbcl/1-0/) pertains to **database contents** and does not alone establish every applicable database right. The [Open Data Commons ODbL 1.0](https://opendatacommons.org/licenses/odbl/1-0/) permits database reuse with **attribution** and public derivative-database share-alike obligations. Both values remain outside the automatic Kaggle acquisition allowlist until an independent, named source-specific permissions and scientific-provenance review. The downloader reports official terms URLs and review scope without bypassing this restriction.
 
+## Actual 16-candidate metadata triage (HPC observation, October 2026)
+
+The live Kaggle API 1.7.4.5 metadata survey of 16 candidate datasets produced four distinct outcomes. This reflects **source acquisition readiness only**, not independent data validation.
+
+| Outcome | Count | Dataset IDs |
+|---|---:|---|
+| Source identity and base-license allowed | 3 | `heart_failure_clinical`, `movie_ratings_small`, `diabetes_readmissions` |
+| Identity matched, license review required | 7 | `stroke_prediction`, `heart_failure_fusion`, `medical_insurance`, `medical_appointments`, `cardiovascular_70k`, `covid_19_epidemiology`, `drug_review_text` |
+| Owner identity unresolved | 5 | `breast_cancer_wisconsin`, `indian_liver`, `credit_default_temporal`, `brfss_surveys`, `cms_hospital_quality` |
+| Kaggle metadata CLI failure | 1 | `pima_diabetes` |
+
+A provider response that gives the expected `datasetSlug` without a supported owner reference is not proof that the owner matches. The private `metadata` command now reports only the **types of whitelisted identity fields**, plus a sanitized CLI exit code when available, to distinguish null/object/string owners and source-endpoint failures. It never outputs raw metadata descriptions, private nested object values, Kaggle credentials or dataset rows.
+
+~~~bash
+# No dataset download; inspect unresolved source owner field shapes
+python3.9 scripts/kaggle_hpc.py metadata --root "$KAGGLE_ROOT" \
+  --id breast_cancer_wisconsin --id indian_liver \
+  --id credit_default_temporal --id brfss_surveys \
+  --id cms_hospital_quality
+
+# No dataset download; inspect Pima metadata command outcome
+python3.9 scripts/kaggle_hpc.py metadata --root "$KAGGLE_ROOT" \
+  --id pima_diabetes
+
+# Pilot additional base-allowlisted sources only after original
+# source and selected-file provenance verification
+kaggle datasets files rounakbanik/the-movies-dataset
+kaggle datasets files brandao/diabetes
+python3.9 scripts/kaggle_hpc.py stage --root "$KAGGLE_ROOT" \
+  --id movie_ratings_small --id diabetes_readmissions --execute
+~~~
+
+These last two catalog entries are **candidate classifications only**. In particular, the scientific suitability and original cohort of `brandao/diabetes` must be checked before calling it a diabetes-readmissions dataset. Do not override unknown, noncommercial or legally complex licenses merely to complete a matrix of 16 rows.
+
 ## Check source integrity and quarantine one member
 
 ~~~bash
