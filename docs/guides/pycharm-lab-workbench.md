@@ -2,7 +2,7 @@
 
 The library is notebook-native. There is no Streamlit server, public upload
 endpoint or need to edit YAML to try the synthetic demonstration. Use a local
-copy of the private `appsplorer/thomaslab-core` repository with Python 3.10+
+copy of the private `appsplorer/thomaslab-core` repository with Python **3.9 or newer**
 and confirm you are on the tested commit before running real research.
 
 ## PyCharm on Windows
@@ -10,11 +10,13 @@ and confirm you are on the tested commit before running real research.
 Open the cloned repository as a PyCharm project, then in its Terminal (PowerShell):
 
 ```powershell
-py -3.12 -m venv .venv
+py -3.9 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\python.exe -m pip install -e ".[notebooks,dev]"
-.\.venv\Scripts\python.exe -m ipykernel install --user --name thomaslab-pycharm --display-name "Thomas Lab (Python 3.12)"
+.\.venv\Scripts\python.exe -m pip install -c constraints/python39.txt -e ".[notebooks,dev]"
+.\.venv\Scripts\python.exe -m ipykernel install --user --name thomaslab-pycharm --display-name "Thomas Lab (Python 3.9)"
 ```
+
+These example commands deliberately use Python 3.9; 3.10 or 3.11 may be used in a separate compatible interpreter. See the [compatibility matrix](../getting-started/python-compatibility.md).
 
 Select `.venv` as Project Interpreter and the **Thomas Lab (Python 3.12)**
 kernel in the PyCharm notebook UI. If PyCharm offers Jupyter server options,
