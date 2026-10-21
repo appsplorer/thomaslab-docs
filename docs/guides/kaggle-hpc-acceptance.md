@@ -489,3 +489,16 @@ The private core acceptance runner was improved *after that run* so `full_pytest
 **Merge sequencing matters:** The private Core PR stack is adaptive platform **#25 → scientific integrity #27 → Python 3.9 HPC #30 → final Kaggle/HPC #32**. Each is still draft and unmerged; PR #32 does not target `main` directly. All current and combined final target checks need verified success before a controlled integration to main can be recommended.
 
 Existing `full_pytest.log`, `quick_quality.log` and `full_quality.log` from job 2498833 are the next evidence to retrieve before another CPU submission. Even full technical pass would not confer institutional patient-data, IRB/DUA, external gold-mapping or clinical deployment authorization.
+
+
+## Job 2498833: exact full-suite and mypy failures identified and fixed in private draft
+
+The full logs, beyond the earlier 17-PASS/3-FAIL/2-NOT_RUN phase summary, confirm **four failing pytest cases** in the original 21 October 2026 HPC commit:
+
+- Two Python 3.10-only `zip(strict=True)` invocations remained in **test code**, not application source: three-annotator Fleiss kappa and active-comparator new-user trial. The private branch now uses the tested length-enforcing Python 3.9 `strict_zip` helper in both tests, preserving record alignment.
+- Two GitBook documentation tests failed because three new researcher guides had no `docs/SUMMARY.md` sidebar entries. The private source documentation now lists the code-to-documentation evidence, HPC Python 3.9, and Kaggle HPC acceptance pages exactly once.
+- Both quick and full quality gates independently passed **Ruff**, then stopped at **mypy**: missing `types-PyYAML` typing stubs in the isolated environment plus nullable-number comparisons in the notebooks 40–55 dynamic control preflight. The branch now declares PyYAML stubs as a development dependency and a fail-closed isolated-environment prerequisite, and explicitly type-narrows notebook controls. Negative tests cover missing, non-numeric, bool and nonfinite control inputs.
+
+The Python 3.9 compatibility scan now covers test files as well as source and scripts; a GitHub CI workflow has been adjusted to run the previously failing contract tests. The new GitHub checks showed failures without retrievable logs, so **CI still needs diagnosis** and the private PR remains **DRAFT/UNMERGED**. These committed changes have **not yet passed Herts HPC**. User action: install the single typing-stubs package into the existing isolated environment on an approved preparation node (not a compute node), then verify static compatibility, Ruff, real mypy and the four previously failed pytest cases before another pinned integrated CPU job.
+
+This fixes demonstrated integration bugs without licensing unreviewed Kaggle/clinical datasets or proving scientific validity. Even a complete named-function body-execution ledger does not test every branch, interpretation, or numerical reference property.
