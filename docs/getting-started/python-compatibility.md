@@ -1,6 +1,6 @@
 # Python compatibility and reproducible environments
 
-**The private Core development branch supports Python 3.9 or newer** according to its `pyproject.toml` (`requires-python = ">=3.9"`). **The currently released private `main` branch still declares `requires-python = ">=3.10"`.** Do not install Python 3.9 against `main` before the validated development changes have been merged. Python 3.9, 3.10 and 3.11 appear in its package classifiers. This is a software **version-support claim**, not a claim that every future interpreter, wheel, method or dataset has been independently validated.
+**The private `thomaslab-core/main` branch now declares Python 3.9 or newer** in `pyproject.toml` (`requires-python = ">=3.9"`). The original Python 3.9 development stack was integrated into `main` via a non-squash merge after exact-SHA Herts HPC technical acceptance. All development commits remain in Git history; there is no longer a need to check out the older feature branch to use Python 3.9. Python 3.9, 3.10 and 3.11 appear in its package classifiers. This is a software **version-support claim**, not a claim that every future interpreter, wheel, method or dataset has been independently validated.
 
 | Environment | Recommended Python | What this means |
 | --- | --- | --- |
@@ -18,14 +18,14 @@ Real October 2026 Herts HPC acceptance logs on the private development branch es
 - At source commit `469c120a81bdf5957911550dea4075fbf577ab61`, focused CPU regression job `2499039` completed **PASS** (`0:0`, 32 seconds); full integrated CPU job **`2499042` completed PASS** (`0:0`, 16 minutes 51 seconds). All **21 executed technical phases passed**, including full pytest, Ruff/mypy and full quality, **106/106 imported modules** and **955/955 declared named function/method bodies observed**, with **zero unobserved functions**. The separate `reviewed_gold_matrix` phase remains **`NOT_RUN_REQUIRES_NAMED_APPROVAL`**.
 - A previously performed NVIDIA A100 smoke test passed synthetic tensor arithmetic and gradient checks. It does not establish universal GPU compatibility.
 
-These statements document specific test runs. **Even 955/955 function bodies being observed is not 100% branch coverage, proven numerical correctness, or scientific validation.** They do not assert that the private branch has merged into `main` or that GitHub CI is green; the three-version GitHub Actions matrix still reports failures at the tested source SHA. Clinical outcomes have not been independently validated. The independent clinical and scientific validation status remains **`NOT_ASSESSED`** until approved data mappings, independent studies and named expert sign-off are available.
+These statements document specific test runs. The tested code has now been merged into Core `main` through a non-squash merge with all original commits preserved. **Even 955/955 function bodies observed is not 100% branch coverage, proven numerical correctness, or scientific validation.** The three-version GitHub Actions matrix reported failures at the tested development SHA and was explicitly waived for this merge; this is not a CI PASS. Clinical outcomes have not been independently validated. The independent clinical and scientific validation status remains **`NOT_ASSESSED`** until approved data mappings, independent studies and named expert sign-off are available.
 
 ## Python 3.9 dependency resolution
 
-For installation in an authorized private checkout of `audit/kaggle-hpc-final-20261021` (not `main`):
+For installation from the current authorized private `thomaslab-core/main` checkout:
 
 ```bash
-git switch audit/kaggle-hpc-final-20261021
+git switch main
 python3.9 -m venv .venv
 .venv/bin/python -m pip install --upgrade pip
 .venv/bin/python -m pip install -c constraints/python39.txt -e '.[dev,notebooks]'
