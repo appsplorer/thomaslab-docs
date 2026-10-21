@@ -455,3 +455,21 @@ The four failures were full pytest (exit 2; detailed traceback not yet provided)
 The module import names that failed were `gformula`, `longitudinal_dr`, `causal_robustness`, `adaptive.notebook_groups.groups_32_39`, and `adaptive.notebook_groups.specialist_40_45`. Inspection of the core source showed immediately evaluated `StrategyRule = int | Mapping[...] | Callable[...]` aliases in the first two files; **ordinary type-union expressions are not supported as runtime values on Python 3.9 even with postponed annotations**. Those aliases are now `typing.Union`-based and a regression test imports all five named modules. The private Python 3.9 compatibility screen was extended to detect runtime type-alias unions. The exact `full_pytest.log` collection errors were not included in the shared log, so root-cause attribution is still being verified.
 
 Before any repeat Slurm job, test the new branch inside the isolated venv with the Python 3.9 static screen, `ruff check`, selected five-module import tests, and full test *collection only*. The new per-function test-coverage ledger was also added **after** job 2495601; the existing job does not report that inventory. Neither successful module import nor one observed function-body line demonstrates branch-complete, numerical or clinical correctness. The core release remains blocked pending full technical and scientific gates.
+
+
+## Final lightweight Python 3.9 log: four confirmed test/lint defects fixed on private branch
+
+A follow-up real UH HPC local run at private commit `9d904cb0f5deb1756517db10d9b48cb6541d1e58` verified `python39_compat.py` **PASS** (128 inspected Python files, no findings) and **successful full pytest collection**. It reported four lightweight regressions:
+
+| Failure | Concrete correction |
+|---|---|
+| Ruff UP035 in `scripts/hpc_callable_evidence.py` | Import `Iterator` from `collections.abc` |
+| `test_python39_rejects_runtime_type_union_alias_even_with_future_annotations` | Three-part fixture now uses real source newlines, not literal backslash-n tokens |
+| `test_python39_accepts_legacy_typing_union_runtime_alias` | Same fixture correction |
+| `test_python39_does_not_misclassify_normal_bitwise_or_values` | Same fixture correction |
+
+These fixes are committed in private Core PR #32 but have **not yet been rerun at the latest commit on HPC**. The Python 3.9 scientific-contracts CI assertion was also updated to match the package's actual `requires-python >=3.9` metadata.
+
+**Every-module / every-function policy:** importing a Python module is not testing its functions. The private `hpc_callable_evidence.py --require-all-observed` flag now makes the next integrated CPU acceptance **FAIL** if any named declared Python function or class method (public, private or nested) lacks a freshly measured pytest-executed body line. An accompanying negative regression test confirms incomplete coverage blocks this strict gate. The detailed evidence JSON identifies each unobserved function and source module for targeted test authoring. This still cannot prove full branch coverage, reference numerical accuracy, clinical correctness, safety across unseen datasets, or user-task usability. Lambda-generated/dynamic callables are outside this declaration ledger and must be covered separately where clinically relevant.
+
+**No automatic merge** has taken place. Before Core PR #32 can be considered for technical merging, the *same candidate SHA* must show: zero Python 3.9 screen findings; passing Ruff, mypy, full pytest and coverage quality gate; complete 106-source-module import validation; a complete strict named-callable execution ledger; and passing packaging, notebook and documentation checks. Scientific approval remains separately blocked by independent licensing, gold mappings, real clinical provenance, IRB/DUA and domain-review requirements.
