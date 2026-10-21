@@ -86,3 +86,24 @@ A generic VCF does **not** guarantee sufficient phasing, locus coverage, copy-nu
 For new studies, prefer the gene-specific v0.8 modules described in [PGx foundation](pgx-foundation.md). The original helpers remain available for backward compatibility.
 
 The v0.8 design keeps assay coverage, allele function, CYP2D6 activity score, predicted phenotype, phenoconversion, and research guideline-concordance as separate provenance-bearing objects.
+
+## Indication-specific PGx research rules — data-integrity boundary
+
+The low-level `lookup_pgx_rule` concordance lookup only matches a rule with a named indication (such as `acs_pci`) when the calling study provides that indication explicitly. Missing indication, a different indication, or an unreviewed label must **not** be treated as an ACS/PCI recommendation. Generic `any` rules remain possible, subject to the reviewed knowledge version.
+
+```python
+from thomaslab.pgx_guidelines import lookup_pgx_rule
+
+# Synthetic reviewed rule artifact; not a prescription or universal guidance.
+kb = {"knowledge_id": "demonstration", "version": "test-1", "rules": [
+    {"rule_id": "pci_example", "gene": "CYP2C19", "drug": "clopidogrel",
+     "phenotypes": ["Intermediate"], "indication": "acs_pci",
+     "concordant_actions": ["alternative_p2y12"]}
+]}
+assert lookup_pgx_rule(kb, gene="CYP2C19", drug="clopidogrel",
+                       phenotype="Intermediate", indication=None) is None
+assert lookup_pgx_rule(kb, gene="CYP2C19", drug="clopidogrel",
+                       phenotype="Intermediate", indication="acs_pci") is not None
+```
+
+**Evidence status:** Dedicated tests are being introduced on the private audit branch; those changes are not considered released until exact-commit CI and the lab's local verification gate pass. The example only demonstrates conservative rule matching.
