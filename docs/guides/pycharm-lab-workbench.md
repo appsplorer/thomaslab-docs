@@ -2,12 +2,12 @@
 
 The library is notebook-native. There is no Streamlit server, public upload
 endpoint or need to edit YAML to try the synthetic demonstration. Use a local
-copy of the private `appsplorer/thomaslab-core` repository with Python **3.9 or newer**
+copy of the private `appsplorer/thomaslab-core` repository with Python **3.9 or newer on the current development branch** (`audit/kaggle-hpc-final-20261021`; the private `main` branch still declares Python 3.10+)
 and confirm you are on the tested commit before running real research.
 
 ## PyCharm on Windows
 
-Open the cloned repository as a PyCharm project, then in its Terminal (PowerShell):
+Open the authorized Core clone as a PyCharm project, switch to `audit/kaggle-hpc-final-20261021` before using Python 3.9, then in its Terminal (PowerShell):
 
 ```powershell
 py -3.9 -m venv .venv
