@@ -402,3 +402,32 @@ python3.9 -m pytest -q \
 ~~~
 
 The corrected source is **not yet HPC-verified**. Missing mandatory scientific dependencies, full pytest, module imports, old ZIP quarantine repairs and three schema profiles remain independent gates. No protected dataset rows, private node paths, user credentials or approved gold mappings are included in the public documentation.
+
+
+## Isolated Python 3.9 dependency recovery after passing subprocess tests
+
+On UH HPC, all executed benchmark, Kaggle, Python 3.9 compatibility and causal tests passed at private source commit `5a44e89d7f2d259144edf065553d0c541a0c2593`. One lifelines-dependent survival test remained **SKIPPED**. An independent `pip check` in the user's **shared** `research_env` flagged five unrelated requirement conflicts: `botocore/urllib3`, `fastai/torch`, `safe-cvs-tai/pyarrow`, `tabpfn-common-utils/nvidia-ml-py` and `thinc/numpy`. These are environment consistency failures, not conclusive defects in the clinical/statistical algorithms.
+
+**Do not attempt to resolve these by downgrading or upgrading the shared research environment.** The private core already has `constraints/python39.txt` for an appropriately bounded stack, including `numpy<2`, `pyarrow<19`, and `lifelines>=0.27,<0.30`.
+
+The private project now includes `scripts/hpc_prepare_python39_env.sh` and `scripts/hpc_environment_gate.py`. On an institution-approved environment-preparation node with permitted package access and storage, the preparation script creates a new `thomaslab-core-cpu` Python 3.9 virtual environment under the approved research directory, installs source and bounded developer/documentation/notebook dependencies, optionally the PyTorch models needed for full mode, and runs `pip check`. The script refuses to install dependencies from inside a Slurm compute job.
+
+~~~bash
+# From the private thomaslab-core checkout after pulling latest feature branch.
+export THOMASLAB_HPC_ROOT=/path/to/approved-research/thomaslab_hpc
+export THOMASLAB_PREP_FULL=1
+bash scripts/hpc_prepare_python39_env.sh
+
+export THOMASLAB_VENV="$THOMASLAB_HPC_ROOT/environments/python39/thomaslab-core-cpu"
+export THOMASLAB_PYTHON39="$THOMASLAB_VENV/bin/python"
+"$THOMASLAB_PYTHON39" scripts/hpc_environment_gate.py \
+  --expected-venv "$THOMASLAB_VENV" --full
+"$THOMASLAB_PYTHON39" -m pytest -q \
+  tests/test_hpc_environment_gate.py tests/test_adaptive_benchmark.py \
+  tests/test_causal.py tests/test_kaggle_hpc.py \
+  tests/test_kaggle_review_manifest.py tests/test_python39_compat.py
+~~~
+
+The integrated CPU runner now requires this exact isolated interpreter and an early passing environment gate. Required missing packages, inherited system site packages and inconsistent dependency resolutions must be treated as failures, not silently skipped. The venv preparation may need substantial storage for PyTorch; verify institutional node/storage/pip-index policy first and report any missing compatible wheels instead of relaxing project constraints. The previous A100 GPU arithmetic smoke is already PASS and need not be repeated just to isolate the CPU environment.
+
+Scientific correctness, independent clinical data, source licensing, expert-reviewed mappings, and production authorization remain separate acceptance gates.
