@@ -10,14 +10,14 @@
 In **PyCharm Terminal / PowerShell**:
 
 ```powershell
-py -3.11 -m venv .venv
+py -3.9 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -e ".[notebooks]"
 python -c "import thomaslab; print('Thomas Lab ready')"
 ```
 
-For Linux/macOS/HPC, activate with `source .venv/bin/activate`. Use Python 3.11 and select the same interpreter for the Jupyter kernel. The private checkout requires existing collaborator permission; do not put access tokens into notebooks.
+For Linux/macOS/HPC, activate with `source .venv/bin/activate`. Python 3.9 or newer is supported; these steps choose 3.9 to match the institutional HPC baseline. Select the same interpreter for the Jupyter kernel. On Linux/macOS use `python3.9 -m venv .venv` to create that environment. The private checkout requires existing collaborator permission; do not put access tokens into notebooks.
 
 ## 2. Create an entirely fabricated cohort
 
