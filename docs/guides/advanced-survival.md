@@ -29,3 +29,8 @@ The survival functions must reject unknown, fractional or nonfinite event/cause 
 A synthetic Aalen–Johansen reference case with follow-up times 1, 2, 2 and 3 and event causes 1, 2, 1 and 0 produces final cause-1 cumulative incidence **0.50**, cause-2 cumulative incidence **0.25**, and all-cause event-free survival **0.25**. These values are independently computable from the risk sets and do not establish covariate adjustment or clinical validity.
 
 The input-contract regression tests under development live in private `tests/test_scientific_input_contracts.py`. The fixes must pass local and hosted tests before being treated as software-release evidence.
+
+
+## Long-format time-varying interval integrity
+
+`build_time_varying_intervals` requires one non-missing identifier per cohort patient, a **finite strictly positive** follow-up end, an event coded exactly as 0 or 1 (not a fractional number), and finite non-negative covariate-change times. A malformed event value must not be truncated with `int()`, and `inf`/missing follow-up or change times must not silently drop or extend intervals. These are data-integrity checks, not proof that time-dependent confounding is identified or modeled correctly.
