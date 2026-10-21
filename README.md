@@ -6,7 +6,7 @@ Public, static research documentation for the private `thomaslab-core` scientifi
 
 This repository contains only publication-reviewed Markdown, generated API reference text, MkDocs configuration, and static website assets. It does **not** contain the Python research package, restricted datasets, patient records, or credentials.
 
-**Core compatibility:** The current private **development branch** declares **Python 3.9 or newer**; the private **`main` branch still requires Python 3.10+** until the Python 3.9 changes are reviewed and merged. See the [Python compatibility and environment matrix](https://appsplorer.github.io/thomaslab-docs/getting-started/python-compatibility/). The public MkDocs site builds independently of the private package. Python support does not imply approval for restricted datasets or all scientific workflows.
+**Core compatibility:** The private **`thomaslab-core/main` now declares Python 3.9 or newer**. The tested code from the HPC development branches was integrated through a non-squash merge preserving the individual commits. The last verified Herts HPC Python 3.9 job passed all 21 executed technical gates; clinical/scientific approval remains separate. See the [Python compatibility and environment matrix](https://appsplorer.github.io/thomaslab-docs/getting-started/python-compatibility/). The public MkDocs site builds independently of the private package. Python support does not imply approval for restricted datasets or all scientific workflows.
 
 ### Site development
 
