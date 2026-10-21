@@ -1,6 +1,6 @@
 # Python 3.9 and Slurm: Thomas Lab HPC validation
 
-**Current canonical procedure for Python 3.9 development validation.** This page supersedes the older `slurm/python39_validation.sbatch`, `THOMASLAB_INSTALL`, and shared-environment instructions. The unmerged private Core development branch declares **Python 3.9+** support, while `thomaslab-core/main` still requires **Python 3.10+**; the current *integrated Herts CPU runner* specifically requires **Python 3.9** in an isolated environment.
+**Current canonical procedure for Python 3.9 development validation.** This page supersedes the older `slurm/python39_validation.sbatch`, `THOMASLAB_INSTALL`, and shared-environment instructions. The private **`thomaslab-core/main` now declares Python 3.9+** following the full-history integration, while previously hosted CI failures were explicitly waived for that merge; the current *integrated Herts CPU runner* specifically requires **Python 3.9** in an isolated environment.
 
 !!! warning "Not a clinical or release approval"
     Technical validation runs against synthetic/test fixtures and only separately authorized public source profiles. No data-use permissions, institutional accounts, validated external clinical mappings, independent researcher task trials or manuscript-level scientific validity follow from a Slurm PASS.
@@ -12,13 +12,13 @@ The public handbook does not contain executable Core source. An authorized colla
 ```bash
 git clone git@github.com:appsplorer/thomaslab-core.git
 cd thomaslab-core
-git switch audit/kaggle-hpc-final-20261021
+git switch main
 git pull --ff-only
 git rev-parse HEAD
 git status --short
 ```
 
-This is an **unmerged development branch** in the October 2026 evidence snapshot. Do not interpret its documentation as a stable release from `main`. Existing collaborators should use their approved checkout; avoid multiple unaudited copies of clinical code.
+These commands now use **`main`**, which contains all original adaptive-platform, scientific-integrity, Python 3.9, and Kaggle/HPC development commits via a non-squash merge. This is a technical software integration, **not** a validated clinical deployment or publication claim. Existing collaborators should use their approved checkout; avoid multiple unaudited copies of clinical data or credentials.
 
 ## 2. Create a clean Python 3.9 environment
 
@@ -132,6 +132,6 @@ At the recorded 21 October 2026 development checkpoint:
 | Scientific reviewer-approved external mappings | **NOT_ASSESSED / NOT_RUN** |
 | Independent broad unseen-source benchmarks and five-researcher usability evaluation | **Not established** |
 
-**At the exact tested SHA, Python 3.9 integrated CPU technical acceptance is PASS.** That is not a full scientific or institutional data-approval decision. The public documents and MkDocs build are independent of the private Core PR stack; GitHub Actions Python-version checks still fail for the tested SHA and the stacked Core PRs remain unmerged. Scientific validity still needs separate evidence.
+**At the exact tested SHA, Python 3.9 integrated CPU technical acceptance is PASS.** That is not a full scientific or institutional data-approval decision. The public MkDocs documentation remains independent of the private Core package. The stacked Core changes have been integrated into `main` with every commit retained; GitHub Actions matrix checks failed at the previously tested SHA and were **explicitly waived**, not passed. Scientific validity still needs separate evidence.
 
 For details on Kaggle source identity, license reviews and historic individual tests, read [Kaggle/HPC acceptance evidence](kaggle-hpc-acceptance.md). For software-versus-science decisions, see [lab validation gates](lab-validation-release-criteria.md).
