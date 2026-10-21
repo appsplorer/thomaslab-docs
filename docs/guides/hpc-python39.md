@@ -46,11 +46,11 @@ sbatch --partition=core32 --cpus-per-task=8 --mem=32G --time=06:00:00 \
 
 Supply any required site account or QoS with the `sbatch` command. If `core32` is unavailable, choose a site-authorized CPU partition. Do not request GPUs for these checks. Jobs running on a restricted cluster may need a pre-provisioned wheelhouse because compute nodes often have no internet access. In that case, install compatible wheels on an authorized build/login environment and submit with `THOMASLAB_INSTALL=0` and `THOMASLAB_VENV` pointing to the approved prepared Python 3.9 environment.
 
-The validation entry point enforces Python 3.9, a clean tracked Git checkout, optional exact SHA matching, compatible package constraints, a dependency check, a syntax/API scan, environment preflight, targeted PGx/survival/IPCW scientific regressions, and the existing quick quality gate. It uses an isolated `.venv-python39` by default.
+The validation entry point enforces Python 3.9, a clean tracked Git checkout, optional exact SHA matching, compatible package constraints, a dependency check, a syntax/API scan, environment preflight, targeted PGx/survival/IPCW scientific regressions, and the existing quick quality gate. It also runs the ten-family fabricated adaptation matrix and a **100,000-row full-source synthetic validation benchmark**, with optional `THOMASLAB_SCALE_ROWS` between 1,000 and 1,000,000. These benchmarks do **not** establish performance or scientific validity for hospital datasets. It uses an isolated `.venv-python39` by default.
 
 ## 3. Review and preserve evidence
 
-The Slurm stdout is written to `slurm-thomaslab-py39-<job-id>.out`. Per-run results are written under `hpc_validation/<job-id>-<UTC-time>/` with restrictive directory permissions. Review `summary.txt`, `pip-freeze.txt`, `pip-check.log`, `python39-static.json`, `targeted-junit.xml`, `targeted.log`, and `quick-gate.log`.
+The Slurm stdout is written to `slurm-thomaslab-py39-<job-id>.out`. Per-run results are written under `hpc_validation/<job-id>-<UTC-time>/` with restrictive directory permissions. Review `summary.txt`, `pip-freeze.txt`, `pip-check.log`, `python39-static.json`, `targeted-junit.xml`, `targeted.log`, and `quick-gate.log`, plus `synthetic-ten-family.json` and `synthetic-scale.json`.
 
 ```bash
 squeue -u "$USER"
