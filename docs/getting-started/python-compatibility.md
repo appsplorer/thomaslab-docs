@@ -18,7 +18,7 @@ Real October 2026 Herts HPC acceptance logs on the private development branch es
 - New tests targeting the 15 previously unobserved callables passed on a separate CPU allocation at source commit `469c120a81bdf5957911550dea4075fbf577ab61`. The subsequent full integrated CPU job `2499042` was submitted, but its final report was **not available in the supplied evidence**.
 - A previously performed NVIDIA A100 smoke test passed synthetic tensor arithmetic and gradient checks. It does not establish universal GPU compatibility.
 
-These statements document specific test runs. They are not an assertion that the private branch has merged into `main`, that GitHub CI is green, or that clinical outcomes have been validated.
+These statements document specific test runs. They are not an assertion that the private branch has merged into `main`, that GitHub CI is green, or that clinical outcomes have been validated. The independent clinical and scientific validation status remains **`NOT_ASSESSED`** until approved data mappings, independent studies and named expert sign-off are available.
 
 ## Python 3.9 dependency resolution
 
