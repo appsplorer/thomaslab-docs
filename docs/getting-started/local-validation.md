@@ -9,6 +9,7 @@ From PowerShell:
 ```powershell
 git clone https://github.com/appsplorer/thomaslab-core.git
 cd thomaslab-core
+git switch audit/kaggle-hpc-final-20261021
 
 py -3.9 -m venv .venv
 .\.venv\Scripts\Activate.ps1
@@ -24,7 +25,7 @@ In PyCharm, set the project interpreter to:
 <repository>\.venv\Scripts\python.exe
 ```
 
-These example commands select **Python 3.9**. The private package also declares 3.10 and 3.11 compatibility; choose a dedicated virtual environment for each interpreter rather than reusing a shared scientific environment. For 3.9, `constraints/python39.txt` supplies conservative resolution bounds, not a reproducible lockfile. See the [compatibility matrix](../getting-started/python-compatibility.md).
+These example commands select **Python 3.9 on the current unmerged development branch**. The private `main` release still requires Python 3.10+ until integration. The private package also declares 3.10 and 3.11 compatibility; choose a dedicated virtual environment for each interpreter rather than reusing a shared scientific environment. For 3.9, `constraints/python39.txt` supplies conservative resolution bounds, not a reproducible lockfile. See the [compatibility matrix](../getting-started/python-compatibility.md).
 
 ## One-command full quality gate
 
