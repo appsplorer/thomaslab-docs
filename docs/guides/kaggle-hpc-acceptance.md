@@ -110,6 +110,30 @@ PY
 
 For Kaggle API 1.7.4.5, the server may provide an inner object with `ownerUser` and `datasetSlug` but no `id`. The private ingestion code now verifies the **exact owner and dataset slug together** against the requested Kaggle handle; if an `id` is also present, both forms must agree. Missing or mismatched identity, unapproved license, and malformed metadata remain **BLOCK**. This is a source-integrity check, not scientific dataset validation.
 
+## Observed HPC pilot: source identity and open database licenses
+
+On 21 October 2026, Python 3.9 HPC execution yielded **55 passing targeted tests**, a verified cached download and quarantined CSV extraction for the CC BY 4.0 heart-failure clinical dataset. This establishes file integrity and tool behavior, not clinical validity.
+
+Three other Kaggle candidate handles were blocked:
+
+- Medical insurance (`mirichoi0218/insurance`): Kaggle metadata reported `DbCL-1.0`.
+- Heart failure prediction (`fedesoriano/heart-failure-prediction`): metadata reported `ODbL-1.0`.
+- Wisconsin breast cancer (`uciml/breast-cancer-wisconsin-data`): identity fields did not match the catalogued Kaggle reference. The actual observed owner and slug remain unverified until a separate metadata inspection.
+
+These are expected, **fail-closed** statuses, not evidence that the datasets or their licenses are illegitimate. The private core provides a metadata-only diagnostic that neither downloads records nor displays free-text metadata:
+
+~~~bash
+python3.9 scripts/kaggle_hpc.py metadata --root "$KAGGLE_ROOT" \
+  --id breast_cancer_wisconsin
+
+python3.9 scripts/kaggle_hpc.py metadata --root "$KAGGLE_ROOT" \
+  --id medical_insurance --id heart_failure_fusion
+~~~
+
+The output is limited to public Kaggle identity fields, observed license labels, and exact-match decisions. A mismatched account/slug cannot be silently rewritten. Verify original provenance before revising the catalog.
+
+The [Open Data Commons DbCL 1.0](https://opendatacommons.org/licenses/dbcl/1-0/) pertains to **database contents** and does not alone establish every applicable database right. The [Open Data Commons ODbL 1.0](https://opendatacommons.org/licenses/odbl/1-0/) permits database reuse with **attribution** and public derivative-database share-alike obligations. Both values remain outside the automatic Kaggle acquisition allowlist until an independent, named source-specific permissions and scientific-provenance review. The downloader reports official terms URLs and review scope without bypassing this restriction.
+
 ## Check source integrity and quarantine one member
 
 ~~~bash
