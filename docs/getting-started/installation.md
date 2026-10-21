@@ -46,15 +46,23 @@ The optional scientific extras include `models` (PyTorch), `llm`, and `gpu`. Use
 
 ## Validate the research package
 
-From the private repository and its selected environment:
+Use the **same isolated interpreter** for every command (not the login or system Python):
 
 ```bash
-python scripts/environment_preflight.py
-python scripts/python39_compat.py
-python scripts/local_quality_gate.py --quick
+# Linux/macOS, from the private Core checkout
+.venv/bin/python scripts/environment_preflight.py
+.venv/bin/python scripts/python39_compat.py
+.venv/bin/python scripts/local_quality_gate.py --quick
 ```
 
-Use the environment's exact Python executable if `python` is not already pointing to your isolated environment. Static compatibility success, a passing import, and a quick test run do **not** replace the full suite, all-module import audit, per-function execution ledger, or scientific validation. On Slurm, follow the [isolated HPC acceptance procedure](../guides/hpc-python39.md) rather than using a shared research environment.
+```powershell
+# Windows PowerShell, from the private Core checkout
+.\.venv\Scripts\python.exe scripts/environment_preflight.py
+.\.venv\Scripts\python.exe scripts/python39_compat.py
+.\.venv\Scripts\python.exe scripts/local_quality_gate.py --quick
+```
+
+Static compatibility success, a passing import, and a quick test run do **not** replace full pytest, the complete module import audit, the strict per-function execution ledger, or scientific validation. On Slurm follow the [isolated HPC acceptance procedure](../guides/hpc-python39.md), not a shared research environment.
 
 ## Install this public documentation site separately
 
