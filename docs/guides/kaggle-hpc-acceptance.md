@@ -17,7 +17,7 @@ An import PASS only shows a module loads. The AST callable count is an inventory
 
 ## Prepare the dedicated HPC workspace
 
-Use a institution-approved storage path and job allocation. The example keeps both data and generated reports **outside** the Git repository.
+Use an institution-approved storage path and job allocation. The example keeps both data and generated reports **outside** the Git repository.
 
 ~~~bash
 export THOMASLAB_HPC_ROOT="/path/to/approved-research/thomaslab_hpc"
@@ -26,7 +26,7 @@ cd "$THOMASLAB_HPC_ROOT/core"
 git clone git@github.com:appsplorer/thomaslab-core.git
 cd thomaslab-core
 git fetch origin
-git switch audit/kaggle-hpc-matrix-20261021
+git switch audit/kaggle-hpc-final-20261021
 git pull --ff-only
 bash scripts/setup_thomaslab_hpc.sh
 
@@ -91,7 +91,7 @@ if isinstance(data, str):
 PY
 ~~~
 
-A valid dataset reference plus an explicitly allowlisted license are still required. An unresolved metadata string is a **BLOCK**, not a downloadable or scientifically validated dataset.
+For Kaggle API 1.7.4.5, the server may provide an inner object with `ownerUser` and `datasetSlug` but no `id`. The private ingestion code now verifies the **exact owner and dataset slug together** against the requested Kaggle handle; if an `id` is also present, both forms must agree. Missing or mismatched identity, unapproved license, and malformed metadata remain **BLOCK**. This is a source-integrity check, not scientific dataset validation.
 
 ## Check source integrity and quarantine one member
 
