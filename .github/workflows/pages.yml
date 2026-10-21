@@ -40,9 +40,26 @@ jobs:
           name: built-documentation
           path: site/
 
+
+  python39-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+          cache: pip
+          cache-dependency-path: requirements-docs.txt
+      - name: Install standalone documentation dependencies on Python 3.9
+        run: python -m pip install -r requirements-docs.txt
+      - name: Run public-content and compatibility preflight
+        run: python scripts/check_public_docs.py
+      - name: Strict MkDocs build on Python 3.9
+        run: python -m mkdocs build --strict
+
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: build
+    needs: [build, python39-docs]
     runs-on: ubuntu-latest
     permissions:
       pages: write
