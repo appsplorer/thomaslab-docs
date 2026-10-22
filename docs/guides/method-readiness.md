@@ -9,6 +9,9 @@ self-certify external clinical validation through a documentation edit.
 | Method family | Source features | Verified evidence | Current study-level gate |
 |---|---|---|---|
 | Structural source profiling and baseline metrics | healthcare_foundation (new, experimental) | New unit regression examples; branch integration pending | NOT_ASSESSED for real patients |
+| All of Us CDR v9 (Registered/Controlled) | healthcare_sources source contract (candidate) | Synthetic OMOP-shaped tables only; no program records obtained | Workbench-only analysis and authorization, release-specific dictionary and independent review |
+| MIMIC-IV v3.1 hosp/icu | healthcare_sources source contract (candidate) | Synthetic tables only; no PhysioNet records obtained | Credentialing/DUA, permitted environment, module-specific key, shifted-time and event reviews |
+| Institution-specific hospital EHR | healthcare_sources source contract (candidate) | Synthetic explicit-mapping tests only; no UGA hospital sample obtained | PI/IRB/DUA, approved storage, signed mapping, clinical code/unit/date and clinical-validity review |
 | EHR/claims/OMOP/FHIR | adapters, contracts, validation | Synthetic tests and previously observed full QA gate | Named, source-specific semantic approval |
 | PGx and CYP2C19/CYP2D6 | pgx modules and knowledge YAML | Software contracts; convenient incomplete knowledge tables | Upstream CPIC/PharmVar release/version and clinical panel review |
 | NLP and annotations | context/annotation modules | Synthetic tests; adjudication helpers | Held-out gold annotations, site-specific error and disclosure review |
