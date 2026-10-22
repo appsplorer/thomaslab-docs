@@ -148,6 +148,20 @@ The clinical site is responsible for separate decisions about planned vs
 unplanned readmissions, data discontinuity, transfer logic, medication exposure
 episodes, coding version, leakage, de-identification and outcome adjudication.
 
+## One-command synthetic integration — all three source families
+
+~~~bash
+# No downloads, credentials, protected records, dataset files, or network I/O:
+python scripts/synthetic_three_source_smoke.py --synthetic-only
+~~~
+
+The command returns a single JSON result with seven boolean software checks
+and explicit `clinical_or_regulatory_validation: NOT_ASSESSED`.
+From an approved Slurm allocation run it with the
+`slurm/portable_cpu.sbatch` template, and retain the exact source SHA.
+A synthetic result is not validation against real All of Us, MIMIC-IV
+or site-specific hospital EHR data.
+
 ## Tests, completeness and release boundaries
 
 ~~~bash
