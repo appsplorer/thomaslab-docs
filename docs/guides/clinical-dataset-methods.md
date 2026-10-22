@@ -40,6 +40,10 @@ covers reviewed-code fingerprints, missing/unknown codes, medication
 order/dispense/admin status, external-site future holdouts and small-site
 disclosure preflights. No result is automatically approved for publication.
 
+See also [All of Us aggregate disclosure restrictions](aou-disclosure.md):
+the generic `export_governed_bundle` is **not** an All of Us egress
+mechanism, and the in-memory preflight never certifies a table for release.
+
 ## New source-aware code
 
 | Module | Functions | Scope |
