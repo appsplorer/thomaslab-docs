@@ -2,6 +2,10 @@
 
 **Updated:** 22 October 2026. This is a *status contract*, not a certification.
 
+The private Core candidate maintains `configs/method_readiness.yaml` and a
+fail-closed `scripts/check_method_readiness.py` guard. Neither repository may
+self-certify external clinical validation through a documentation edit.
+
 | Method family | Source features | Verified evidence | Current study-level gate |
 |---|---|---|---|
 | Structural source profiling and baseline metrics | healthcare_foundation (new, experimental) | New unit regression examples; branch integration pending | NOT_ASSESSED for real patients |
