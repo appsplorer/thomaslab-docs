@@ -18,6 +18,25 @@ Keep one code checkout, one private environment, one approved data root,
 and one restricted results/audit root. No credentials, notebooks with outputs,
 or patient rows in Git commits or job logs.
 
+### Dataset-specific compute boundaries
+
+- **All of Us Registered/Controlled v9:** carry out participant-level OMOP,
+  survey, Fitbit and omics work in the **authorized All of Us Researcher
+  Workbench**, not Sapelo2, Herts HPC, Kaggle or local notebooks. The
+  `healthcare_aou_query` module plans parameterized SQL only; its functions
+  do not download, execute or export a query.
+- **MIMIC-IV 3.1:** provision an independent PhysioNet credential, required
+  training and signed DUA, then obtain UGA IT/PI permission for its exact
+  institutional storage and computation before placing any files on Sapelo2.
+  Use lossless local `.csv.gz` streaming and patient-shifted-time rules.
+- **Hospital EHR:** keep every identifiable or limited dataset exclusively on
+  the designated hospital/UGA-approved compute with IRB/HRPP determination,
+  lawful DUA, access audit and export review.
+
+**None of the Slurm templates is an All of Us data-transfer mechanism.**
+Run the synthetic contract tests for all families on HPC; real All of Us
+records remain in their authorised platform.
+
 ## 1. Connect to UGA's Sapelo2
 
 UGA GACRC's published instructions identify **Sapelo2** at
