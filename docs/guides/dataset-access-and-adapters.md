@@ -15,6 +15,8 @@ clinical semantics, certify HIPAA compliance, or authorize exports.
 | **MIMIC-IV v3.1** | PhysioNet `hosp` and `icu` tables; `subject_id`/`hadm_id`/`stay_id` | PhysioNet-credentialed users, required training and DUA; UGA HPC only where the license and institution explicitly permit | Public GitHub access implies dataset access, or shifted dates are real calendar dates |
 | **Hospital EHR** | Institution-specific encounters, observations, medication orders/administrations and clinical notes | UGA/hospital-approved enclave/HPC after PI, IRB/HRPP, DUA, IT, security and retention review | Any fixed schema, coding, dates, identifiers, field names or patient linkage |
 
+**All of Us public aggregate exception:** Public Tier Data Browser summaries are distinct from Registered/Controlled participant-level records. The central governance policy permits an explicitly declared `PUBLIC_AGGREGATE` source in an approved local environment, still subject to small-cell and release terms. Kaggle notebook execution remains synthetic-only. The new individual-level source adapter intentionally does not accept public summaries as OMOP patient tables.
+
 **All of Us:** The NIH program's [data-access tiers](https://researchallofus.org/data-tools/data-access/),
 [Workbench](https://www.researchallofus.org/data-tools/workbench/), and
 [current CDR data dictionaries](https://support.researchallofus.org/hc/en-us/articles/360033200232-Data-Dictionaries)
