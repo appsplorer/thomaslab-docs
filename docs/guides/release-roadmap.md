@@ -117,3 +117,44 @@ software suite, full pytest/coverage/Ruff/mypy/package/notebook checks,
 independent protocol/code review, licensed MIMIC access, All of Us Workbench
 authorization, UGA hospital IRB/DUA/IT/storage controls and real external
 data-validation cohorts.
+
+
+## 22 October 2026 — clinical ML leakage and longitudinal follow-up expansion
+
+**Candidate Core changes, not a production or clinical-validity certificate:**
+
+- New `thomaslab.clinical_leakage`: source-table feature timing and *actual
+  posted/available* results versus decision cutoff, metadata feature/target
+  proxy review, strict UTC/timezone conversion, temporal embargo and
+  patient-group purging, train-only numeric median fitting and frozen
+  held-out application. No patient records automatically exported.
+- New `thomaslab.clinical_followup`: outcome horizon/censoring diagnostics,
+  treatment initiation versus prespecified time zero (immortal-time risk),
+  continuous claims/enrollment observation checks; no incident-outcome
+  labels or causal treatment effects inferred.
+- Existing `thomaslab.splits` now refuses missing/lossy patient and site
+  grouping identities, unknown temporal policies, and all-site holdouts
+  that would leave no derivation sample.
+- **21 synthetic-only tests executed locally and PASS** in a minimal isolated
+  Python environment using pandas/pytest and a lightweight stand-in for
+  the existing leakage-name detection import. These are focused
+  module tests, **not** a full private Core package integration report.
+  Five additional negative legacy-split tests are committed but were not
+  executed in that isolated environment.
+- Both candidate repository branches contain the same implementation
+  handbook, two API module references, updated HPC/Slurm testing
+  instructions and explicit `CANDIDATE` method statuses.
+- New test files and existing split regressions are explicitly required
+  in Core CI and the exact-commit HPC acceptance script.
+
+**Still blocked:** fresh exact-current-SHA full pytest, numerical/baseline
+validation, Ruff, mypy, packaging, notebooks, security tests and approved
+CPU/GPU Slurm; independently adjudicated patient/medication outcomes;
+cross-site and chronological external studies; authorised real-data samples,
+IRB/DUA/GACRC/Workbench/PhysioNet permissions; governance and scientific
+release approvals.
+
+**No library can certify all clinical studies leakage-free** solely from
+structural tests or feature names. Prediction time, source recording latency,
+missing outcome capture, cross-site identity and protocol/target leakage
+require domain- and source-specific inspection.
