@@ -270,3 +270,10 @@ References: [MIMIC IV hospital module](https://mimic.mit.edu/docs/iv/modules/hos
 **Readiness remains candidate structural validation only.** Real MIMIC data,
 independent source-adjudication, clinical reference mappings and a
 verified exact-source-SHA full QA report are still required.
+
+
+See [Clinical ML leakage and follow-up](clinical-leakage-and-followup.md)
+for point-in-time lab availability, patient/time group purging, train-only
+preprocessing, claims enrollment completeness and outcome-censoring guards.
+These checks do not establish clinical validity or permission to use restricted
+All of Us, MIMIC-IV or hospital records.
