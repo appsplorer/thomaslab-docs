@@ -30,3 +30,27 @@ must decide transfer, allowed license, stewardship and two named maintainers.
 Do not state UGA endorsement or ownership before an authorized written
 decision. Record response expectations, support channel, funded maintenance
 time, incident contact, backup/restore and offboarding procedures.
+
+
+## Clinical source audit addendum — 22 October 2026
+
+This checklist records what source review and candidate code inspection
+established, rather than treating passing syntax or older HPC tests as
+evidence of clinical science validity.
+
+| Audit subject | Evidence / corrective work | Disposition |
+|---|---|---|
+| All of Us CDR v9 | Official CDR dictionary reviewed; Workbench-only participant-level access retained; OMOP concepts, periods, PPI and wearable/omics metadata utilities | CODE CANDIDATE; real CDR NOT ACCESSED |
+| MIMIC-IV v3.1 | Official PhysioNet and schema references; separate hosp/ICU keys, gzip input, shifted times, ICD, eMAR and lab dictionary QA | CODE CANDIDATE; credentialed data NOT ACCESSED |
+| Site hospital EHR | Explicit local column/units/time mappings, encounter and longitudinal cohort preflights | CODE CANDIDATE; steward sample NOT PROVIDED |
+| Shared data validation | Fixed pandas nullable numeric conversion; tightened mixed text/numeric diagnosis code checks; added versioned coding manifests and small-site holdout guards | TESTS AUTHORED; exact new SHA execution PENDING |
+| Public documentation | Source-aware method catalogues, HPC A–Z and conservative method readiness mirrored between private Core and public docs branches | CI/site may pass independently of Core |
+| Clinical privacy, governance and rights | All of Us Workbench, PhysioNet DUA and institution-approved hospital enclave are separate from software checks | EXTERNAL AUTHORIZATION NOT ESTABLISHED |
+| Scientific verification | Novel cohorts, PGx, causal, NLP and baseline methods require prespecified independent real-source validation | NOT_ESTABLISHED |
+| Maintainer workflows | GitHub Actions and branch protection require authorized repo administration | OPEN / NOT VERIFIED |
+
+**Never merge or release this new Core candidate on the basis of the prior
+Herts job 2499042.** Require an approved Python 3.11+ clean environment,
+the new exact-commit `portable_acceptance.sbatch` report (including
+`test_healthcare_quality.py`), and code review. UGA IRB/DUA, ownership,
+security and data approval remain separately gated by the PI and institution.
