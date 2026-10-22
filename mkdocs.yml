@@ -73,6 +73,7 @@ nav:
       - 'Role-based paths': getting-started/role-paths.md
       - 'HPC A-to-Z setup': guides/hpc-a-to-z.md
       - 'Common healthcare baselines': guides/healthcare-foundation.md
+      - 'All of Us, MIMIC-IV and hospital EHR': guides/dataset-access-and-adapters.md
       - 'Method evidence status': guides/method-readiness.md
       - 'Glossary': getting-started/glossary.md
       - 'Release and responsibility roadmap': guides/release-roadmap.md
