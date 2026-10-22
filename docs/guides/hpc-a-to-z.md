@@ -199,6 +199,22 @@ Use `scontrol show job JOB_ID` and the institution's job accounting procedures
 for pending reasons, memory/time failures, and allocation limits. Never simply
 increase resource requests without first inspecting the failure.
 
+### Clinical temporal-leakage smoke checks (synthetic)
+
+~~~bash
+cd "$THOMASLAB_CODE_ROOT"
+"$THOMASLAB_PYTHON" -m pytest -q \
+  tests/test_clinical_leakage.py \
+  tests/test_clinical_followup.py \
+  tests/test_splits.py
+~~~
+
+These local/HPC tests require no All of Us, MIMIC-IV or hospital datasets.
+They detect named leakage contracts (late-result labs, postindex features,
+patient overlap, train/test preprocessing contamination, incomplete followup,
+insurance enrollment gaps and treatment-time-zero errors). A synthetic test
+PASS cannot prove real clinical study data are leakage-free.
+
 ## 8. Exact-commit CPU candidate QA (before merging new code)
 
 Run this only on an approved research CPU allocation, with **synthetic tests
