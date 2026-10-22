@@ -20,8 +20,10 @@ Small-cell exceptions require express All of Us programme permission.
 ## What is implemented
 
 - `thomaslab.adaptive.safe_bundle.export_governed_bundle` now requires
-  `source_system` for every non-synthetic dataset and applies the declared
-  source identity to its central `validate_environment` policy.
+  `source_system` for every non-synthetic dataset and checks it against
+  the approved adapter's fingerprint-bound `source_system`, rejecting
+  legacy real-data adapters without reviewed origin. It then applies that
+  identity to the central `validate_environment` policy.
   For All of Us, **the generic bundle exporter always refuses to write**,
   even for an aggregate or a caller claiming a different source when the
   adapter provenance identifies All of Us. This prevents accidental copying
