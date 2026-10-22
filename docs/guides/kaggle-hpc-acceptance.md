@@ -20,7 +20,7 @@ An import PASS only shows a module loads. The AST callable count is an inventory
 Use a Herts-approved storage path and job allocation. The example keeps both data and generated reports **outside** the Git repository.
 
 ~~~bash
-export THOMASLAB_HPC_ROOT="/beegfs/general/$USER/research_workplace/Projects/thomaslab_hpc"
+export THOMASLAB_HPC_ROOT="/path/to/approved/thomaslab_hpc"
 mkdir -p "$THOMASLAB_HPC_ROOT/core"
 cd "$THOMASLAB_HPC_ROOT/core"
 git clone git@github.com:appsplorer/thomaslab-core.git
@@ -344,7 +344,7 @@ sinfo -o "%P %a %l %D"
 Then request an **authorized CPU** job, adjusting account/partition/time to locally confirmed limits. Opt in to recovery only when intentional; old quarantines will be preserved, not silently overwritten:
 
 ~~~bash
-export THOMASLAB_HPC_ROOT="/beegfs/general/$USER/research_workplace/Projects/thomaslab_hpc"
+export THOMASLAB_HPC_ROOT="/path/to/approved/thomaslab_hpc"
 export THOMASLAB_EXPECTED_SHA="$(git rev-parse HEAD)"
 export THOMASLAB_PYTHON39=python3.9
 export THOMASLAB_FULL=1
