@@ -35,6 +35,11 @@ An independent HPC test pass at the *new exact commit* is still required.
   can lack `hadm_id` for legitimate reasons; assess time linkage and
   dictionary version rather than dropping those observations.
 
+The shared [cross-dataset clinical quality guide](cross-dataset-clinical-quality.md)
+covers reviewed-code fingerprints, missing/unknown codes, medication
+order/dispense/admin status, external-site future holdouts and small-site
+disclosure preflights. No result is automatically approved for publication.
+
 ## New source-aware code
 
 | Module | Functions | Scope |
@@ -46,6 +51,7 @@ An independent HPC test pass at the *new exact commit* is still required.
 | `healthcare_mimic` | `mimic_anchor_age_quality`, `mimic_stay_relationship_quality`, `mimic_lab_event_quality`, `mimic_prescription_quality`, `mimic_icd_version_quality`, `mimic_emar_quality`, `mimic_lab_dictionary_integrity`, `mimic_icu_chart_quality` | anchored age top-coding, hospital/ICU, shifted times, lab dictionary, orders vs eMAR, ICD-9/10 |
 | `healthcare_hospital` | `hospital_encounter_quality`, `hospital_lab_quality`, `hospital_medication_quality`, `count_preindex_events`, `hospital_intervisit_gap_quality` | configurable site EHR, lab units, ordered/admin events, strictly preindex counts and noncausal encounter gaps |
 | `healthcare_cohorts` | `cohort_attrition_summary`, `build_index_event_cohort`, `followup_event_quality` | prespecified eligibility flow, earliest observed code-defined index (not disease onset), censor-aware followup completeness checks |
+| `healthcare_quality` | `code_set_manifest`, `clinical_code_coverage`, `medication_state_summary`, `site_temporal_holdout_preflight`, `site_missingness_preflight` | cross-source provenance, medication states, site/temporal generalization, disclosure preflights |
 | `healthcare_foundation` | structural profiling, required-column contracts, split leakage, binary/regression/KM descriptive baselines | research-only summary baselines with no clinical utility claims |
 
 **No automatic source-to-OMOP coding or unit conversion.** The software
