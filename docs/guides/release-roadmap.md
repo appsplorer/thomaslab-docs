@@ -88,3 +88,32 @@ Core PR #34, with mirrored public guidance in docs PR #31:
 modules as clinically validated. Passing documentation CI only proves the
 public MkDocs build, not the private Python release. The historical
 Herts HPC result remains valid *only* for its original commit.
+
+
+## 22 October 2026 — dataset-contract follow-up audit
+
+The source-specific contract and documentation layer was checked again
+against the official All of Us CDR v9 data dictionary and MIMIC-IV v3.1
+hospital and ICU table documentation.
+
+| Finding | Software remediation in Core PR #34 | Evidence/limits |
+|---|---|---|
+| All of Us tier reference ambiguity | Non-executing OMOP SQL planner now only accepts the documented `wb-affable-acorn-7941.R2025Q4R6` or `wb-silky-artichoke-2408.C2025Q4R6` pairing | Workbench IAM authorization, availability and real SQL execution still unverified |
+| Participant-level cross-source linkage | Added `source_aware_relationship_integrity`: blocks mixed source family, release, host and approval/steward declaration | Declaration is not an authenticated proof; All of Us exceptions require explicit Programme approval |
+| MIMIC lab admissions | Optional child `hadm_id` linkage can be counted with explicit review, without dropping or imputation | Source-specific clinical event timing, missingness and actual patient linkage remain unverified |
+| MIMIC hosp and ICU coverage | Added structural candidates for `poe`, `emar_detail`, `services`, `procedureevents`, `datetimeevents`, `ingredientevents` | Not comprehensive data dictionaries; no real release sample tested |
+| MIMIC medication workflow | Added `mimic_order_to_emar_linkage_quality` checking pharmacy/admission/patient conflicts and null associations | Orders do not establish administrations; dose, route and adherence NOT_ASSESSED |
+| UGA and general HPC | Corrected A-to-Z acceptance documentation to five recorded QA exit statuses | UGA allocations, permitted storage, CPU/GPU/SBATCH runtime still not independently tested |
+| Both documentation repos | Mirrored updated source-method references and clinical guide, bound by pinned 26-file synchronization | Draft PRs are not the public `main` release |
+
+**No real-world research data was accessed in this software change.** The
+code cannot promise compatibility with arbitrary unknown EHR layouts, label
+definitions, vocabulary versions or clinical outcomes. Keep source contracts
+at `CANDIDATE` until Dr Thomas supplies approved samples and gold-standard
+mappings and a new exact-current-SHA test report passes.
+
+Required acceptance evidence: clean Python 3.11/3.12 and supported HPC
+software suite, full pytest/coverage/Ruff/mypy/package/notebook checks,
+independent protocol/code review, licensed MIMIC access, All of Us Workbench
+authorization, UGA hospital IRB/DUA/IT/storage controls and real external
+data-validation cohorts.
