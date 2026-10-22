@@ -22,8 +22,8 @@
 | Reviewed, immutable adapters | `thomaslab.adaptive.adapter_registry.AdapterRegistry` | Approval, drift and tamper tests | Mapping correctness requires named expert review |
 | Researcher-safe beginner model | `thomaslab.easy.quick_binary_model`, Notebook 03 | Explicit split and leakage tests | A model fit does not establish transportability |
 | Governed inputs/outputs | `thomaslab.adaptive.governance` | Policy, path and exporter tests | Python checks cannot provision OS accounts, ACLs, IRB/DUA approval or de-identify arbitrary data |
-| Pharmacogenomics indication | `thomaslab.pgx_guidelines.lookup_pgx_rule` | `tests/test_scientific_input_contracts.py` | New fail-closed correction requires exact-head tests and domain review |
-| Competing-risk numerical coding | `thomaslab.survival.aalen_johansen_cif` | Finite time, binary event, integral cause and known closed-form tests | New correction requires exact-head tests; no Fine–Gray or causal claim |
+| Pharmacogenomics indication | `thomaslab.pgx_guidelines.lookup_pgx_rule` | `tests/test_scientific_input_contracts.py` | Exact-SHA Python 3.9 HPC software gate PASS (job 2499042); PGx assay, allele and guideline domain sign-off remains pending |
+| Competing-risk numerical coding | `thomaslab.survival.aalen_johansen_cif` | Finite time, binary event, integral cause and known closed-form tests | Exact-SHA Python 3.9 HPC software gate PASS (job 2499042); method-specific clinical review pending; no Fine–Gray or causal claim |
 | Notebook interface | 59 notebooks | 40 synthetic callbacks; 19 legacy registrations | Five independent nontechnical researchers and complete legacy user journeys remain outstanding |
 
 ## How to reproduce code-side checks (authorized collaborators)
