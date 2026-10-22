@@ -66,7 +66,7 @@ person = pd.DataFrame({"person_id": [101, 102]})
 visits = pd.DataFrame({"person_id": [101], "visit_occurrence_id": [1001]})
 observations = pd.DataFrame({
     "observation_id": [1, 2], "person_id": [101, 102],
-    "visit_occurrence_id": [1001, None],
+    "visit_occurrence_id": pd.Series([1001, None], dtype="Int64"),
     "observation_concept_id": [123, 123],
     "value_as_concept_id": [903096, 456],
 })
