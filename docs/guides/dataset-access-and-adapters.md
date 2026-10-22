@@ -27,6 +27,14 @@ authorization. Do not export participant-level results or attempt copying
 controlled data into a UGA Slurm allocation. Workbench release/disclosure rules
 are independent of local Python checks.
 
+**MIMIC compressed tables:** The updated private `thomaslab.adaptive.source`
+accepts credentialed, locally permitted `.csv.gz` / `.tsv.gz` tables
+using Pandas' streaming compression reader, preserving textual identifier
+and code fields. `iter_source_chunks(..., chunk_rows=10000)` reduces
+memory pressure; it is **not** a source license, an automatic cloud downloader
+or full-dataset scientific validation. Use only an already approved input
+path and verified checksum; do not treat a compressed CSV as a ZIP archive.
+
 **MIMIC:** Use the official [PhysioNet MIMIC-IV v3.1 release](https://physionet.org/content/mimiciv/3.1/)
 and [module documentation](https://mimic.mit.edu/docs/iv/).
 Current structural adapters cover a **subset** of `hosp`/`icu` tables,
