@@ -35,7 +35,14 @@ print(validate_column_contract(example, {
 print(binary_baseline_report([0, 0, 1, 1], [0.1, 0.2, 0.8, 0.9]))
 ~~~
 
+The new module also provides `kaplan_meier_baseline_report(time, event, horizon=...)`,
+an unadjusted right-censoring benchmark. It is not a competing-risk estimator,
+causal survival model or externally validated clinical endpoint.
+
 All reports contain aggregate diagnostics, not sample records or identifiers.
+**Aggregate counts may still create small-cell disclosure risk.** Do not publish
+these reports for restricted data without the institutional disclosure gate;
+these low-level functions do not automatically de-identify results.
 Baseline inputs must be held out independently by patient/site/time as
 appropriate. Thresholds and estimands must be chosen *before* test evaluation.
 Single-class ROC AUC is reported as `None` rather than fabricated.
