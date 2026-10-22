@@ -74,6 +74,7 @@ nav:
       - 'HPC A-to-Z setup': guides/hpc-a-to-z.md
       - 'Common healthcare baselines': guides/healthcare-foundation.md
       - 'All of Us, MIMIC-IV and hospital EHR': guides/dataset-access-and-adapters.md
+      - 'All of Us disclosure controls': guides/aou-disclosure.md
       - 'Source-aware clinical methods API': guides/clinical-dataset-methods.md
       - 'Cross-dataset clinical quality contracts': guides/cross-dataset-clinical-quality.md
       - 'Method evidence status': guides/method-readiness.md
@@ -233,6 +234,16 @@ nav:
       - 'Viz': api/viz.md
   - 'Complete function reference':
       - 'All modules': reference/functions/README.md
+      - 'aou disclosure': reference/functions/aou_disclosure.md
+      - 'healthcare sources': reference/functions/healthcare_sources.md
+      - 'healthcare foundation': reference/functions/healthcare_foundation.md
+      - 'healthcare omop': reference/functions/healthcare_omop.md
+      - 'healthcare aou domains': reference/functions/healthcare_aou_domains.md
+      - 'healthcare aou query': reference/functions/healthcare_aou_query.md
+      - 'healthcare mimic': reference/functions/healthcare_mimic.md
+      - 'healthcare hospital': reference/functions/healthcare_hospital.md
+      - 'healthcare cohorts': reference/functions/healthcare_cohorts.md
+      - 'healthcare quality': reference/functions/healthcare_quality.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
