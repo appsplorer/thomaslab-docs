@@ -3,7 +3,7 @@
 This self-service reference is generated from the public Python source surface.
 
 **Stable baseline:** 69 modules, 571 documented callables  
-**Candidate additions:** 10 module references and 44 callable signatures (Core PR #34; not yet accepted)
+**Candidate additions:** 12 module references and 52 callable signatures (Core PR #34; not yet accepted)
 
 Every callable includes purpose, use guidance, full signature, parameter meanings, input contract, output guidance, raises/fail-closed behavior, research guardrails, a synthetic implementation template, related functions/workflows, verification links, and source documentation.
 
@@ -99,5 +99,7 @@ For end-to-end implementations, use the [self-service cookbook](../../examples/s
 | [`thomaslab.healthcare_cohorts`](healthcare_cohorts.md) | 3 |
 | [`thomaslab.healthcare_quality`](healthcare_quality.md) | 5 |
 | [`thomaslab.adaptive.aou_disclosure`](aou_disclosure.md) | 1 |
+| [`thomaslab.clinical_leakage`](clinical_leakage.md) | 5 |
+| [`thomaslab.clinical_followup`](clinical_followup.md) | 3 |
 
 See also [All of Us disclosure restrictions](../../guides/aou-disclosure.md) and [dataset methods](../../guides/clinical-dataset-methods.md).
