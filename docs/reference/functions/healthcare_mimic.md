@@ -102,3 +102,34 @@ def mimic_icu_chart_quality( chartevents: pd.DataFrame, *, item_dictionary: pd.D
 
 **Input review:** verify source grain, data rights, column semantics, nulls, units, temporal origin and coding version before calling. **Output:** structural diagnostic or restricted in-memory research artifact. **Limit:** no patient-level external release, clinical inference, or independent validity is established.
 
+
+
+## `mimic_order_to_emar_linkage_quality`
+
+**Purpose:** assess how documented MIMIC-IV `pharmacy_id` links associate
+prescriptions with eMAR events without inferring that a prescription was
+administered or dispensed.
+
+**Signature**
+
+~~~python
+def mimic_order_to_emar_linkage_quality(
+    prescriptions: pd.DataFrame,
+    emar: pd.DataFrame,
+    *,
+    max_rows: int = 250_000,
+) -> dict[str, Any]:
+~~~
+
+**Checks:** nonnull prescription pharmacy/subject/admission IDs,
+potentially ambiguous pharmacy IDs used across patients, orphan eMAR pharmacy
+links, patient mismatches, legitimately missing eMAR pharmacy/admission
+references and incompatible identifier types.
+
+**Output:** aggregate-only status `BLOCK` or
+`MEDICATION_LINKAGE_REVIEW_REQUIRED`. No patient IDs or row-level tables
+are returned.
+
+**Important:** eMAR medication administration and eMAR-detail dose records
+must be clinically reconciled separately; never infer medication adherence,
+drug exposure, or dosage solely from matching order IDs.
