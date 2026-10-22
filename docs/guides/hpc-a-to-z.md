@@ -166,7 +166,32 @@ Use `scontrol show job JOB_ID` and the institution's job accounting procedures
 for pending reasons, memory/time failures, and allocation limits. Never simply
 increase resource requests without first inspecting the failure.
 
-## 8. Apptainer/Singularity candidate and locked-release discipline
+## 8. Exact-commit CPU candidate QA (before merging new code)
+
+Run this only on an approved research CPU allocation, with **synthetic tests
+and no real patient data**. It checks new regression cases, repository
+hygiene, conservative method statuses and the pre-existing complete quality
+gate. The report retains each command's exit code and exact Git SHA.
+
+~~~bash
+cd "$THOMASLAB_CODE_ROOT"
+export THOMASLAB_EXPECTED_SHA="$(git rev-parse HEAD)"
+export THOMASLAB_QA_REPORT_ROOT="$THOMASLAB_WORK_ROOT/results/qa"
+mkdir -p "$THOMASLAB_QA_REPORT_ROOT"
+chmod 700 "$THOMASLAB_QA_REPORT_ROOT"
+sbatch --partition=batch --cpus-per-task=16 --mem=48G --time=08:00:00 \
+  --export=ALL slurm/portable_acceptance.sbatch
+~~~
+
+After Slurm finishes, inspect the `status.txt`, `new-contracts.log`,
+`full-gate.log`, `dependencies.sha256` and command provenance under the
+private output directory. A job state of `COMPLETED` alone is not evidence
+of passed tests; all four exit statuses must be zero. This new code has **not
+yet passed this exact-commit gate** and must not inherit the 21 October Herts
+acceptance result from an earlier SHA. The independent clinical gates remain
+separate even after a technical PASS.
+
+## 9. Apptainer/Singularity candidate and locked-release discipline
 
 `containers/THOMASLAB_CPU.def` is an **illustrative CPU candidate**, not
 a validated or dependency-locked image. Build on authorized compute/CI
@@ -194,7 +219,7 @@ UGA supports Apptainer/Singularity-style HPC containers; verify the actual
 runtime and image-building policy first. A GPU container must be independently
 validated and run with `--nv` where the site permits it.
 
-## 9. Preparing for Dr Thomas's sample datasets
+## 10. Preparing for Dr Thomas's sample datasets
 
 Request **only a lawful, approved dataset transfer** from the PI. For each
 source, have an authorized steward document:
@@ -210,7 +235,7 @@ Start with **synthetic or suitably authorized de-identified** sources. The
 software can validate structure and run approved controls but cannot grant
 data rights, verify hidden clinical semantics or certify publications.
 
-## 10. Handover evidence and stop conditions
+## 11. Handover evidence and stop conditions
 
 Preserve exact Git SHA, package lock/constraint resolver, CPU/GPU description,
 Slurm job IDs, raw redacted logs, tests, benchmark config, data fingerprint,
