@@ -1,5 +1,11 @@
 # Python compatibility and reproducible environments
 
+> **Security lifecycle:** Python 3.9 and 3.10 reached end of life by October
+> 2026. The historical 3.9 HPC run remains reproducibility evidence, but new
+> UGA deployments should target a currently supported GACRC-approved Python
+> 3.11+ environment and repeat *all* exact-commit scientific software tests.
+> The proposed 3.11/3.12 matrix is a candidate, **not** a verified PASS.
+
 **The private `thomaslab-core/main` branch now declares Python 3.9 or newer** in `pyproject.toml` (`requires-python = ">=3.9"`). The original Python 3.9 development stack was integrated into `main` via a non-squash merge after exact-SHA Herts HPC technical acceptance. All development commits remain in Git history; there is no longer a need to check out the older feature branch to use Python 3.9. Python 3.9, 3.10 and 3.11 appear in its package classifiers. This is a software **version-support claim**, not a claim that every future interpreter, wheel, method or dataset has been independently validated.
 
 | Environment | Recommended Python | What this means |
