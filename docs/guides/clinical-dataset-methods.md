@@ -203,3 +203,40 @@ certify a patient-data model or published causal estimate.
 Never move All of Us Controlled/Registered records into generic UGA HPC,
 personal cloud accounts or GitHub. Small counts and any patient-level
 intermediate require the source's disclosure-review process.
+
+
+## Source-specific record linkage and optional foreign keys
+
+- **All of Us:** The Programme does not permit participant-level linkage to
+  external data without explicit documented permission. The default
+  `source_aware_relationship_integrity` function **always blocks different
+  source families, CDR releases, classifications, environments and stewardship
+  attestations**. It cannot issue linkage exceptions or independently
+  verify Workbench credentials. Use same-CDR joins inside the approved
+  Workbench only. Never combine an All of Us person ID with MIMIC or a
+  separate hospital MRN by their superficial number/string similarity.
+- **MIMIC-IV:** `hosp.labevents.hadm_id` can be missing for a legitimately
+  recorded result. Use
+  `relationship_integrity(..., allow_null_child_keys=True)` **only after
+  reviewing the optional-FK semantics**; it separately reports
+  `null_child_links`, does not guess admissions or silently drop rows,
+  and returns `STRUCTURAL_REVIEW_REQUIRED` when null links occur.
+  Other FKs still use fail-closed non-null defaults.
+- **Generic hospital EHR:** join on a steward-reviewed, stable per-site
+  patient/encounter mapping; use the same approved source/release context for
+  both tables. Cross-site MRN linkage is not inferred or approved.
+
+## Registered and Controlled CDR reference-resource safety
+
+`plan_aou_omop_domain_query` is non-executing and accepts only official
+v9 tier/project pairs from the
+[All of Us Data Dictionaries](https://support.researchallofus.org/hc/en-us/articles/360033200232-Data-Dictionaries):
+`registered_v9` -> `wb-affable-acorn-7941.R2025Q4R6`, and
+`controlled_v9` -> `wb-silky-artichoke-2408.C2025Q4R6`.
+Wrong-tier or unrecognized project IDs are refused. Confirm the currently
+available release inside the actual Workbench before applying any plan.
+Only the user's Workbench IAM entitlements can authenticate execution.
+
+This source-aware linking preflight is a **structural contract**, not
+proof of cross-dataset transportability, phenotype equivalence or clinical
+causal validity.
