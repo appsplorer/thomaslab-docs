@@ -164,6 +164,20 @@ checks `torch.cuda.is_available()`. It does not claim full Torch, CUDA, LLM,
 PGx or scientific acceptance. On other clusters override `--partition`,
 `--gres`, `--account`, resource/time limits and module loading as permitted.
 
+### Synthetic cross-source smoke on a CPU allocation
+
+~~~bash
+cd "$THOMASLAB_CODE_ROOT"
+sbatch --partition=batch --cpus-per-task=8 --mem=24G --time=01:00:00 \
+  --export=ALL slurm/portable_cpu.sbatch \
+  scripts/synthetic_three_source_smoke.py --synthetic-only
+~~~
+
+This script fabricates its inputs entirely in memory, returns seven
+non-clinical check results, and must not read All of Us Workbench
+participant-level data, PhysioNet credentialed files or hospital records.
+Modify the partition for your scheduler after confirming the live site policy.
+
 ## 7. Arrays, logs and job troubleshooting
 
 ~~~bash
