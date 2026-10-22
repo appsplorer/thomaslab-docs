@@ -54,3 +54,37 @@ Herts job 2499042.** Require an approved Python 3.11+ clean environment,
 the new exact-commit `portable_acceptance.sbatch` report (including
 `test_healthcare_quality.py`), and code review. UGA IRB/DUA, ownership,
 security and data approval remain separately gated by the PI and institution.
+
+
+## 22 October 2026 closure record — implementation versus acceptance
+
+The P0 source-specific **code candidates** have been implemented in private
+Core PR #34, with mirrored public guidance in docs PR #31:
+
+| Audit finding | Software change | Evidence remaining |
+|---|---|---|
+| All of Us generic exporter bypass | Generic governed exporter denies every All of Us output; real sources require named source_system and fingerprint-bound adapter identity | Exact-SHA tests; institutional security review |
+| All of Us counts 1–20 and derivable values | `adaptive.aou_disclosure` performs in-memory preliminary screening; generic site missingness refuses All of Us releases | Named Workbench-authorized disclosure review over all figures/tables/text, and programme exception where applicable |
+| Missing clinical API reference | Nine healthcare module references plus one All of Us disclosure reference, linked on public navigation | Content review of each API contract and reproducible examples |
+| Cross-repository documentation drift | Twenty-six publication-safe shared pages registered in Core `check_docs_sync.py`; pinned public commit compared in Core CI | Successful hosted Core gate, manual publishing/PR review |
+| Outdated Core private Pages instructions | Both repos now describe public `thomaslab-docs` as sole Pages publisher | Merge approved docs PR and confirm deployed site |
+| Source-dependent synthetic fixture restrictions | Synthetic MIMIC/hospital tables allowed locally; real patient records remain inside permitted institutional compute | Re-run synthetic tests at exact commit |
+
+**NOT COMPLETE / not authorizable by a software contributor:**
+
+- Core hosted Actions currently fail without usable job execution steps;
+  the exact current PR SHA has **no accepted pytest/coverage/Ruff/mypy/HPC report**.
+- No UGA approved enclave, accounts, dataset DUAs, IRB/HRPP determination,
+  institutional owner/IP permission or central immutable audit storage has
+  been attested.
+- No independent real-source All of Us Workbench, MIMIC v3.1 or hospital EHR
+  clinical/reference-map validity evaluation is reported.
+- The 15–20 unseen-dataset gold-standard study and five independent research
+  usability sessions have not been conducted.
+- Release signing, lockfile/container digest, hosted runner allocation and
+  repository branch protection remain separate open release/administrative gates.
+
+**Release decision:** Do not merge the draft Core PR or describe the new
+modules as clinically validated. Passing documentation CI only proves the
+public MkDocs build, not the private Python release. The historical
+Herts HPC result remains valid *only* for its original commit.
