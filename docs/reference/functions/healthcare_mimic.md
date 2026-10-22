@@ -123,7 +123,7 @@ def mimic_order_to_emar_linkage_quality(
 
 **Checks:** nonnull prescription pharmacy/subject/admission IDs,
 potentially ambiguous pharmacy IDs used across patients, orphan eMAR pharmacy
-links, patient mismatches, legitimately missing eMAR pharmacy/admission
+links, patient and admission mismatches, cross-admission collisions, legitimately missing eMAR pharmacy/admission
 references and incompatible identifier types.
 
 **Output:** aggregate-only status `BLOCK` or
