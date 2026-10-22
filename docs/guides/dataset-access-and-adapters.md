@@ -49,6 +49,11 @@ patient/visit linkage, standardized codes and versions, date/time conventions,
 outcome adjudication and a steward-approved mapping. The API **requires**
 explicit `hospital_mapping` and does not silently use column-name guesses.
 
+The complete [source-aware clinical methods catalogue](clinical-dataset-methods.md)
+documents the new OMOP concept/visit checks, All of Us survey/wearable/omics
+preflights and parameterized Workbench query planning, plus MIMIC
+prescriptions/eMAR/ICD/ICU checks and common hospital EHR temporal baselines.
+
 ## Exact boundaries of the new implementation
 
 The pure, in-memory helpers are:
