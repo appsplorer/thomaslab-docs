@@ -75,6 +75,7 @@ nav:
       - 'Common healthcare baselines': guides/healthcare-foundation.md
       - 'All of Us, MIMIC-IV and hospital EHR': guides/dataset-access-and-adapters.md
       - 'Source-aware clinical methods API': guides/clinical-dataset-methods.md
+      - 'Cross-dataset clinical quality contracts': guides/cross-dataset-clinical-quality.md
       - 'Method evidence status': guides/method-readiness.md
       - 'Glossary': getting-started/glossary.md
       - 'Release and responsibility roadmap': guides/release-roadmap.md
