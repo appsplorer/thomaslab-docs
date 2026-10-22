@@ -45,6 +45,7 @@ An independent HPC test pass at the *new exact commit* is still required.
 | `healthcare_aou_query` | `plan_aou_omop_domain_query` | **non-executing** parameterized Workbench-specific OMOP v9 query plan |
 | `healthcare_mimic` | `mimic_anchor_age_quality`, `mimic_stay_relationship_quality`, `mimic_lab_event_quality`, `mimic_prescription_quality`, `mimic_icd_version_quality`, `mimic_emar_quality`, `mimic_lab_dictionary_integrity` | anchored age top-coding, hospital/ICU, shifted times, lab dictionary, orders vs eMAR, ICD-9/10 |
 | `healthcare_hospital` | `hospital_encounter_quality`, `hospital_lab_quality`, `hospital_medication_quality`, `count_preindex_events`, `hospital_intervisit_gap_quality` | configurable site EHR, lab units, ordered/admin events, strictly preindex counts and noncausal encounter gaps |
+| `healthcare_cohorts` | `cohort_attrition_summary`, `build_index_event_cohort`, `followup_event_quality` | prespecified eligibility flow, earliest observed code-defined index (not disease onset), censor-aware followup completeness checks |
 | `healthcare_foundation` | structural profiling, required-column contracts, split leakage, binary/regression/KM descriptive baselines | research-only summary baselines with no clinical utility claims |
 
 **No automatic source-to-OMOP coding or unit conversion.** The software
@@ -153,8 +154,19 @@ episodes, coding version, leakage, de-identification and outcome adjudication.
 python -m pytest -q tests/test_healthcare_sources.py \
   tests/test_healthcare_omop.py tests/test_healthcare_aou_domains.py \
   tests/test_healthcare_aou_query.py tests/test_healthcare_mimic.py \
-  tests/test_healthcare_hospital.py tests/test_adaptive_source.py
+  tests/test_healthcare_hospital.py tests/test_healthcare_cohorts.py \\
+  tests/test_adaptive_source.py
 ~~~
+
+When using any source, prespecify source-specific code sets and observation
+windows. The new `healthcare_cohorts` module can build an **in-memory**
+first-*observed* index event from a frozen code set
+(`allow_patient_level=True` is required), count a sequential eligibility
+waterfall, and check whether event followup reaches a prespecified horizon.
+These helpers **do not prove first-ever incident disease, complete external
+outcome ascertainment or exchangeability**. In All of Us Workbench, retain
+all patient-level outputs in that workspace. In MIMIC, relative times are
+consistent within a shifted patient, not across patients.
 
 This is a **test plan**, not an assertion of completed execution.
 For the exact-SHA full QA use `slurm/portable_acceptance.sbatch` on
