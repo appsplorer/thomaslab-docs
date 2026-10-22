@@ -77,6 +77,7 @@ nav:
       - 'All of Us disclosure controls': guides/aou-disclosure.md
       - 'Source-aware clinical methods API': guides/clinical-dataset-methods.md
       - 'Cross-dataset clinical quality contracts': guides/cross-dataset-clinical-quality.md
+      - 'Clinical ML leakage and follow-up': guides/clinical-leakage-and-followup.md
       - 'Method evidence status': guides/method-readiness.md
       - 'Glossary': getting-started/glossary.md
       - 'Release and responsibility roadmap': guides/release-roadmap.md
@@ -244,6 +245,8 @@ nav:
       - 'healthcare hospital': reference/functions/healthcare_hospital.md
       - 'healthcare cohorts': reference/functions/healthcare_cohorts.md
       - 'healthcare quality': reference/functions/healthcare_quality.md
+      - 'clinical leakage': reference/functions/clinical_leakage.md
+      - 'clinical follow-up': reference/functions/clinical_followup.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
