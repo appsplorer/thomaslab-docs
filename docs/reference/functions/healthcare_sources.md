@@ -41,7 +41,7 @@ def inspect_source_table( frame: pd.DataFrame, *, context: SourceContext, table:
 **Signature**
 
 ~~~python
-def relationship_integrity( child: pd.DataFrame, parent: pd.DataFrame, *, child_key: str, parent_key: str, max_rows: int = 250_000, ) -> dict[str, Any]:
+def relationship_integrity( child: pd.DataFrame, parent: pd.DataFrame, *, child_key: str, parent_key: str, max_rows: int = 250_000, allow_null_child_keys: bool = False, ) -> dict[str, Any]:
 ~~~
 
 **Input review:** verify source grain, data rights, column semantics, nulls, units, temporal origin and coding version before calling. **Output:** structural diagnostic or restricted in-memory research artifact. **Limit:** no patient-level external release, clinical inference, or independent validity is established.
@@ -58,3 +58,32 @@ def visit_window_integrity( table: pd.DataFrame, *, start: str, end: str, ) -> d
 
 **Input review:** verify source grain, data rights, column semantics, nulls, units, temporal origin and coding version before calling. **Output:** structural diagnostic or restricted in-memory research artifact. **Limit:** no patient-level external release, clinical inference, or independent validity is established.
 
+
+## `source_aware_relationship_integrity`
+
+**Purpose:** Perform a structural referential check only within the *same*
+reviewed source/release/environment/classification and authorization context.
+Reject cross-dataset participant linkages. This generic helper cannot grant
+an All of Us participant-level external linkage exception.
+
+**Signature**
+
+~~~python
+def source_aware_relationship_integrity(
+    child: pd.DataFrame,
+    parent: pd.DataFrame,
+    *,
+    child_context: SourceContext,
+    parent_context: SourceContext,
+    child_key: str,
+    parent_key: str,
+    allow_null_child_keys: bool = False,
+    max_rows: int = 250_000,
+) -> dict[str, Any]:
+~~~
+
+**Important:** Set `allow_null_child_keys=True` only for a reviewed optional
+foreign key such as `MIMIC-IV hosp.labevents.hadm_id`. Null link counts remain
+reported and require review. The source contexts are declarations, not
+credential verification or authorization. The public helper never returns
+identifiers or authorizes dissemination.
