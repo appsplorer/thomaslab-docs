@@ -52,7 +52,7 @@ mechanism, and the in-memory preflight never certifies a table for release.
 | `healthcare_omop` | `omop_concept_integrity`, `omop_person_visit_integrity`, `omop_observation_period_integrity`, `omop_measurement_quality` | concept dictionary coverage, patient/visit linkage, period chronology, numeric/units quality |
 | `healthcare_aou_domains` | `aou_survey_response_quality`, `aou_wearable_daily_quality`, `aou_omics_provenance_quality` | PPI skip, Fitbit/day quality and controlled-tier omics metadata (no variant calling) |
 | `healthcare_aou_query` | `plan_aou_omop_domain_query` | **non-executing** parameterized Workbench-specific OMOP v9 query plan |
-| `healthcare_mimic` | `mimic_anchor_age_quality`, `mimic_stay_relationship_quality`, `mimic_lab_event_quality`, `mimic_prescription_quality`, `mimic_icd_version_quality`, `mimic_emar_quality`, `mimic_lab_dictionary_integrity`, `mimic_icu_chart_quality` | anchored age top-coding, hospital/ICU, shifted times, lab dictionary, orders vs eMAR, ICD-9/10 |
+| `healthcare_mimic` | `mimic_anchor_age_quality`, `mimic_stay_relationship_quality`, `mimic_lab_event_quality`, `mimic_prescription_quality`, `mimic_icd_version_quality`, `mimic_emar_quality`, `mimic_lab_dictionary_integrity`, `mimic_icu_chart_quality`, `mimic_order_to_emar_linkage_quality` | anchored age top-coding, hospital/ICU, shifted times, lab dictionary, orders vs eMAR, ICD-9/10 |
 | `healthcare_hospital` | `hospital_encounter_quality`, `hospital_lab_quality`, `hospital_medication_quality`, `count_preindex_events`, `hospital_intervisit_gap_quality` | configurable site EHR, lab units, ordered/admin events, strictly preindex counts and noncausal encounter gaps |
 | `healthcare_cohorts` | `cohort_attrition_summary`, `build_index_event_cohort`, `followup_event_quality` | prespecified eligibility flow, earliest observed code-defined index (not disease onset), censor-aware followup completeness checks |
 | `healthcare_quality` | `code_set_manifest`, `clinical_code_coverage`, `medication_state_summary`, `site_temporal_holdout_preflight`, `site_missingness_preflight` | cross-source provenance, medication states, site/temporal generalization, disclosure preflights |
@@ -240,3 +240,33 @@ Only the user's Workbench IAM entitlements can authenticate execution.
 This source-aware linking preflight is a **structural contract**, not
 proof of cross-dataset transportability, phenotype equivalence or clinical
 causal validity.
+
+## MIMIC-IV v3.1 additional documented table coverage
+
+The v3.1 candidate schema contracts now recognize selected additional
+`hosp.poe`, `hosp.emar_detail`, `hosp.services`, `icu.procedureevents`,
+`icu.datetimeevents` and `icu.ingredientevents` structures.
+
+- `poe_id` identifies a provider order. An `emar_detail` record can have
+  multiple constituent dose rows for one eMAR event; never deduplicate merely
+  by `emar_id` or assume a single dose per medication.
+- A recorded ICU procedure indicates a documented event; a missing procedure
+  record cannot establish clinical absence. ICU start/end times can still
+  require a separate temporal-order review.
+- `mimic_order_to_emar_linkage_quality` counts incompatible/missing
+  `pharmacy_id` references and patient mismatches without joining raw rows
+  into a broad patient-level table. It does not estimate actual exposure,
+  dispense quantity, dose, adherence, or medication effectiveness.
+- The `hosp` and `icu` modules are distinct source systems, even when
+  records belong to the same deidentified `subject_id` / `hadm_id` chain.
+  Cross-patient calendar comparisons remain invalid due to shifted dates.
+
+References: [MIMIC IV hospital module](https://mimic.mit.edu/docs/iv/modules/hosp/),
+[ICU module](https://mimic.mit.edu/docs/iv/modules/icu/),
+[eMAR details](https://mimic.mit.edu/docs/iv/modules/hosp/emar_detail.html),
+[POE](https://mimic.mit.edu/docs/iv/modules/hosp/poe.html),
+[procedureevents](https://mimic.mit.edu/docs/iv/modules/icu/procedureevents.html).
+
+**Readiness remains candidate structural validation only.** Real MIMIC data,
+independent source-adjudication, clinical reference mappings and a
+verified exact-source-SHA full QA report are still required.
