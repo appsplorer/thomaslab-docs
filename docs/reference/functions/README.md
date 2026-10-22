@@ -3,7 +3,7 @@
 This self-service reference is generated from the public Python source surface.
 
 **Stable baseline:** 69 modules, 571 documented callables  
-**Candidate additions:** 10 module references and 43 callable signatures (Core PR #34; not yet accepted)
+**Candidate additions:** 10 module references and 44 callable signatures (Core PR #34; not yet accepted)
 
 Every callable includes purpose, use guidance, full signature, parameter meanings, input contract, output guidance, raises/fail-closed behavior, research guardrails, a synthetic implementation template, related functions/workflows, verification links, and source documentation.
 
@@ -94,7 +94,7 @@ For end-to-end implementations, use the [self-service cookbook](../../examples/s
 | [`thomaslab.healthcare_omop`](healthcare_omop.md) | 4 |
 | [`thomaslab.healthcare_aou_domains`](healthcare_aou_domains.md) | 3 |
 | [`thomaslab.healthcare_aou_query`](healthcare_aou_query.md) | 1 |
-| [`thomaslab.healthcare_mimic`](healthcare_mimic.md) | 8 |
+| [`thomaslab.healthcare_mimic`](healthcare_mimic.md) | 9 |
 | [`thomaslab.healthcare_hospital`](healthcare_hospital.md) | 5 |
 | [`thomaslab.healthcare_cohorts`](healthcare_cohorts.md) | 3 |
 | [`thomaslab.healthcare_quality`](healthcare_quality.md) | 5 |
