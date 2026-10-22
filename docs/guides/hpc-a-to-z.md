@@ -175,7 +175,15 @@ containing untracked clinical data. Obtain an approved base image digest,
 frozen wheel hashes, vulnerability review and immutable image checksum.
 
 ~~~bash
-# Only after admin approval and a verified clean build context:
+# Only after admin approval; create a clean source-only build context.
+# Do not use a working directory containing untracked datasets or secrets.
+cd "$THOMASLAB_CODE_ROOT"
+python scripts/check_repository_hygiene.py
+mkdir -p "$THOMASLAB_WORK_ROOT/build-context"
+git archive --format=tar HEAD | tar -xf - -C "$THOMASLAB_WORK_ROOT/build-context"
+cd "$THOMASLAB_WORK_ROOT/build-context"
+
+# Run on an institution-authorized build allocation, never a busy login node:
 apptainer build thomaslab-cpu.sif containers/THOMASLAB_CPU.def
 sha256sum thomaslab-cpu.sif
 # In a permitted Slurm CPU allocation:
