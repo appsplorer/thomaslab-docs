@@ -219,7 +219,7 @@ sbatch --partition=batch --cpus-per-task=16 --mem=48G --time=08:00:00 \
 After Slurm finishes, inspect the `status.txt`, `new-contracts.log`,
 `full-gate.log`, `dependencies.sha256` and command provenance under the
 private output directory. A job state of `COMPLETED` alone is not evidence
-of passed tests; all four exit statuses must be zero. This new code has **not
+of passed tests; all five exit statuses (repository hygiene, method readiness, new contracts, full quality and synthetic smoke) must be zero. This new code has **not
 yet passed this exact-commit gate** and must not inherit the 21 October Herts
 acceptance result from an earlier SHA. The independent clinical gates remain
 separate even after a technical PASS.
