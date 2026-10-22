@@ -110,6 +110,8 @@ identity, workspace enrollment or storage ACLs**.
 
 ## Before the supervisor supplies a sample dataset
 
+The private repository provides `configs/clinical_source_intake_template.yaml` as a **blank example**. Complete the actual intake only within institution-approved records; never commit signed approvals, confidential paths or patient metadata to a public or personal repository.
+
 Request, in writing, the intended dataset family and source release;
 whether the PI is legally authorized to share **this specific sample**;
 the permitted secure compute location; IRB/HRPP determination and DUA;
