@@ -69,6 +69,13 @@ markdown_extensions:
       custom_checkbox: true
 
 nav:
+  - 'Choose your role and environment':
+      - 'Role-based paths': getting-started/role-paths.md
+      - 'HPC A-to-Z setup': guides/hpc-a-to-z.md
+      - 'Common healthcare baselines': guides/healthcare-foundation.md
+      - 'Method evidence status': guides/method-readiness.md
+      - 'Glossary': getting-started/glossary.md
+      - 'Release and responsibility roadmap': guides/release-roadmap.md
   - 'Start here':
       - 'Home': index.md
       - 'First Session': getting-started/first-session.md
