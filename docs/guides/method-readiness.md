@@ -1,6 +1,6 @@
 # Method readiness: transparent evidence levels
 
-**Updated:** 22 October 2026. This is a *status contract*, not a certification.
+**Updated:** 24 October 2026. This is a *status contract*, not a certification.
 
 The private Core candidate maintains `configs/method_readiness.yaml` and a
 fail-closed `scripts/check_method_readiness.py` guard. Neither repository may
@@ -8,6 +8,7 @@ self-certify external clinical validation through a documentation edit.
 
 | Method family | Source features | Verified evidence | Current study-level gate |
 |---|---|---|---|
+| New hospital EHR schema discovery/drift candidate | adaptive.schema_discovery (2 methods) | 15 synthetic local tests passed; source SHA registered in candidate; exact-HEAD Core CI/HPC not accepted | Source-specific schema, roles, permissions, code/units and clinician review remain NOT_ASSESSED |
 | Structural source profiling and baseline metrics | healthcare_foundation (new, experimental) | New unit regression examples; branch integration pending | NOT_ASSESSED for real patients |
 | All of Us CDR v9 (Registered/Controlled) | healthcare_sources source contract (candidate) | Synthetic OMOP-shaped tables only; no program records obtained | Workbench-only analysis and authorization, release-specific dictionary and independent review |
 | MIMIC-IV v3.1 hosp/icu | healthcare_sources source contract (candidate) | Synthetic tables only; no PhysioNet records obtained | Credentialing/DUA, permitted environment, module-specific key, shifted-time and event reviews |
