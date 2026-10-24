@@ -250,6 +250,7 @@ nav:
       - 'clinical leakage': reference/functions/clinical_leakage.md
       - 'clinical follow-up': reference/functions/clinical_followup.md
       - 'adaptive schema discovery': reference/functions/schema_discovery.md
+      - 'governed file schema intake': reference/functions/schema_intake.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
