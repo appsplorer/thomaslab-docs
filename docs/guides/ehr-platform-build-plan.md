@@ -368,3 +368,54 @@ failure-handling contracts before promoting automated reviewed
 multi-target mapping. No patient dataset, PhysioNet record or All of Us
 Workbench participant data was downloaded, accessed or certified in S04.
 The full exact-SHA QA and independent reviewer approval remain blocking.
+
+
+## Session S05: approved local SQLite/FHIR metadata ingress — candidate
+
+**24 October 2026.** The new \`thomaslab.adaptive.structured_ingest\`
+component implements *two narrow source readers*:
+
+- \`discover_approved_sqlite_schema\`: local SQLite \`.sqlite\` file,
+  specifically declared ordinary table, read-only SQL and no arbitrary
+  commands. Identifier/code columns must retain text affinity; value
+  representation is normalized to text for schema inspection and is not
+  validated original clinical storage type. On Python 3.9 without SQLite
+  \`setlimit\`, local database files exceeding 32 MiB are blocked.
+- \`discover_approved_fhir_ndjson_schema\`: single-declared-resource FHIR
+  \`.ndjson\` local extracts, two-pass top-level schema profiling, bounded
+  line/row/column scanning, JSON type fingerprints, duplicate-key and
+  malformed JSON/UTF-8 rejection, and explicit JSON type-drift blocking.
+  No remote FHIR endpoints or Bulk FHIR download are implemented.
+
+Both call the **existing** source governance checks and
+\`adaptive.schema_discovery\`, carry forward review-only semantics, and
+return no original clinical values, approved mappings, patient-level
+exports, external credential assurances or clinical-validity claims.
+All of Us participant CDR remains Workbench-only and is expressly refused
+by these local readers. Even metadata/counts remain disclosure-sensitive.
+
+**Local test evidence:** 41/41 synthetic SQLite+FHIR tests PASS on
+Python 3.13.5, pandas 2.2.3, pytest 9.0.2, with *test surrogates for the
+existing* governance and S01 scanner (not a full Core runtime test).
+Exact tested source and regression-test files were compared with the
+committed Git blobs. The full private Core CI, complete pytest/Ruff/mypy,
+Python 3.9 runtime, Herts/UGA HPC, authorized hospital EHR and MIMIC/
+All of Us source-scientific acceptance have **not** passed.
+
+[See S05 function reference](../reference/functions/structured_ingest.md).
+
+**Ledger decision: P1-03 stays OPEN.** S05 does not supply external
+SQL Server/PostgreSQL network connector entitlement and query execution
+contracts, a signed FHIR server/Bulk export pipeline, comprehensive
+source-specific malformed-input tests, nor independently run full Core
+CI/HPC acceptance. Do not label P1-03 as complete from synthetic local
+SQLite and FHIR file profiling alone.
+
+**Cumulative 46-deliverable tracker (S05):** 4/46 (8.7%) locally
+implemented and tested *under their complete scoped task criteria*,
+42/46 OPEN (91.3%); 0/46 accepted for real patients. S05 adds
+documented implementation and focused evidence **within still-open
+P1-03**, not another completed deliverable. The next session must
+finish the source-governed integration and source-specific adapter
+contracts before the tracker percentage changes. No new branch was
+merged into \`main\`.
