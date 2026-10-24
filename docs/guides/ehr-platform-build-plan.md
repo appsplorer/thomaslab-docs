@@ -525,3 +525,55 @@ P1-07 role-aware intern/clinical expert/steward review queue is the next
 bounded development milestone. The existing `MappingWorkbench` and
 `AdapterRegistry` were not silently modified; S07 candidates are
 not legacy one-to-one reviewed mappings or approved executable OMOP ETL.
+
+
+## Session S08 — role-separated, persistent mapping review queue (24 October 2026)
+
+**Implementation:** New `thomaslab.adaptive.review_queue.MappingReviewQueue`
+consumes bounded **S07 metadata-only** candidate records and attaches each
+task to source system, release, S01 structural fingerprint, model ruleset,
+source field and reviewed alternative destinations. It does not read hospital
+rows, transform or export PHI, construct OMOP tables, certify a drug exposure
+or bypass the existing `MappingWorkbench` / `AdapterRegistry` approval.
+
+This milestone implements a staged queue with source-scoped task IDs and
+bounded role-filtered pending lists. An `intern` triages a specific S07
+candidate, a **different** `clinical_expert` records supporting clinical
+evidence, and a third `data_steward` records source-governance review.
+Rejection at any stage is terminal. The final accepted stage is explicitly
+`REVIEWED_FOR_VALIDATION`, **not** a clinically authorized mapping,
+full-source acceptance or patient-data release.
+
+For reproducibility, per-task JSON records are exclusively created in
+a pre-created, approved and private local folder, and reviewer decisions
+are recorded in sequence-numbered SHA-256 hash-linked append-only-by-API
+event records with private file permissions and per-task write locks.
+Identity checks use a **mandatory external role verifier interface**.
+This is a *hook for institutional IAM*, not actual cryptographically
+verified employee login or dataset-grant entitlement. Review rationales
+and field labels could still contain sensitive information and must stay
+inside the approved enclave; automated PHI scrubbing of free-form
+rationale is not provided. Hash linking is not externally signed and
+cannot prevent privileged filesystem attackers from rewriting/truncating
+journal history. Managed append-only audits and integration with actual
+hospital IAM remain independent acceptance prerequisites.
+
+**Local tests:** **46/46** S08 focused synthetic tests PASS on Python
+3.13.5 / pandas 2.2.3 / pytest 9.0.2; Python 3.9–3.13 syntax/grammar
+check PASS. The exact committed source and test Git blobs matched the
+locally executed files. These tests used the S03 and S07 mapping logic,
+with *local contract-compatible surrogates* for S01/legacy canonical
+definitions and institutional governance. Neither actual full Core
+integration, Linux Python 3.9/HPC run, hospital IAM, audited concurrent
+cluster storage, clinical data, or real EHR acceptance were completed.
+
+[Read S08 API and safe usage](../reference/functions/review_queue.md).
+
+**46-deliverable ledger:** P1-07 is **LOCAL_TEST_PASS** only. Cumulative
+**6/46** locally implemented/tested (~13.0%), **40/46 OPEN**
+(~87.0%), **0/46** source-scientifically accepted. The prior P1-03
+authorized SQL/FHIR institutional integration and full current-head
+Core/HPC release gates remain OPEN. The next milestone is **S09:
+P1-08 schema-fingerprint-bound reviewed mapping reuse, version/drift
+invalidation and held-out unseen-schema evaluation**. Source-scoped
+mapping memory must not bypass final full-source and clinician approvals.
