@@ -254,6 +254,7 @@ nav:
       - 'clinical domain and grain suggestions': reference/functions/clinical_domain_inference.md
       - 'candidate clinical table relationships': reference/functions/relationships.md
       - 'governed SQLite and FHIR metadata intake': reference/functions/structured_ingest.md
+      - 'remote PostgreSQL and FHIR connector contracts': reference/functions/remote_ingest.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
