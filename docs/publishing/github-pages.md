@@ -17,7 +17,7 @@ GitHub Pages (HTML + CSS + JavaScript + search index)
 https://appsplorer.github.io/thomaslab-docs/
 ```
 
-A static API index and 69 module-reference documents are copied from the documented public interface. No automated private-to-public sync is configured; updates require editorial review.
+The public site contains the baseline static API reference plus candidate healthcare module reference pages. Source and documentation updates require editorial review. The **private Core CI checks the 26 explicitly shared guides and API references** against an immutable public documentation commit recorded in `configs/public_docs_sync.json`, using `scripts/verify_public_docs_revision.py`. This verifies reviewed parity; it does not publish private code or automatically synchronize all intentionally distinct API/mkdocstrings representations. The public Pages workflow builds and deploys **only** from this public repository's approved `main` branch.
 
 ## Enable Pages (repository administrator)
 

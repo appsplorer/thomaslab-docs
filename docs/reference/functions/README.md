@@ -2,8 +2,8 @@
 
 This self-service reference is generated from the public Python source surface.
 
-**Modules:** 69  
-**Public callables:** 571
+**Stable baseline:** 69 modules, 571 documented callables  
+**Candidate additions:** 13 module references and 54 callable signatures (Core PR #34; not yet accepted)
 
 Every callable includes purpose, use guidance, full signature, parameter meanings, input contract, output guidance, raises/fail-closed behavior, research guardrails, a synthetic implementation template, related functions/workflows, verification links, and source documentation.
 
@@ -82,3 +82,25 @@ For end-to-end implementations, use the [self-service cookbook](../../examples/s
 | [`thomaslab.transportability`](transportability.md) | 9 |
 | [`thomaslab.validation`](validation.md) | 5 |
 | [`thomaslab.viz`](viz.md) | 7 |
+
+## Candidate clinical dataset and disclosure modules
+
+**Not an accepted v1 release:** The entries below document public signatures from the current private Core PR #34; all three source families remain synthetic-only candidates pending exact-SHA tests, authorizations and independent scientific validation.
+
+| Source-aware module | Documented callables |
+|---|---:|
+| [`thomaslab.healthcare_sources`](healthcare_sources.md) | 5 |
+| [`thomaslab.healthcare_foundation`](healthcare_foundation.md) | 8 |
+| [`thomaslab.healthcare_omop`](healthcare_omop.md) | 4 |
+| [`thomaslab.healthcare_aou_domains`](healthcare_aou_domains.md) | 3 |
+| [`thomaslab.healthcare_aou_query`](healthcare_aou_query.md) | 1 |
+| [`thomaslab.healthcare_mimic`](healthcare_mimic.md) | 9 |
+| [`thomaslab.healthcare_hospital`](healthcare_hospital.md) | 5 |
+| [`thomaslab.healthcare_cohorts`](healthcare_cohorts.md) | 3 |
+| [`thomaslab.healthcare_quality`](healthcare_quality.md) | 5 |
+| [`thomaslab.adaptive.aou_disclosure`](aou_disclosure.md) | 1 |
+| [`thomaslab.clinical_leakage`](clinical_leakage.md) | 5 |
+| [`thomaslab.clinical_followup`](clinical_followup.md) | 3 |
+| [`thomaslab.adaptive.schema_discovery`](schema_discovery.md) | 2 |
+
+See also [All of Us disclosure restrictions](../../guides/aou-disclosure.md) and [dataset methods](../../guides/clinical-dataset-methods.md).

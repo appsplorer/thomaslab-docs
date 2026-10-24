@@ -69,6 +69,20 @@ markdown_extensions:
       custom_checkbox: true
 
 nav:
+  - 'Choose your role and environment':
+      - 'Role-based paths': getting-started/role-paths.md
+      - 'HPC A-to-Z setup': guides/hpc-a-to-z.md
+      - 'Common healthcare baselines': guides/healthcare-foundation.md
+      - 'All of Us, MIMIC-IV and hospital EHR': guides/dataset-access-and-adapters.md
+      - 'All of Us disclosure controls': guides/aou-disclosure.md
+      - 'Source-aware clinical methods API': guides/clinical-dataset-methods.md
+      - 'Cross-dataset clinical quality contracts': guides/cross-dataset-clinical-quality.md
+      - 'Clinical ML leakage and follow-up': guides/clinical-leakage-and-followup.md
+      - 'Method evidence status': guides/method-readiness.md
+      - 'Glossary': getting-started/glossary.md
+      - 'Release and responsibility roadmap': guides/release-roadmap.md
+      - 'Real dataset acceptance backlog (24 Oct)': guides/real-dataset-acceptance-plan.md
+      - 'Adaptive EHR engineering build plan': guides/ehr-platform-build-plan.md
   - 'Start here':
       - 'Home': index.md
       - 'First Session': getting-started/first-session.md
@@ -223,6 +237,32 @@ nav:
       - 'Viz': api/viz.md
   - 'Complete function reference':
       - 'All modules': reference/functions/README.md
+      - 'aou disclosure': reference/functions/aou_disclosure.md
+      - 'healthcare sources': reference/functions/healthcare_sources.md
+      - 'healthcare foundation': reference/functions/healthcare_foundation.md
+      - 'healthcare omop': reference/functions/healthcare_omop.md
+      - 'healthcare aou domains': reference/functions/healthcare_aou_domains.md
+      - 'healthcare aou query': reference/functions/healthcare_aou_query.md
+      - 'healthcare mimic': reference/functions/healthcare_mimic.md
+      - 'healthcare hospital': reference/functions/healthcare_hospital.md
+      - 'healthcare cohorts': reference/functions/healthcare_cohorts.md
+      - 'healthcare quality': reference/functions/healthcare_quality.md
+      - 'clinical leakage': reference/functions/clinical_leakage.md
+      - 'clinical follow-up': reference/functions/clinical_followup.md
+      - 'adaptive schema discovery': reference/functions/schema_discovery.md
+      - 'governed file schema intake': reference/functions/schema_intake.md
+      - 'clinical domain and grain suggestions': reference/functions/clinical_domain_inference.md
+      - 'candidate clinical table relationships': reference/functions/relationships.md
+      - 'governed SQLite and FHIR metadata intake': reference/functions/structured_ingest.md
+      - 'remote PostgreSQL and FHIR connector contracts': reference/functions/remote_ingest.md
+      - 'ranked EHR field suggestions and abstention': reference/functions/field_suggestions.md
+      - 'role-aware EHR mapping review queue': reference/functions/review_queue.md
+      - 'fingerprint-bound approved mapping memory': reference/functions/mapping_memory.md
+      - 'canonical patient encounter and clinical event staging': reference/functions/canonical_dataset.md
+      - 'OMOP CDM 5.4.3 target definitions and proposed extensions': reference/functions/omop54_contract.md
+      - 'research release manifest and immutable archive preflight': reference/functions/release_manifest.md
+      - 'source-use classification and institutional retention contract': reference/functions/source_use_contract.md
+      - 'audit journal, disclosure screening and restricted egress': reference/functions/audit_egress.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
