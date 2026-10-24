@@ -262,3 +262,64 @@ bash scripts/verify_hardening_candidate.sh
 Next: complete the still-open SQL/FHIR and approved-manifest contracts
 before making new tracker completion claims; proceed to S03 domain/key
 inference only with explicit abstention and human review.
+
+
+## Session S03: contextual clinical-domain and source-grain candidates
+
+**24 October 2026.** In private Core PR #34, the new
+`thomaslab.adaptive.clinical_domain_inference` module consumes **completed
+S01 schema metadata only**. It does not read patient records, transfer data,
+infer code-set equivalence, approve mappings or write a dataset. It reuses the
+previous scanner's source release and structural fingerprint.
+
+The method proposes one of 13 reviewable domain families: person,
+encounter, ICU stay, condition, procedure, measurement, medication order,
+dispense, administration, clinical note, PGx, imaging or claims. It returns
+ranked source-column/table-name evidence with heuristic ranking **scores that
+are not calibrated probabilities**. It also proposes a source row grain only
+where structural identifier hints and domain agree; uniqueness, valid keys
+and patient/encounter linkage are *always unverified*. Contradictory medication
+order/administration evidence requires abstention.
+
+Statuses are `CANDIDATE_REVIEW_REQUIRED`,
+`ABSTAIN_INSUFFICIENT_EVIDENCE`,
+`ABSTAIN_AMBIGUOUS_DOMAIN`, or `BLOCK_SOURCE_SCHEMA`. The returned
+`mapping_approved`, `source_grain_verified`,
+`clinical_semantics_validated` and `authorized_for_export` are all
+`False`. For source-specific approval, progress through separately reviewed
+P1-05 through P1-08 and clinical governance gates; never treat these
+structural suggestions as signed source semantics.
+
+Documentation: [S03 clinical-domain inference reference](../reference/functions/clinical_domain_inference.md).
+
+**Exact source/test file evidence:** local 30/30 synthetic tests PASS
+(Python 3.13.5, pytest 9.0.2), source module compile PASS, Python 3.9/3.11
+grammar parse PASS; byte-identical source/test Git blob SHA values checked
+against Core PR #34. These are **isolated focused tests only**, not evidence
+of a clean full Core runtime, supported Python 3.9/3.11 test execution,
+HPC Slurm compatibility, clinical accuracy, or authorization for real data.
+
+**Scope-adjusted 46-deliverable ledger after S03:**
+- P1-01, P1-02, P1-04: **3/46 locally implemented and tested (6.5%)**
+- **43/46 OPEN**; P1-03 remains open for SQL/FHIR authorization and ingestion.
+- **0/46** independently source-/clinically accepted.
+- Existing methods outside this new 46-item ledger are not counted here.
+
+Focused verification on an approved development checkout:
+
+~~~bash
+python -m pytest -q tests/test_clinical_domain_inference.py \
+    tests/test_adaptive_schema_discovery.py \
+    tests/test_ehr_platform_status.py
+python scripts/ehr_platform_status.py
+# Full exact Git SHA acceptance on approved HPC:
+bash scripts/verify_hardening_candidate.sh
+~~~
+
+**Next required milestones:** finish P1-03 approved SQL/FHIR source ingestion
+and malformed-input integration, then P1-05 *multi-table relationship/key
+candidates* with patient/encounter cardinality, nullable admissions, distinct
+source row grain and explicit abstention. After that, build reviewable
+multi-target mappings, signed expert review queue and fingerprint-bound
+approved mapping reuse. Complete licensed vocabulary import and staged
+OMOP/extension table materialization only after their own acceptance tests.
