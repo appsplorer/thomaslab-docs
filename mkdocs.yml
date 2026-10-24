@@ -255,6 +255,7 @@ nav:
       - 'candidate clinical table relationships': reference/functions/relationships.md
       - 'governed SQLite and FHIR metadata intake': reference/functions/structured_ingest.md
       - 'remote PostgreSQL and FHIR connector contracts': reference/functions/remote_ingest.md
+      - 'ranked EHR field suggestions and abstention': reference/functions/field_suggestions.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
