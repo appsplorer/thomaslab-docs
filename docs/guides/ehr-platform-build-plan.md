@@ -323,3 +323,48 @@ source row grain and explicit abstention. After that, build reviewable
 multi-target mappings, signed expert review queue and fingerprint-bound
 approved mapping reuse. Complete licensed vocabulary import and staged
 OMOP/extension table materialization only after their own acceptance tests.
+
+
+## Session S04: multi-table candidate keys and bounded relationship diagnostics
+
+**24 October 2026.** Added `thomaslab.adaptive.relationships` with two
+review-required functions that reuse completed S01 schema profiles and S03
+domain candidates rather than introducing a disconnected mapping system.
+
+- `propose_table_relationships` proposes exact-column, within-source,
+  same-release person→encounter→ICU/event relationships, optionally
+  site-scoped via composite `site_id` keys. Cross-hospital, different-release,
+  mismatched source physical types, one-sided site scope and multiple
+  ambiguous parent ID aliases block or abstain.
+- `validate_relationship_frames` checks *authorized, already-loaded* bounded
+  Pandas frames (maximum 100,000 rows per table by default), detecting
+  duplicate parent keys, orphan child links, inconsistent patient/encounter
+  identities, and missing or lossy numeric identifiers. MIMIC-IV-like
+  `labevents.hadm_id` nulls are specifically marked and require an explicit
+  `allow_missing_child_foreign_key` diagnostic choice. It never certifies
+  full-source completeness, clinical semantics or an approved join.
+
+**Evidence:** The exact new code/test files were independently matched to
+their GitHub Git blob hashes. Local S04 synthetic suite **34/34 PASS**;
+S03+S04 together **64/64 PASS** on Python 3.13.5, pandas 2.2.3 and
+pytest 9.0.2. Local Python compilation and 3.9–3.13 grammar checks pass.
+The tests use schema-version-1 **metadata contract fixtures** and the
+real S03 candidate module; this does **not** verify an independently
+executed full S01 source ingestion process, complete Core pytest/coverage,
+Python 3.9 runtime, UGA/Herts Slurm or clinical source truth.
+
+The [S04 API reference](../reference/functions/relationships.md) has
+the complete input/output contracts, synthetic example and limits.
+
+**Scope-adjusted engineering ledger:**
+- **P1-01, P1-02, P1-04 and P1-05** have focused local evidence (**4/46, 8.7%**).
+- **42/46 remain OPEN (91.3%)**, including **P1-03** (complete
+  approved CSV/Parquet/SQL/FHIR ingest), P1-06 through P1-08, the clinical
+  terminology dictionary, ETL, full-source scalability and usability.
+- **0/46** independently accepted for institutionally governed patient data.
+
+Next implement the remaining approved-ingress P1-03 connector and
+failure-handling contracts before promoting automated reviewed
+multi-target mapping. No patient dataset, PhysioNet record or All of Us
+Workbench participant data was downloaded, accessed or certified in S04.
+The full exact-SHA QA and independent reviewer approval remain blocking.
