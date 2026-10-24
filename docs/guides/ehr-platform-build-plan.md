@@ -419,3 +419,63 @@ P1-03**, not another completed deliverable. The next session must
 finish the source-governed integration and source-specific adapter
 contracts before the tracker percentage changes. No new branch was
 merged into `main`.
+
+
+## Session S06 — approved remote connector contract candidate (24 October 2026)
+
+**Implementation:** `thomaslab.adaptive.remote_ingest` adds typed,
+expiry-bound `RemoteGrant` and `RemoteAuthorizationRequest` objects,
+an externally supplied authorization-verification callback,
+`discover_approved_postgres_schema` and
+`discover_approved_fhir_server_schema`. This extends prior S01–S05
+components; it does not replace the existing governed source scanner
+or researcher mapping workbench.
+
+The PostgreSQL path uses a separately configured SQLAlchemy-compatible
+connection, `SET TRANSACTION READ ONLY`, fixed schema-qualified
+identifier-vetted columns, a 30-second statement timeout and bounded
+cursor batches. It does not create credentials, permit arbitrary SQL,
+export rows or infer clinical code/field semantics.
+
+The FHIR path accepts an institutional HTTP client and a tightly scoped
+HTTPS resource collection. It rejects redirects, cross-host/path next
+links, malformed/oversize Bundles, resource-type mismatch and conflicting
+top-level JSON value types. Authorization is checked before every page.
+It inspects only top-level field names and type markers, not clinical
+resource contents for automatic mapping.
+
+Both connectors **require** institutional actor/reviewer attestation,
+nonexporting execution policy, aligned source manifest, an unexpired grant
+and an external verifier. A researcher-provided verifier returning
+`True` is not independent authentication; real IAM, hospital role
+permissions, OAuth/TLS/network controls, DUA/IRB and facility-controlled
+audit remain external prerequisites. The generic remote APIs reject
+All of Us and MIMIC-IV data rather than bypassing their established
+source-specific access routes.
+
+**Verification:** 39/39 focused synthetic connector tests PASS locally;
+Python 3.9/3.10/3.11 grammar parsing PASS. Synthetic PostgreSQL and
+HTTP clients and isolated contract-compatible stand-ins for existing
+governance/S01 utilities were used; therefore these results do **not**
+establish a clean full Core runtime, approved live PostgreSQL/FHIR
+authentication, Python 3.9 HPC, clinically appropriate relationships or
+a privacy-reviewed patient dataset. Exact new source/test files were
+verified against committed Git blob hashes.
+
+[Full S06 API, authorization and limitations](../reference/functions/remote_ingest.md).
+
+**P1-03 remains OPEN** pending institution-owned PostgreSQL/other SQL
+credentials and database-role verification, SQL Server (if applicable),
+live FHIR/OAuth and Bulk Data source-specific acceptance, complete-source
+and corruption integration, clinical governance, and full exact-current-
+commit Core CI/HPC gates. The 46-task ledger accordingly remains
+**4/46 locally implemented and tested against complete task definitions,
+42/46 OPEN, 0/46 independently source-scientifically accepted.**
+S06 is a partial P1-03 increment rather than a separately completed
+deliverable.
+
+**S07 priority:** implement a source-independent review queue for
+P1-06/P1-07 using disclosure-safe metadata and existing adaptive
+mapping/adapter registry, while separately clearing live P1-03
+institutional and full Core acceptance gates. Do not silently merge
+candidate code into `main` before those gates pass.
