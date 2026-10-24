@@ -641,3 +641,62 @@ full current-SHA private Core/HPC acceptance remain OPEN.
 requirements—versioned canonical EHR tables, patient/encounter/event
 semantics, source provenance, and approved release contracts—without
 performing unsafe automatic mapping or real-data export.
+
+
+## Session S10 — canonical patient/encounter/event temporal staging (24 October 2026)
+
+**Implementation:** New `src/thomaslab/adaptive/canonical_dataset.py`
+implements the first versioned *Thomas Lab research staging contract*
+(`thomaslab-ehr-staging-v1`) for patient, encounter and clinical-event
+tables. This is a **bounded, metadata-only diagnostic of
+already-authorized in-memory data**, not a raw EHR importer,
+pseudonymizer, published patient-level dataset, certified OMOP CDM 5.4
+ETL, immutable archive or approved clinical data release.
+
+The `validate_staging_dataset` function requires source system and
+release provenance and the three S01 schema fingerprint declarations,
+site-scoped lexical IDs with leading zeros, independent person/encounter/
+clinical event uniqueness and joins, and distinct event, recorded and
+available timestamps with explicit time zones. It does not collapse
+orders, dispensings and administrations into one medication exposure.
+Time-unavailable observations, numeric-epoch guesses, missing provenance,
+cross-patient encounters and inconsistent IDs block. Events outside
+encounter boundaries and recorded-before-event entries are retained
+only as *aggregate source exception counts requiring reviewer attention*;
+no event values or identities are returned. Null visit links are
+counted, never imputed. A conservative rule blocks available time
+earlier than event or recorded time pending source-specific exceptions.
+
+The structural manifest hash is deterministic on declared contract,
+schema columns and caller-supplied S01 fingerprints. It is **not a
+cryptographic checksum of clinical record contents** nor proof of
+real source schema identity, source completeness, certified
+pseudonymization, controlled retention or release provenance.
+Real source data and even restricted aggregate counts must remain
+inside institutionally approved compute/storage.
+
+**Evidence:** **39/39 focused synthetic local tests PASS** using the
+actual new production module and pandas on Python 3.13.5, pandas
+2.2.3 and pytest 9.0.2; Python 3.9–3.13 grammar parsing PASS.
+Source/test Git blobs were checked against the exact locally
+tested files. Full current-head Core test suite, actual Python 3.9
+runtime, Slurm HPC, IRB/DUA and hospital staff approval, OMOP CDM 5.4
+mapping and clinical dataset release are NOT PASSED.
+
+[Read S10 staging API and temporal rules](../reference/functions/canonical_dataset.md).
+
+**Ledger:** Mark **P0-04 `LOCAL_TEST_PASS` only** for the staged
+three-timestamp contract; not independently source-scientifically
+accepted. Cumulative **8/46** locally implemented/tested (~17.4%),
+**38/46 OPEN** (~82.6%), **0/46** accepted for real patient data.
+P0-01 approved use/retention, P0-02 pseudonymous identity/linkage,
+P0-03 OMOP target/extension design, P0-05 immutable archive/release,
+P0-06 access tiers/audit, and P1-03 enterprise SQL/FHIR IAM remain
+OPEN. S10 does not generate files, claim official data availability,
+or merge the Core draft PR into main.
+
+**Next milestone S11:** P0-03 OMOP 5.4-aware canonical domain
+specification and justified extension manifest, including
+vocabulary/clinical concept review gates; in parallel, complete
+P1-03 institutional source connector authorization and accepted
+exact-SHA Core/HPC QA.
