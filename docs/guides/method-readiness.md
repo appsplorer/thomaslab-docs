@@ -9,6 +9,9 @@ self-certify external clinical validation through a documentation edit.
 | Method family | Source features | Verified evidence | Current study-level gate |
 |---|---|---|---|
 | New hospital EHR schema discovery/drift candidate | adaptive.schema_discovery (2 methods) | 17 synthetic local tests passed; source SHA registered in candidate; exact-HEAD Core CI/HPC not accepted | Source-specific schema, roles, permissions, code/units and clinician review remain NOT_ASSESSED |
+| Governed bounded file metadata intake (S02 candidate) | adaptive.schema_intake | 15 isolated wrapper smoke cases, one optional Parquet skip; real Core integration/HPC not accepted | Source paths, declared data-use rights and clinical mapping not independently approved |
+| Clinical domain and row-grain inference (S03 candidate) | adaptive.clinical_domain_inference | 30/30 local synthetic tests; structural heuristic ranking and abstention | No calibrated mapping confidence, certified source grain or clinical validation |
+| Patient/encounter/ICU relationship inference (S04 candidate) | adaptive.relationships | 34/34 local S04 synthetic tests; 64/64 S03+S04 combined | No approved joins, independently verified full-source cardinality or real-data validation |
 | Structural source profiling and baseline metrics | healthcare_foundation (new, experimental) | New unit regression examples; branch integration pending | NOT_ASSESSED for real patients |
 | All of Us CDR v9 (Registered/Controlled) | healthcare_sources source contract (candidate) | Synthetic OMOP-shaped tables only; no program records obtained | Workbench-only analysis and authorization, release-specific dictionary and independent review |
 | MIMIC-IV v3.1 hosp/icu | healthcare_sources source contract (candidate) | Synthetic tables only; no PhysioNet records obtained | Credentialing/DUA, permitted environment, module-specific key, shifted-time and event reviews |
