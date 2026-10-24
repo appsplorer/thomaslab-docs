@@ -260,6 +260,7 @@ nav:
       - 'fingerprint-bound approved mapping memory': reference/functions/mapping_memory.md
       - 'canonical patient encounter and clinical event staging': reference/functions/canonical_dataset.md
       - 'OMOP CDM 5.4.3 target definitions and proposed extensions': reference/functions/omop54_contract.md
+      - 'research release manifest and immutable archive preflight': reference/functions/release_manifest.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
