@@ -479,3 +479,49 @@ P1-06/P1-07 using disclosure-safe metadata and existing adaptive
 mapping/adapter registry, while separately clearing live P1-03
 institutional and full Core acceptance gates. Do not silently merge
 candidate code into `main` before those gates pass.
+
+
+## Session S07 — ranked multi-target field suggestions (24 October 2026)
+
+**Implementation:** `thomaslab.adaptive.field_suggestions` extends the S01
+metadata → S03 source-domain proposal pipeline with
+`rank_reviewable_field_destinations(...)`. It uses existing
+`get_domain_contract` and `CANONICAL_SCHEMA` aliases, plus bounded,
+deterministic lexical ranking (never calibrated probability estimates).
+
+Unlike the earlier one-to-one `adaptive.mappings` preview, the new
+**review-only** candidate model retains several domain-qualified targets
+for one source field without selecting any for ETL. Competing source
+columns, conflicting target fields, generic time labels, weak fuzzy matches
+and unknown source schemas explicitly abstain. It refuses to interpret
+prescribing, dispensing or eMAR as equivalent exposures and flags
+unreviewed ICD/RxNorm vocabulary, protected identifier linkage, assay/unit
+and timestamp/availability semantics.
+
+The source metadata fingerprint is recalculated for consistency with
+S01 physical column/type metadata, but **original source authenticity
+and authorization are not independently verified**. Output contains
+field names and risk metadata only, not patient values; even field names
+can be sensitive and require approved institutional storage.
+
+**Local verification:** **37/37** focused synthetic regression tests PASS
+(Python 3.13.5, pandas 2.2.3, pytest 9.0.2);
+Python 3.9–3.13 grammar PASS. Exact source and test blob SHAs were
+compared with the locally tested files. The S03 module is the actual
+earlier implementation; S01 producer and canonical contract/alias modules
+were represented by contract-compatible local test surrogates. This is
+**not** an exact-current-commit Core integration/HPC acceptance test
+or a calibrated clinical mapping benchmark. A synthetic 253-column
+eight-domain timing of approximately 0.15 seconds was exploratory only.
+
+[Read the S07 function guide](../reference/functions/field_suggestions.md).
+
+**Ledger scope:** P1-06 is **LOCAL_TEST_PASS** only (not independently
+accepted). **5/46** deliverables have focused local implementation
+evidence (~10.9%); **41/46** are OPEN (~89.1%); **0/46**
+are independently source-scientifically accepted. P1-03 remains OPEN
+for institutional SQL/FHIR access integration and exact-SHA QA.
+P1-07 role-aware intern/clinical expert/steward review queue is the next
+bounded development milestone. The existing `MappingWorkbench` and
+`AdapterRegistry` were not silently modified; S07 candidates are
+not legacy one-to-one reviewed mappings or approved executable OMOP ETL.
