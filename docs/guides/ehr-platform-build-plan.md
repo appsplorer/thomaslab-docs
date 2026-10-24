@@ -558,7 +558,7 @@ cannot prevent privileged filesystem attackers from rewriting/truncating
 journal history. Managed append-only audits and integration with actual
 hospital IAM remain independent acceptance prerequisites.
 
-**Local tests:** **46/46** S08 focused synthetic tests PASS on Python
+**Local tests:** **48/48** S08 focused synthetic tests PASS on Python
 3.13.5 / pandas 2.2.3 / pytest 9.0.2; Python 3.9–3.13 syntax/grammar
 check PASS. The exact committed source and test Git blobs matched the
 locally executed files. These tests used the S03 and S07 mapping logic,
