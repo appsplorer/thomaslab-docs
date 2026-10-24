@@ -1,6 +1,6 @@
 # S09 — Schema-fingerprint-bound, reviewer-approved mapping memory
 
-**Software state:** local synthetic contract candidate, not independently accepted for hospital deployment or patient-level export. The private implementation is `thomaslab.adaptive.mapping_memory` in <Link title="Core PR #34" url="https://github.com/appsplorer/thomaslab-core/pull/34"/>. Never use an archived mapping as permission to handle protected data.
+**Software state:** local synthetic contract candidate, not independently accepted for hospital deployment or patient-level export. The private implementation is `thomaslab.adaptive.mapping_memory` in [Core PR #34](https://github.com/appsplorer/thomaslab-core/pull/34). Never use an archived mapping as permission to handle protected data.
 
 ## Role in the Thomas Lab EHR pipeline
 
