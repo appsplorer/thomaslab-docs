@@ -120,7 +120,7 @@ python scripts/ehr_platform_status.py
 bash scripts/verify_hardening_candidate.sh
 ```
 
-**46/46 focused synthetic tests passed locally** on Python 3.13.5, pandas 2.2.3, pytest 9.0.2. Python 3.9–3.13 grammar checks passed, and Git blobs matched the exact tested files. The local test environment included the real S03 and S07 algorithms with test-compatible S01/legacy canonical definition and governance surrogates. These results do **not** establish full private Core integration, real IAM, authorized storage deployment, institutional authentication, Python 3.9 runtime, hospital/All of Us/MIMIC-IV acceptance or independent clinical review.
+**48/48 focused synthetic tests passed locally** on Python 3.13.5, pandas 2.2.3, pytest 9.0.2. Python 3.9–3.13 grammar checks passed, and Git blobs matched the exact tested files. The local test environment included the real S03 and S07 algorithms with test-compatible S01/legacy canonical definition and governance surrogates. These results do **not** establish full private Core integration, real IAM, authorized storage deployment, institutional authentication, Python 3.9 runtime, hospital/All of Us/MIMIC-IV acceptance or independent clinical review.
 
 P1-07 is marked `LOCAL_TEST_PASS` only, not independently accepted. The next source/schema-drift approval-memory milestone is P1-08; P1-03 authorized SQL/FHIR and full Core/HPC release gates remain open.
 
