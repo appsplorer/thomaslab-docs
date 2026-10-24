@@ -82,6 +82,7 @@ nav:
       - 'Glossary': getting-started/glossary.md
       - 'Release and responsibility roadmap': guides/release-roadmap.md
       - 'Real dataset acceptance backlog (24 Oct)': guides/real-dataset-acceptance-plan.md
+      - 'Adaptive EHR engineering build plan': guides/ehr-platform-build-plan.md
   - 'Start here':
       - 'Home': index.md
       - 'First Session': getting-started/first-session.md
@@ -248,6 +249,7 @@ nav:
       - 'healthcare quality': reference/functions/healthcare_quality.md
       - 'clinical leakage': reference/functions/clinical_leakage.md
       - 'clinical follow-up': reference/functions/clinical_followup.md
+      - 'adaptive schema discovery': reference/functions/schema_discovery.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
