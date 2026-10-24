@@ -37,7 +37,7 @@ changes within chunks return `BLOCK_DTYPE_DRIFT`. Schema metadata,
 column names and aggregate counts must stay inside authorized compute
 until the applicable institutional/programme disclosure review.
 
-**Stop conditions:** duplicate or case-colliding headers; empty sources;
+**Stop conditions:** duplicate or case-colliding headers; empty iterators/header-only tables;
 missing, reordered, ambiguous columns across chunks; malformed labels;
 invalid bounds; chunk larger than configured limit. Raises before returning
 an incomplete report. The schema fingerprint is **not** the patient/source
