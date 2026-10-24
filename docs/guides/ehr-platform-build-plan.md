@@ -700,3 +700,62 @@ specification and justified extension manifest, including
 vocabulary/clinical concept review gates; in parallel, complete
 P1-03 institutional source connector authorization and accepted
 exact-SHA Core/HPC QA.
+
+
+## Session S11 — pinned OHDSI OMOP 5.4.3 target specification and review-only extensions (24 October 2026)
+
+**Version-pinned official scope:** In `configs/omop54_target_contract.json`,
+Thomas Lab now contains all **39 official OMOP CDM 5.4.3 tables and 432
+fields** from OHDSI's tagged field/table specification (v5.4.3, commit
+`746a15e0fb36a95ba6cc0993737f1273bbad92f2`; bundled field catalog
+Git blob `7d37aac301f5ddeecf079ec88f37ca5e12c109d1`).
+The JSON preserves required fields, datatypes and primary/foreign-key
+targets; the loader verifies expected version, completeness, FK
+references and exact bundled Git blob, refusing altered snapshots.
+
+**Thomas Lab extensions are *not* OMOP fields.**
+`configs/thomaslab_omop54_extensions.json` proposes three *separately
+governed sidecars*: `thomaslab.event_provenance`, `thomaslab.event_temporal_availability`
+and `thomaslab.pgx_assay_provenance`. They keep source release and row
+lineage, the three event/recording/availability clocks, and assay/gene/
+allele/genome/guideline provenance without changing OHDSI's field
+definition. All three are default-denied for export and require a
+qualified reviewer, institutional rights and release policy.
+
+New `thomaslab.adaptive.omop54_contract` provides pinned field-layout
+checks, controlled candidate OMOP table suggestions and a
+`assemble_omop54_target_blueprint` function which **does not** create a
+database or authorize ETL. In particular, medication orders,
+dispensing and administrations **abstain** instead of automatically
+becoming drug exposures. PGx has explicit clinical measurement/observation
+alternatives. No clinical concept or vocabulary release is asserted
+as validated.
+
+**Local evidence:** **34/34 focused synthetic Python tests PASS**
+(Python 3.13.5, pytest 9.0.2) with exact tested module and test file
+matched by Git blob. The official 5.4.3 source CSVs were separately
+parsed and validated for **39 tables, 432 fields, zero missing FK table
+or referenced field** when the snapshot was created. Local regression
+fixtures intentionally synthesize the schema and do not establish
+full Core integration. Actual Python 3.9 runtime, complete Core
+pytest/quality, Slurm/HPC, official instantiated DDL, OHDSI
+Data Quality Dashboard, licensed vocabulary content, source-to-concept
+mapping precision, clinical review, approved IRB/DUA and hospital-source
+permissions remain **NOT PASSED**. CDM v5.5 now exists; choosing 5.4 is
+a documented S11 project scope, not a claim that it is the latest CDM.
+
+[S11 OMOP target and extension API](../reference/functions/omop54_contract.md).
+
+**Ledger:** P0-03 marked `LOCAL_TEST_PASS` **only for this full
+version-pinned field-level target specification and proposed
+clinical/provenance extension design**. Cumulative **9/46 local
+deliverables (~19.6%), 37/46 OPEN (~80.4%), 0/46 independently
+accepted** for patient datasets. The S10 temporal staging contract
+(P0-04) remains locally tested. P0-01/02/05/06, enterprise-source
+P1-03, production ETL and all full Core/HPC/clinical release gates
+remain open. Core PR #34 stays a draft without merging to main.
+
+**S12 recommendation:** implement a narrowly scoped P0-05 immutable
+archive/release-identity *contract and dry-run validator* first. Require
+institutionally approved storage, content hashes and reviewed source-
+to-staging-to-OMOP lineage before any real protected-data release.
