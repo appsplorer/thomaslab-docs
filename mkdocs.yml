@@ -252,6 +252,7 @@ nav:
       - 'adaptive schema discovery': reference/functions/schema_discovery.md
       - 'governed file schema intake': reference/functions/schema_intake.md
       - 'clinical domain and grain suggestions': reference/functions/clinical_domain_inference.md
+      - 'candidate clinical table relationships': reference/functions/relationships.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
