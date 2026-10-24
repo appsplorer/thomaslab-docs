@@ -810,3 +810,60 @@ P0-01 hospital-approved source classification/use/retention and P0-06
 authenticated audit/egress controls before attempting any patient-data
 workflow. Separately clear open P1-03 SQL/FHIR authorization and
 full exact-SHA Core Python 3.9/HPC QA; Core PR #34 stays draft.
+
+
+## Session S13 — source classification, purpose, retention and institutional grant contracts (24 October 2026)
+
+New `thomaslab.adaptive.source_use_contract.validate_source_use_contract`
+defines a strict, version-pinned, metadata-only contract for source
+classification, institution/agreement/ethics references, explicit research
+purposes, source release and S01 schema identity, allowed environments,
+permission expiry, retention end and legal hold. It delegates the decision
+to an **externally operated institutional grant verifier**, retains all
+existing Core environment and All of Us restrictions, denies unverifiable
+or expired scopes, and never grants source access, deletion or row export.
+A caller-supplied synthetic `lambda: True` cannot attest a real hospital.
+Hospital-issued agreements, independently checked IAM/DUA/IRB grants,
+revocation services and retention enforcement remain prerequisites.
+
+[S13 documented API and safety contract](../reference/functions/source_use_contract.md).
+
+## Session S14 — metadata audit, cell-risk and deny-only egress controls (24 October 2026)
+
+New `thomaslab.adaptive.audit_egress` adds a bounded private local
+`AuditLedger` with role-verifier-gated event append, O_EXCL file creation,
+owner-only record permissions, local SHA-256 hash chaining and exclusive
+single-directory writes. This is **not** an institutionally signed,
+externally anchored, protected WORM or centrally witnessed audit service.
+`preview_disclosure` identifies cell counts below an explicitly
+bounded threshold (default 11, **not an NIH/hospital universal rule**);
+larger cells still require complementary suppression and repeated-query/
+linkage review. `assess_egress` is *always deny-only*, including requests
+from apparent stewards and for aggregates. No clinical export path,
+network boundary control, institution IAM or independent DUA authorization
+has been implemented.
+
+[S14 documented API and limits](../reference/functions/audit_egress.md).
+
+**Combined S13 and S14 evidence:** **66/66 synthetic local tests PASS**
+on Python 3.13.5 / pytest 9.0.2, with Python 3.9–3.13 grammar parsing
+PASS. The four new GitHub source/test files match the exact executed local
+copies. Focused tests exercise the S13/S14 production functions with a
+local contract-compatible substitute for Core `ExecutionPolicy` and
+governance; this is *not* full exact-commit Core integration or approved
+Herts HPC/Python 3.9 runtime.
+
+**Tracker judgment: P0-01 and P0-06 both remain OPEN.** Passing software
+preflights cannot establish that a real hospital has approved source use
+and retention, independent staff role verification, external audit/WORM
+storage, clinical disclosure governance or an egress gateway. P0-05
+immutable archives and P1-03 approved SQL/FHIR source connectors remain
+OPEN as well. Cumulative **9/46 scoped deliverables locally complete
+(19.6%), 37/46 OPEN (80.4%), 0/46 independently accepted for real
+patient data**. Core PR #34 remains draft, not merged into `main`.
+
+**Next acceptance priorities:** provision *institution-owned* S13 IAM
+verification and signed grant manifests, S14 central audit+egress
+enforcement, P0-05 compliant archive receipts, P1-03 source IAM and
+actual exact-SHA full Core/HPC acceptance before real hospital data is
+used or a dataset is released.
