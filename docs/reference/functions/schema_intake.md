@@ -38,7 +38,7 @@ in-memory batches; file metadata is compared before and after the scan
 to detect ordinary concurrent changes. This is **not** a complete
 filesystem-race or immutable-snapshot guarantee.
 
-A participant-level All of Us CDR file intake is blocked: run
+A participant-level All of Us CDR file intake is blocked, even if an otherwise restricted source declares the PUBLIC_AGGREGATE tier: run
 authorized Workbench-native source queries inside the Workbench instead.
 No local file scan is permission to transfer, download or publish data.
 SQL and FHIR ingestion need separate approved connection policies and
@@ -95,7 +95,7 @@ New regression cases cover compressed CSV, ambiguous headers, corrupt gzip,
 header-only sources, out-of-root paths, missing classification, restricted local
 execution, declared institutional execution, All of Us Workbench barriers,
 symlinks, unsupported formats and scan limits. Parquet needs `pyarrow`.
-The standalone S02 wrapper was smoke-tested with stand-in dependencies;
+The standalone S02 wrapper was smoke-tested with stand-in dependencies, including a test rejecting a RESTRICTED All of Us source mislabelled as PUBLIC_AGGREGATE;
 **the full actual Core implementation has not yet passed these new tests
 or exact-commit release checks**. P1-03 stays OPEN until approved SQL/FHIR
 ingestion, source-specific tests and release criteria are implemented.
