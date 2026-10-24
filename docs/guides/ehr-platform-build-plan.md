@@ -759,3 +759,54 @@ remain open. Core PR #34 stays a draft without merging to main.
 archive/release-identity *contract and dry-run validator* first. Require
 institutionally approved storage, content hashes and reviewed source-
 to-staging-to-OMOP lineage before any real protected-data release.
+
+
+## Session S12 — deterministic release IDs and immutable-archive preflight (24 October 2026)
+
+**Implementation:** Added `thomaslab.adaptive.release_manifest`, a
+**metadata-only / synthetic-byte-only** module tied to the S01 fingerprint,
+S10 temporal staging version and S11 OHDSI OMOP 5.4.3 target version.
+`build_release_manifest` constructs deterministic SHA-256 release IDs
+from source release, controlled classification, the three S01 schema
+fingerprints and bounded source → staging → OMOP artifact descriptions.
+Each artifact is identified by an opaque ID, declared SHA-256 and byte
+length, required parent lineage, source schema and transformation
+revision; stage-skipping, orphaned dependencies, duplicate IDs, version
+drift and forged approval flags are rejected.
+
+`validate_release_manifest` checks internal manifest identity and
+three-stage dependencies. `verify_synthetic_archive_files` optionally
+reads only **invented synthetic local** files from an existing private
+directory, streaming SHA-256 checks and refusing corrupt, swapped,
+oversized or symlinked sources. Protected-source byte inspections are
+expressly refused. `inspect_worm_receipt_claims` checks **declared**
+object-version/lock mode/digest/retention timestamp references without
+claiming signed storage-provider verification. No archive is written,
+WORM mode enabled, source data published, patient rows returned or
+institutional release authorized. All outputs explicitly block export.
+
+**Evidence:** **45/45 focused synthetic tests PASS** on Python 3.13.5
+and pytest 9.0.2, Python 3.9–3.13 syntax/AST parsing PASS. Exact
+committed new source/test Git blobs match the locally executed files.
+These tests exercise the actual standalone standard-library module,
+not mocked external data services. No real protected data, Herts HPC,
+actual Python 3.9 runtime, full Core CI/Ruff/packaging, institutional
+object-store immutability, signed audit, source use/retention policy,
+dataset release or clinician OMOP validation have passed.
+
+[Read S12 release manifest contract and limitations](../reference/functions/release_manifest.md).
+
+**Ledger decision: P0-05 stays OPEN**. S12 is a bounded, locally tested
+subcomponent of P0-05, *not the complete requirement*: no independently
+enforced immutable archive, institutionally verified retention,
+production archive/recovery process, authenticated WORM receipts or
+approved release gate exists. Counts therefore remain **9/46 locally
+complete against entire tracked task definitions, 37/46 OPEN, 0/46
+independently accepted for real patient datasets**.
+
+**Next development S13:** finish the independent P0-05 archive/storage
+integration contract *where permitted by the institution*, or prioritize
+P0-01 hospital-approved source classification/use/retention and P0-06
+authenticated audit/egress controls before attempting any patient-data
+workflow. Separately clear open P1-03 SQL/FHIR authorization and
+full exact-SHA Core Python 3.9/HPC QA; Core PR #34 stays draft.
