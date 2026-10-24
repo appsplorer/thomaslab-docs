@@ -160,6 +160,28 @@ An open tracker entry may overlap existing candidate code; it remains open
 until integration and acceptance evidence support closure. This is not a
 percentage of the entire pre-existing Thomas Lab platform.
 
+## Reproducible progress and acceptance reporting
+
+Run from the private Core checkout after each development session:
+
+~~~bash
+python scripts/ehr_platform_status.py
+python -m pytest -q tests/test_adaptive_schema_discovery.py \
+    tests/test_ehr_platform_status.py
+~~~
+
+The progress script validates the persistent
+`configs/ehr_platform_development_tracker.json` ledger and reports,
+for each phase, tracked deliverables, source-code implementation with
+evidence, still-open tasks and separately approved real-data acceptance.
+It refuses duplicate task identities and premature scientific approval.
+
+**Session S01 test evidence:** 15 schema/drift tests plus 5 independent
+status-ledger tests = **20 isolated tests PASS** on Python 3.13.5,
+Pandas 2.2.3 and pytest 9.0.2. No Python 3.9, full Core CI/HPC,
+Ruff/mypy or authorized patient-data acceptance was performed in this
+session.
+
 ## Required order for next development sessions
 
 **S02:** connect the schema scanner to approved source manifests/readers;
