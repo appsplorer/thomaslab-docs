@@ -63,8 +63,8 @@ total inspected rows, and a stable SHA-256 structural fingerprint. It **never
 copies row values or provides automatic clinical mapping approval**.
 
 The algorithm rejects duplicate/case-colliding columns, changing column
-names or order between batches, empty streams, malformed source identifiers,
-overly large batches and exceeded chunk limits. A physical dtype change
+names or order between batches, empty streams/header-only tables, malformed source identifiers,
+overly large batches and exceeded chunk limits. Lexical blank strings and tokens such as `NA` are preserved, not automatically classified as missing; source-specific missingness review is required. A physical dtype change
 across batches returns `BLOCK_DTYPE_DRIFT`. A normal scan returns
 `REVIEW_REQUIRED`—not `PASS_TO_RELEASE`.
 
@@ -127,7 +127,7 @@ Large-scale performance and restricted-source semantic tests remain open.
 
 ## Session test evidence
 
-The 15 synthetic regression tests were actually run in an isolated local
+The 17 synthetic regression tests were actually run in an isolated local
 environment with Pandas **2.2.3** and pytest **9.0.2** and passed. The
 source module was compiled successfully. Cases include missing values,
 chunk-invariant fingerprints, no raw values in reports, altered source
@@ -176,8 +176,8 @@ for each phase, tracked deliverables, source-code implementation with
 evidence, still-open tasks and separately approved real-data acceptance.
 It refuses duplicate task identities and premature scientific approval.
 
-**Session S01 test evidence:** 15 schema/drift tests plus 5 independent
-status-ledger tests = **20 isolated tests PASS** on Python 3.13.5,
+**Session S01 test evidence:** 17 schema/drift tests plus 5 independent
+status-ledger tests = **22 isolated tests PASS** on Python 3.13.5,
 Pandas 2.2.3 and pytest 9.0.2. No Python 3.9, full Core CI/HPC,
 Ruff/mypy or authorized patient-data acceptance was performed in this
 session.
