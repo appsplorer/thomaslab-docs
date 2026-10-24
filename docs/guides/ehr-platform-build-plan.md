@@ -214,3 +214,51 @@ must stay inside its permitted Workbench; PhysioNet or hospital data must
 remain under the applicable agreements and institutionally approved
 compute. This public documentation contains no patient records, secret
 paths, licence-restricted vocabulary dumps or unapproved export route.
+
+
+## Session S02: governed local file intake (candidate; not yet accepted)
+
+**24 October 2026.** A new private code module,
+`thomaslab.adaptive.schema_intake`, connects the existing policy gate,
+approved-path checker and chunked CSV/TSV/gzip/Parquet/XLSX reader with
+the S01 metadata-only schema scanner. No parallel reader or mapping system
+was created. The file intake adds a strict CSV header check that blocks
+missing, repeated and case-colliding names that Pandas could mangle,
+refuses unsupported formats and symlink paths, checks ordinary concurrent
+file changes, and preserves explicit restrictions on publication/exports.
+
+The API is documented in the [S02 governed file-intake reference](../reference/functions/schema_intake.md).
+File classification declarations **are not proof** of data access rights;
+all hospital/PhysioNet and source-owner authorizations still require
+independent institutional verification. All of Us participant-level CDR
+records are **not** accepted by this local file intake; its authorized
+Workbench-specific connector remains a separate task.
+
+**Isolated exercise evidence:** 14 S02 wrapper smoke cases passed using
+local stand-in implementations of pre-existing source/governance/discovery
+dependencies; one Parquet case was skipped because `pyarrow` was not
+installed. This verifies the new wrapper's basic control flow, **not**
+integration against the actual entire private Core package. The source and
+regression tests are committed to draft Core PR #34; full exact-SHA Core
+pytest, Ruff, mypy, Python 3.9/3.11, Parquet, HPC and independent acceptance
+have **not** passed on this new commit.
+
+**Tracker decision:** `P1-03` remains OPEN: approved SQL and FHIR ingress,
+malformed-input handling across all authorized modalities and full-release
+acceptance are still missing. The new 46-deliverable ledger therefore stays
+at **2/46 with focused local implementation evidence, 44/46 open, 0/46
+independently accepted for real data**. No source-specific PHI/clinical
+rights or security certification is inferred.
+
+Execute on an approved developer/HPC checkout with full package dependencies:
+
+~~~bash
+python -m pytest -q tests/test_adaptive_schema_intake.py \
+    tests/test_adaptive_schema_discovery.py \
+    tests/test_ehr_platform_status.py
+bash scripts/verify_hardening_candidate.sh
+~~~
+
+Next: complete the still-open SQL/FHIR and approved-manifest contracts
+before making new tracker completion claims; proceed to S03 domain/key
+inference only with explicit abstention and human review.
