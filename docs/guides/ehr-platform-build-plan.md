@@ -577,3 +577,67 @@ Core/HPC release gates remain OPEN. The next milestone is **S09:
 P1-08 schema-fingerprint-bound reviewed mapping reuse, version/drift
 invalidation and held-out unseen-schema evaluation**. Source-scoped
 mapping memory must not bypass final full-source and clinician approvals.
+
+
+## Session S09 — approved-adapter fingerprint memory and unseen-schema abstention (24 October 2026)
+
+New `thomaslab.adaptive.mapping_memory` connects S01 structural metadata, the
+S07 deterministic field ranking, S08 three-person review, and the existing
+`AdapterRegistry`. The S09 `FingerprintMappingMemory` only stores a
+**write-once, review-only hint** when a verified S08 chain ends in
+`REVIEWED_FOR_VALIDATION` and the AdapterRegistry revision independently
+shows `APPROVED` with named reviewer and passing, complete
+`FULL_SOURCE` validation metadata. Both paths must agree on source system,
+release, table, ordered source fields, S01 fingerprint and approved
+source→canonical assignment. The memory-writing actor must be a fourth
+separate verified data steward.
+
+New registry drafts now optionally accept **all three** S09 provenance
+fields (`source_release`, `table_name`,
+`source_schema_fingerprint_sha256`) together; partial bindings are
+rejected. `MappingWorkbench` forwards these fields when the source
+manifest includes them. Older unbound registry revisions remain readable
+but are **not eligible for S09 memory**.
+
+Lookup requires an externally verified role and exact ruleset/fingerprint,
+source/release/table/domain/field match. Different release or schema
+produces `BLOCK_SCHEMA_OR_RELEASE_DRIFT`; missing or unfamiliar inputs
+abstain. Even a successful lookup is only
+`EXACT_MATCH_REVIEW_HINT_ONLY`, with
+`automatic_etl_allowed=False`, `authorized_for_export=False`,
+`clinical_mapping_reapproved=False`, and
+`external_entitlement_rechecked=False`. No source rows, raw patient
+values, credentials, or actual OMOP mappings are released.
+
+`evaluate_unseen_schema_holdouts` accepts a bounded set of 1–64
+explicitly labeled source-schema cases, reports aggregate exact-match/
+abstention confusion counts, and blocks any labeled **false reuse**. The
+local four-case synthetic illustration yielded one correct exact hint,
+three correct abstentions, zero false reuse. These annotations are
+**not** independent clinical gold-standard truth or held-out real
+hospital evaluation. An intentionally false label triggered a
+`BLOCK_FALSE_REUSE` safety result.
+
+**Local evidence:** **37/37 synthetic S09 tests PASS** on Python
+3.13.5/pandas 2.2.3/pytest 9.0.2, with Python 3.9–3.13
+grammar parsing PASS. Exact tested new implementation/test Git blobs
+matched Core candidate commits; the test environment uses actual S03,
+S07 and S08 code plus compatible local surrogates for older S01,
+canonical definitions and registry. Full, real Core import/integration,
+new registry/provenance propagation regression testing, institutional IAM,
+revocation checks, signed audit/WORM storage, Python 3.9 runtime and
+HPC/clinical acceptance have **not passed**. A stored mapping hint cannot
+be directly consumed by clinical ETL.
+
+[Read the S09 API guide and limits](../reference/functions/mapping_memory.md).
+
+**Ledger:** P1-08 has `LOCAL_TEST_PASS` synthetic evidence only.
+**7/46** deliverables locally evidenced (15.2%), **39/46 OPEN**
+(84.8%), **0/46** source-scientifically accepted for protected
+hospital data. P1-03 enterprise-source authorization/integration and
+full current-SHA private Core/HPC acceptance remain OPEN.
+
+**Next milestone S10:** prioritize missing P0 dataset foundation
+requirements—versioned canonical EHR tables, patient/encounter/event
+semantics, source provenance, and approved release contracts—without
+performing unsafe automatic mapping or real-data export.
