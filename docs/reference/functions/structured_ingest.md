@@ -1,8 +1,8 @@
 # Governed structured metadata intake: SQLite and FHIR NDJSON (S05)
 
 **Engineering state:** Private Core PR #34 candidate. S05 added
-\`thomaslab.adaptive.structured_ingest\` with two entry points and
-\`tests/test_adaptive_structured_ingest.py\` (41 synthetic local tests).
+`thomaslab.adaptive.structured_ingest` with two entry points and
+`tests/test_adaptive_structured_ingest.py` (41 synthetic local tests).
 **No exact-head full Core/Herts HPC or real patient-data authorization/validation is established.**
 
 ## Architecture and boundaries
@@ -10,21 +10,21 @@
 This adds **metadata discovery**, not a general-purpose database adapter,
 HL7 FHIR server client, Bulk FHIR exporter, clinical ETL or patient-data
 distribution tool. It reuses the existing
-\`adaptive.governance.validate_environment\`,
-\`ensure_approved_input\` and \`adaptive.schema_discovery.discover_source_schema\`.
+`adaptive.governance.validate_environment`,
+`ensure_approved_input` and `adaptive.schema_discovery.discover_source_schema`.
 The source owner, IRB/DUA, institutional storage/credential controls and
 source manifests must be independently approved; declarations in a local
 manifest are not external proof of permission.
 
 | Source | Entry point | Supported scope | Explicit exclusions |
 |---|---|---|---|
-| Approved local \`.sqlite\` | \`discover_approved_sqlite_schema\` | Read-only *ordinary named tables*, schema and null metadata | Arbitrary SQL, views, remote PostgreSQL/SQL Server, network/linked servers, automatic key or code interpretation |
-| Approved local \`.ndjson\` | \`discover_approved_fhir_ndjson_schema\` | Single declared FHIR resource type per file, top-level field and JSON-type profiling | Remote FHIR endpoints, OAuth, Bulk Data API downloads, transaction bundles, clinically validated FHIR parsing |
+| Approved local `.sqlite` | `discover_approved_sqlite_schema` | Read-only *ordinary named tables*, schema and null metadata | Arbitrary SQL, views, remote PostgreSQL/SQL Server, network/linked servers, automatic key or code interpretation |
+| Approved local `.ndjson` | `discover_approved_fhir_ndjson_schema` | Single declared FHIR resource type per file, top-level field and JSON-type profiling | Remote FHIR endpoints, OAuth, Bulk Data API downloads, transaction bundles, clinically validated FHIR parsing |
 | All of Us participant CDR | None in this module | **Not accepted** | Local/HPC CDR extraction or Workbench bypass |
 
-Both APIs require an absolute file path, an \`ExecutionPolicy\` with approved
-roots, and a source manifest containing \`source_system\`, \`source_release\`,
-\`table_name\` and \`classification\`. Restricted hospital sources additionally
+Both APIs require an absolute file path, an `ExecutionPolicy` with approved
+roots, and a source manifest containing `source_system`, `source_release`,
+`table_name` and `classification`. Restricted hospital sources additionally
 require the existing actor/reviewer/institutional attestations and source-use
 declaration. These are policy checks, not proof of external access rights.
 They never log rows, publish records, approve mappings or authorize exports.
@@ -56,8 +56,8 @@ assert report["authorized_for_export"] is False
 ~~~
 
 This example assumes an **already created synthetic-only SQLite database**
-containing a \`labs\` table. The function opens local SQLite in read-only
-mode, with \`PRAGMA query_only\`, a fixed SELECT of an identifier-validated
+containing a `labs` table. The function opens local SQLite in read-only
+mode, with `PRAGMA query_only`, a fixed SELECT of an identifier-validated
 ordinary table, a consistent read transaction, and no caller-supplied SQL.
 Views/virtual tables, symlinks, ambiguous columns, SQLite BLOB values,
 nontext clinical keys/codes and out-of-root files are rejected.
@@ -65,11 +65,11 @@ nontext clinical keys/codes and out-of-root files are rejected.
 SQLite values are **lexically normalized to text for metadata inspection**:
 the S01 physical type profile **does not represent native SQLite storage
 types**, numerical validity, medical codes or medication exposure.
-\`physical_storage_dtype_validated=False\` is always returned.
+`physical_storage_dtype_validated=False` is always returned.
 
 Default batches are at most 1,000 rows and 256 fields, using a 128 KiB
-SQLite row-size constraint on drivers that support \`setlimit\`.
-Python 3.9 drivers without \`setlimit\` are restricted to SQLite files
+SQLite row-size constraint on drivers that support `setlimit`.
+Python 3.9 drivers without `setlimit` are restricted to SQLite files
 no larger than 32 MiB; large files must undergo additional approved
 environmental/driver validation. These limits do not prove safe operation
 for arbitrary untrusted databases, nor certify immutable source snapshots.
@@ -106,9 +106,9 @@ union of top-level attributes while accommodating FHIR optional fields.
 Only JSON *type markers* (e.g., string, number, object) enter the S01 scan,
 never patient IDs, text or clinical values. The two passes are checked for
 byte-hash agreement and ordinary file modification; the resulting
-\`fhir_shape_fingerprint_sha256\` includes resource type and JSON value
+`fhir_shape_fingerprint_sha256` includes resource type and JSON value
 type signatures. A non-null top-level JSON type conflict is marked
-\`BLOCK_FHIR_JSON_TYPE_DRIFT\`.
+`BLOCK_FHIR_JSON_TYPE_DRIFT`.
 
 FHIR top-level fields and types are **not** validated against full FHIR
 profiles, cardinality, references, nested extensions, terminology or
