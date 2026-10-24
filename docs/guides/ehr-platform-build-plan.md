@@ -234,7 +234,7 @@ independent institutional verification. All of Us participant-level CDR
 records are **not** accepted by this local file intake; its authorized
 Workbench-specific connector remains a separate task.
 
-**Isolated exercise evidence:** 14 S02 wrapper smoke cases passed using
+**Isolated exercise evidence:** 15 S02 wrapper smoke cases passed using
 local stand-in implementations of pre-existing source/governance/discovery
 dependencies; one Parquet case was skipped because `pyarrow` was not
 installed. This verifies the new wrapper's basic control flow, **not**
