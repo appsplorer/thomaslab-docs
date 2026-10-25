@@ -62,7 +62,7 @@ The graph model deliberately does not represent SQL joins, arbitrary Python tran
 
 ## Testing and acceptance
 
-A **36/36-test combined synthetic S17/S18 suite** passed locally on Python 3.13.5. S18 tests covered exact graph fingerprints, source approval/fingerprint mismatch, cross-site denial, unknown official tables, unreviewed fan-out, multi-table joins requiring site keys and review IDs, and unsafe field name / SQL-snippet rejection. The focused harness used an S09-compatible fake approval registry and the same staging/OMOP *interfaces*, not the complete actual private Core dependencies. The exact new S18 source and combined test file have Git blob matches to their locally tested counterparts.
+A **36/36-test combined synthetic S17/S18 suite** passed locally on Python 3.13.5. S18 tests covered exact graph fingerprints, source approval/fingerprint mismatch, cross-site denial, unknown official tables, unreviewed fan-out, multi-table joins requiring site keys and review IDs, and unsafe field name / SQL-snippet rejection. The 36 locally executed focused tests used an S09-compatible fake approval registry and the same staging/OMOP *interfaces*. A **37th test is now committed**, exercising an actual `AdapterRegistry` instance and rejection of a tampered approved-record content digest; that new integration case is **not yet runtime-verified** on the complete private Core checkout. The exact new S18 source and combined test file have Git blob matches to their locally tested counterparts.
 
 The full private Core import graph, Python 3.9 runtime, HPC, independently clinician-approved joins, actual source cardinalities and OMOP value-level correctness are still unverified.
 
