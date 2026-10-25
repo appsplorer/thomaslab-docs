@@ -942,3 +942,28 @@ remain open; Core PR #34 remains draft.
 source crosswalk for P0-02, provider-signed license and SHA-verifiable
 vocabulary import for P2-01/P2-02, and full Core/Python 3.9/Slurm
 integration on an exact candidate SHA.
+
+
+## Session S17 — governed full-package Athena terminology import (25 October 2026)
+
+`thomaslab.adaptive.athena_import.import_athena_full_package` imports exactly the nine official Athena full-package TSV vocabulary files into a private, release-specific SQLite review store. It integrates with the **S16 `TerminologyReleaseRegistry`** for exact release/declared SHA-256 verification and rechecked external entitlement, with existing Core `ExecutionPolicy` governed input/output roots and nonexporting institutional/HPC mode. It rejects incompatible delta/CPT4 extra packages, corrupt/unapproved ZIPs, encrypted entries, high decompression ratios, bad UTF-8 and table headers, oversized rows and archives, and ambiguous/corrupt vocabulary concept references. Configurable row, ZIP, decompressed, physical-line, batch and SQLite byte ceilings bound resource use. Imports are staged inside private owner-only folders with no overwrite; failed attempts remove incomplete stores.
+
+The SQLite schema preserves **lexical source vocabulary fields as TEXT**, not native official OMOP datatype constraints; no clinical concept mappings, signed license evidence, public export or DQD claims are made. The source must remain within separately licensed institutional storage. The entire Athena pack SHA is checked against the **declared S16 registry SHA**, which is not proof the publisher or institutional license authority signed that declaration. No actual Athena package was imported during synthetic testing.
+
+[Read S17 full importer API and licensing restrictions](../reference/functions/athena_import.md).
+
+**P2-02 remains OPEN:** production/clinical acceptance requires an actual permitted Athena release, verified issuer package/content hashes and licensing, retained restricted-source storage, large-scale quality testing and full Core/Python 3.9/HPC validation.
+
+## Session S18 — typed source → canonical staging → OMOP dependency graph (25 October 2026)
+
+`thomaslab.adaptive.etl_graph.build_reviewed_etl_graph` creates a deterministic SHA-256 identified **non-executable** graph spanning approved source adapters, the S10 person/encounter/clinical_event staging families, and only official tables from the S11 pinned OHDSI v5.4.3 catalog. It invokes S09's `_approval` to require a verified approved source adapter with complete full-source validation and fingerprint/source-release/table binding, checks each field map against the approved adapter and canonical/OMOP table, and disallows unapproved extra columns or arbitrary executable transform expressions.
+
+Distinct site scopes cannot be mixed. Multi-source staging joins require explicit site-isolated key pairs and review references on each inbound edge. One-to-many and multi-target fan-out require separate review references; no join is actually run, no cross-hospital identity is reconciled and no approval is inferred from these reference strings. Outputs always set `compiled_sql=False`, `transformations_executed=False`, `concept_mapping_validated=False` and `dataset_release_authorized=False`.
+
+[Read S18 typed graph and no-execution boundaries](../reference/functions/etl_graph.md).
+
+**Combined local evidence:** **36/36 synthetic tests PASS**, Python 3.13.5, pytest; test source and both new production module Git blob SHA identities verified against exact executed copies. Tests include invented nine-table ZIP read/write and SQLite query, source entitlement denial, corrupt package rollback, unapproved graph revisions, multi-table source joins, cross-site block and review-only fan-out. The isolated test harness uses synthetic substitutes for **Core governance**, S11 full catalog and S16 registry (and S09's approval contract) rather than the full exact-head Core dependency graph. No official licensed vocabulary pack, real EHR, actual Python 3.9 interpreter, Slurm HPC, full CI/Ruff or scientific/clinical acceptance was tested.
+
+**Tracker:** P3-01 `LOCAL_TEST_PASS` for the complete *bounded metadata-only typed graph* design; accepted remains false. P2-02 stays `OPEN` with S17 local subcomponent evidence. Totals **10/46 local scoped deliverables (21.7%), 36/46 OPEN (78.3%), 0/46 independently source-scientifically accepted**. The separate executable ETL compiler P3-02, join validity P3-03, OMOP record builders P3-04, licensed production sources and source security controls remain OPEN. Core PR #34 stays draft.
+
+**Next gated milestones:** S19/P2-02 licensed full-package acceptance and bounded production vocab quality suite when institutional source access exists; S20/P3-02 allowlisted no-arbitrary-execution transformation compiler and S21/P3-03 protected site/time join contracts, plus exact-SHA Core/Python 3.9/Slurm QA.
