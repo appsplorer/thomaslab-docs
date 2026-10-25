@@ -867,3 +867,78 @@ verification and signed grant manifests, S14 central audit+egress
 enforcement, P0-05 compliant archive receipts, P1-03 source IAM and
 actual exact-SHA full Core/HPC acceptance before real hospital data is
 used or a dataset is released.
+
+
+## Session S15 — site-scoped pseudonymous identity safety (25 October 2026)
+
+`thomaslab.adaptive.site_identity` implements bounded **HMAC-SHA-256**
+source-identifier pseudonymization using explicit source site, source
+system, original ID namespace, entity grain (person/encounter/event) and
+site key version. Source IDs remain lexical (leading zeros preserved).
+Separate sites, key versions and entity grains yield different derived
+tokens even for the same source ID. Weak/nonbytes key material,
+noncanonical IDs, unknown grain, missing key provider and oversized
+batches fail closed. The batch API returns *only derived pseudonyms*.
+Cross-site linkage requests are metadata-only and **always blocked**.
+
+The cryptographic key must come from **institution-managed KMS/HSM or
+enclave custody** with independent permissions, key rotation/retention
+and full actor/purpose audit. This source-only module **does not**
+authenticate the provider callback; outputs mark KMS and institutional
+linkage approval as not verified. Pseudonyms remain sensitive patient
+data, not an automatic de-identification guarantee. No real IDs were
+used in development.
+
+**Focused tests: 39/39 passed** locally on Python 3.13.5, pytest 9.0.2,
+with source/test blob hashes matching the exact executed code,
+Python 3.9–3.13 grammar and compileall PASS. Full current Core,
+approved Herts HPC, institutional custody, IRB/DUA and clinical
+reidentification-risk approvals were not tested.
+
+[Read S15 keyed identity guide](../reference/functions/site_identity.md).
+
+**Ledger: P0-02 remains OPEN** until independently approved
+pseudonymization/key administration, site linkage design, controlled
+data stewardship and hospital acceptance are demonstrated.
+
+## Session S16 — clinical terminology registry, releases and entitlements (25 October 2026)
+
+`thomaslab.adaptive.terminology_registry` implements **metadata-only**
+source/release pinning for OHDSI Athena, SNOMED CT, LOINC, RxNorm,
+UCUM, UMLS, ICD-10-CM, CPIC and NHS dm+d. A distinct source release
+holds declared pack SHA-256, license model/reference, institution,
+jurisdiction, allowed purposes and expiry. Registration persists
+bounded 0600 JSON metadata records in an existing private 0700
+directory, with identity/digest checks and write-once-by-API version
+semantics. Lookup rechecks the **external institutional entitlement
+verifier**, including a revocation denial path.
+
+The supplied verifier callback is not automatically trusted, and
+**declared** pack SHA-256 is not a byte-validated vocabulary source.
+No licensed concepts are downloaded, shared, indexed, imported or
+mapped to clinical source codes. The existing S11 5.4 target schema
+does not imply entitlement to Athena vocabularies.
+
+**Focused tests: 30/30 passed** locally on Python 3.13.5, pytest 9.0.2,
+with exact source/test Git-blob matches and Python 3.9–3.13 syntax
+and compilation PASS. Actual institutional licensing, original pack
+byte checks, full Core/HPC compatibility and clinical mapping have
+not passed.
+
+[Read S16 terminology registry guide](../reference/functions/terminology_registry.md).
+
+**Ledger: P2-01 remains OPEN** because source entitlement/legal
+evidence and real vocabulary release checks still require independent
+institutional service integration.
+
+**Combined S15/S16:** **69/69 focused synthetic tests PASS**;
+the two whole 46-item requirements are **not** independently fulfilled.
+Cumulative completion stays **9/46 locally completed scoped tasks
+(19.6%), 37/46 OPEN, 0/46** accepted for protected hospital data.
+P0-01/P0-05/P0-06 and P1-03 institutional security/source gates
+remain open; Core PR #34 remains draft.
+
+**Next dependencies:** independent key custodian and permissioned
+source crosswalk for P0-02, provider-signed license and SHA-verifiable
+vocabulary import for P2-01/P2-02, and full Core/Python 3.9/Slurm
+integration on an exact candidate SHA.
