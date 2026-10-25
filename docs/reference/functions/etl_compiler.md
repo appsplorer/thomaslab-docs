@@ -32,7 +32,7 @@ The actual graph must already have originated from the original protected S18 re
 
 ## Testing and next gates
 
-34/34 S19+S20 synthetic focused tests passed locally using Python 3.13.5; the implementation and regression-test Git blobs match the tested source. Python 3.9–3.13 grammar parsing passed. This test setup uses invented graph/catalog metadata, **not** the entire private Core dependency graph, the additional pending S18 AdapterRegistry integration test, actual Python 3.9 runtime, or approved HPC.
+35/35 S19+S20 synthetic focused tests passed locally using Python 3.13.5; the implementation and regression-test Git blobs match the tested source. Python 3.9–3.13 grammar parsing passed. This test setup uses invented graph/catalog metadata, **not** the entire private Core dependency graph, the additional pending S18 AdapterRegistry integration test, actual Python 3.9 runtime, or approved HPC.
 
 **P3-02 `LOCAL_TEST_PASS` at its bounded, typed non-executing IR compiler scope only**, not executable ETL or scientific acceptance. Before patient-data processing, separately implement security-reviewed ETL execution/row builders, site/time joins, approval-and-revocation checks, OMOP vocabulary validation, row reconciliation, logging, clinical sign-off, and source licensing/IRB/DUA.
 
