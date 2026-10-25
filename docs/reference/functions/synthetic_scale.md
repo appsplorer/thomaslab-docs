@@ -41,3 +41,18 @@ PY
 **P4-02 still open:** measure credible peak RSS, disk I/O, timings and failure recovery at 1m, 10m and 100m synthetic events on approved CPU allocations. Confirm reproducibility, batching, environment provenance and actual memory ceilings. Neither the generated files nor the timing metrics constitute validation of clinical ETL, source authorization or any patient-record export.
 
 Related: [EHR build plan](../../guides/ehr-platform-build-plan.md), [incremental rebuild](incremental_rebuild.md), [release staging](atomic_release_stage.md).
+
+
+## Slurm exact-SHA job template
+
+The private Core candidate also includes **slurm/synthetic_scale.sbatch**. It requires an approved allocation, a clean checkout at THOMASLAB_EXPECTED_SHA, an absolute approved Python executable, and verifies that the Python module comes from the same checkout. The job emits non-patient JSON summaries with Linux process max-RSS, but does not certify end-to-end memory bounds.
+
+~~~bash
+export THOMASLAB_EXPECTED_SHA="$(git rev-parse HEAD)"
+export THOMASLAB_PYTHON="$(command -v python)"
+export THOMASLAB_SCALE_ROWS=1000000
+export THOMASLAB_SCALE_MODE=stream
+sbatch --partition=core256 --cpus-per-task=4 --mem=16G --time=04:00:00 --export=ALL slurm/synthetic_scale.sbatch
+~~~
+
+For optional columnar mode, set THOMASLAB_SCALE_MODE=columnar and provide an institution-approved THOMASLAB_HPC_ROOT with an existing private benchmarks/synthetic_columnar directory; install approved compatible dependencies beforehand. For the 10m or 100m test, change THOMASLAB_SCALE_ROWS only after validating workload suitability, quotas and scheduling. Never submit synthetic profiling workloads with real patient records.
