@@ -269,6 +269,9 @@ nav:
       - 'reviewed typed multi-table ETL dependency graph': reference/functions/etl_graph.md
       - 'allowlisted ETL intermediate-representation compiler': reference/functions/etl_compiler.md
       - 'protected site-identity and as-of joins': reference/functions/protected_joins.md
+      - 'Synthetic OMOP core field-shape and source-value builder': reference/functions/omop_core_builder.md
+      - 'Versioned nonstandard administration, note, PGx and imaging sidecars': reference/functions/extension_tables.md
+      - 'Synthetic quarantine and source-to-target reconciliation': reference/functions/quarantine_reconcile.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
