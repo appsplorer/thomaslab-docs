@@ -83,6 +83,7 @@ nav:
       - 'Release and responsibility roadmap': guides/release-roadmap.md
       - 'Real dataset acceptance backlog (24 Oct)': guides/real-dataset-acceptance-plan.md
       - 'Adaptive EHR engineering build plan': guides/ehr-platform-build-plan.md
+      - 'Synthetic scalability benchmarks (S26/S27)': reference/functions/synthetic_scale.md
   - 'Start here':
       - 'Home': index.md
       - 'First Session': getting-started/first-session.md
