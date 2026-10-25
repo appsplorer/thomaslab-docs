@@ -265,6 +265,8 @@ nav:
       - 'audit journal, disclosure screening and restricted egress': reference/functions/audit_egress.md
       - 'site-scoped HMAC pseudonymous identity': reference/functions/site_identity.md
       - 'controlled terminology source release registry': reference/functions/terminology_registry.md
+      - 'governed Athena full-package importer': reference/functions/athena_import.md
+      - 'reviewed typed multi-table ETL dependency graph': reference/functions/etl_graph.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
