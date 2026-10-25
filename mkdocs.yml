@@ -87,6 +87,8 @@ nav:
       - 'Lineage and clinical observability (S28/S29)': reference/functions/lineage_observability.md
       - 'Clinical time-zero and censoring gate (S30)': reference/functions/study_safety_gate.md
       - 'Cross-hospital held-out-site transport (S31)': reference/functions/site_transport_gate.md
+      - 'Governed HPC candidate matrix (S32)': reference/functions/hpc_acceptance_contract.md
+      - 'Centralized/federated synthetic aggregates (S33)': reference/functions/federated_aggregate.md
   - 'Start here':
       - 'Home': index.md
       - 'First Session': getting-started/first-session.md
