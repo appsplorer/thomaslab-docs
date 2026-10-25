@@ -43,7 +43,7 @@ Use site-specific HMAC tokens only under independent P0-02 identity-service perm
 
 ## Verification and remaining work
 
-34/34 S19+S20 focused synthetic tests passed on Python 3.13.5, including invalid grain, source/site mismatch, missing review, tampered IR, future availability, timezone ambiguity and recorded-before-event cases. Exact new code/test Git blobs match local tests and Python 3.9–3.13 grammar checks passed.
+35/35 S19+S20 focused synthetic tests passed on Python 3.13.5, including invalid grain, source/site mismatch, missing review, tampered IR, future availability, timezone ambiguity and recorded-before-event cases. Exact new code/test Git blobs match local tests and Python 3.9–3.13 grammar checks passed.
 
 **P3-03 stays OPEN.** The source hospital's time semantics, actual pseudonym/encounter key provenance, approved identity-service callback, longitudinal patient/visit linkage, independent clinical review, controlled execution, large-scale HPC join cardinality tests and full current-SHA Core regression remain unverified.
 
