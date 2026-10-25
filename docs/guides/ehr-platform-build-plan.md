@@ -1005,3 +1005,26 @@ New `thomaslab.adaptive.quarantine_reconcile` checks bounded invented source→t
 References: [S21 core builder](../reference/functions/omop_core_builder.md), [S22 four sidecars](../reference/functions/extension_tables.md), [S23 quarantine/reconciliation](../reference/functions/quarantine_reconcile.md).
 
 **Next acceptance:** full exact Core commit tests and approved Python 3.9/HPC; source IAM/key governance and site temporal relationships; an independently reviewed full OMOP table construction workflow with row identity reconciliation, OHDSI vocabulary/licensing and clinical review; institution-approved encrypted quarantine and WORM release/evidence storage.
+
+
+## S24 — Atomic synthetic release candidate staging, release-bound reviews (25 October 2026)
+
+**Implemented:** `thomaslab.adaptive.atomic_release_stage` validates an existing S12 three-stage, SHA-256 content-addressed manifest and copies **invented synthetic** source/staging/OMOP artifact files into a new privately staged candidate. It requires an explicitly nonexporting Core policy, approved input/output roots, disjoint absolute 0700 directories, no symlinks, finite size limits (default 32 MiB per artifact, 128 MiB total) and exclusive per-release writer lock. Each copy is streamed in bounded chunks with file-descriptor identity/size and content-hash checks. It uses private temporary directory and file writes, fsync plus atomic same-filesystem directory rename; failures before final rename remove partial staging. The candidate stores `candidate_metadata.json` with explicit release-blocked flags and no patient values returned.
+
+A second S24 function validates **declarations** of steward/privacy roles and matching release IDs/timestamps with separation of duty, but does **not** cryptographically authenticate the reviewers, attest institutional access or sign an archive. An atomic filesystem directory is not WORM/object-lock or institution-approved retention. **P3-07 remains OPEN** pending actual IAM, signed approvals, provider-verified immutable archive/evidence, disclosure review and backup/recovery. Stale process locks/temp directories after abnormal interruption need admin review, never silent cleanup.
+
+[S24 candidate staging and signoff guide](../reference/functions/atomic_release_stage.md).
+
+## S25 — Change-sensitive, idempotent incremental plan and private checkpoint (25 October 2026)
+
+**Implemented:** `thomaslab.adaptive.incremental_rebuild` compares two valid **synthetic-only S12** release manifests for the same source system and classification. It detects declared changes in artifact SHA-256, byte length, approved mapping revision, dependencies, added/removed objects, source-release and S01 source schema fingerprints. It transitively invalidates all affected source→staging→OMOP descendants and produces a deterministic metadata-only rebuild plan with expected artifact hashes and dependencies.
+
+The S25 progress journal stores a bounded, SHA-256-sealed **declaration-only** checkpoint inside a private 0700 directory, with exclusive writer locking, 0600 files, fsync, atomic updates, optimistic revision checks, idempotent replay and source-to-target dependency-order checks. A restarted process can inspect the remaining declared tasks. **This does not independently verify that any ETL task actually ran or that expected output bytes exist**; it cannot enable a protected dataset release. Resuming after an interrupted or potentially tampered job requires institutional authorization and reinspection. **P3-08 remains OPEN** pending real authorized CDC/incremental source reads, externally attested results, multi-worker safe recovery, validation at actual source scale, source key/temporal review and full HPC QA.
+
+[S25 incremental rebuild and restart guide](../reference/functions/incremental_rebuild.md).
+
+**S24/S25 combined focused tests:** **45/45 PASS** locally on Python 3.13.5; Python 3.9–3.13 AST syntax parsing PASS. The two actual new modules plus the regression file have Git blob SHA identities matching the locally run copies. Test harness used locally compatible S12 manifest and Core governance stand-ins; no full actual private Core Python 3.9/HPC test, independent IAM, WORM or clinical-data acceptance passed. Both modules reject `RESTRICTED` sources; no protected hospital, MIMIC-IV or All of Us records were opened, exported or processed.
+
+**Ledger: P3-07 OPEN and P3-08 OPEN**. Their partial software progress is recorded without upgrading a complete-scoped task. Cumulative **12/46 locally tested completed requirements (26.1%), 34/46 OPEN (73.9%), 0/46 independently accepted for real patient datasets**. Core draft PR #34 is not merged to main.
+
+**Next acceptance priorities:** exact-SHA full Core Python 3.9/quality/Slurm suite; external data custodian approval and KMS; provider-verified compliant immutable archive and signed signoffs; approved source CDC/incremental execution with verifiable output checksum and source-target quarantine reconciliation.
