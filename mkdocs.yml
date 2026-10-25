@@ -263,6 +263,8 @@ nav:
       - 'research release manifest and immutable archive preflight': reference/functions/release_manifest.md
       - 'source-use classification and institutional retention contract': reference/functions/source_use_contract.md
       - 'audit journal, disclosure screening and restricted egress': reference/functions/audit_egress.md
+      - 'site-scoped HMAC pseudonymous identity': reference/functions/site_identity.md
+      - 'controlled terminology source release registry': reference/functions/terminology_registry.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
