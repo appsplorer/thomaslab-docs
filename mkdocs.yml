@@ -267,6 +267,8 @@ nav:
       - 'controlled terminology source release registry': reference/functions/terminology_registry.md
       - 'governed Athena full-package importer': reference/functions/athena_import.md
       - 'reviewed typed multi-table ETL dependency graph': reference/functions/etl_graph.md
+      - 'allowlisted ETL intermediate-representation compiler': reference/functions/etl_compiler.md
+      - 'protected site-identity and as-of joins': reference/functions/protected_joins.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
