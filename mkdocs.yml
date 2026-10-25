@@ -89,6 +89,9 @@ nav:
       - 'Cross-hospital held-out-site transport (S31)': reference/functions/site_transport_gate.md
       - 'Governed HPC candidate matrix (S32)': reference/functions/hpc_acceptance_contract.md
       - 'Centralized/federated synthetic aggregates (S33)': reference/functions/federated_aggregate.md
+      - 'Jupyter synthetic dataset explorer (S34)': reference/functions/synthetic_explorer.md
+      - 'Phenotype candidate registry (S35)': reference/functions/phenotype_library.md
+      - 'Study mart and methods reports (S36)': reference/functions/synthetic_study_mart.md
   - 'Start here':
       - 'Home': index.md
       - 'First Session': getting-started/first-session.md
