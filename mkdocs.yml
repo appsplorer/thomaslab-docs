@@ -272,6 +272,8 @@ nav:
       - 'Synthetic OMOP core field-shape and source-value builder': reference/functions/omop_core_builder.md
       - 'Versioned nonstandard administration, note, PGx and imaging sidecars': reference/functions/extension_tables.md
       - 'Synthetic quarantine and source-to-target reconciliation': reference/functions/quarantine_reconcile.md
+      - 'Atomic synthetic candidate staging and signoff declarations': reference/functions/atomic_release_stage.md
+      - 'Incremental dependency planning and resumable checkpoints': reference/functions/incremental_rebuild.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md
