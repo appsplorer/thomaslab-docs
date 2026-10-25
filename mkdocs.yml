@@ -84,6 +84,7 @@ nav:
       - 'Real dataset acceptance backlog (24 Oct)': guides/real-dataset-acceptance-plan.md
       - 'Adaptive EHR engineering build plan': guides/ehr-platform-build-plan.md
       - 'Synthetic scalability benchmarks (S26/S27)': reference/functions/synthetic_scale.md
+      - 'Lineage and clinical observability (S28/S29)': reference/functions/lineage_observability.md
   - 'Start here':
       - 'Home': index.md
       - 'First Session': getting-started/first-session.md
