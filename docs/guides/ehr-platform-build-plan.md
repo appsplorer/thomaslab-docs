@@ -1028,3 +1028,12 @@ The S25 progress journal stores a bounded, SHA-256-sealed **declaration-only** c
 **Ledger: P3-07 OPEN and P3-08 OPEN**. Their partial software progress is recorded without upgrading a complete-scoped task. Cumulative **12/46 locally tested completed requirements (26.1%), 34/46 OPEN (73.9%), 0/46 independently accepted for real patient datasets**. Core draft PR #34 is not merged to main.
 
 **Next acceptance priorities:** exact-SHA full Core Python 3.9/quality/Slurm suite; external data custodian approval and KMS; provider-verified compliant immutable archive and signed signoffs; approved source CDC/incremental execution with verifiable output checksum and source-target quarantine reconciliation.
+
+
+## S32/S33 — governed HPC plans and conservative federated synthetic aggregates (25 October 2026)
+
+**S32 / P4-07 PARTIAL:** Exact-commit, partition-allowlisted, Python 3.9-aware, nonexecuting CPU/GPU job profiles with SHA-256-bound metadata are implemented. A separate Slurm template refuses an unknown Git checkout or missing allocation evidence and routes CPU work to the existing full Core QA runner; optional GPU smoke checks only CUDA availability and invented 32x32 matrix arithmetic. The Slurm launcher and GPU preflight have NOT run on HPC; site partition/QoS, actual Python 3.9 runtime, full Core CI and independent software/security review are still open. [S32 candidate HPC contracts](../reference/functions/hpc_acceptance_contract.md).
+
+**S33 / P4-08 PARTIAL:** A nonexecuting synthetic-only centralized/federated plan binds site and cohort/phenotype/vocabulary digests and refuses patient rows. Site reports require exact plan/release, event and complement cell counts each >=11, and a complete set of unique site reports. Pooled counters always remain nonexportable; actual cross-query differencing, IRB/DUA, authorized hospital-local computation, linked-patient overlap and independent disclosure review are NOT implemented. [S33 aggregate study contracts](../reference/functions/federated_aggregate.md).
+
+S32/S33 **77/77 focused synthetic Python 3.13.5 tests passed** locally, Python 3.9–3.13 grammar parsing and Bash syntax checks passed. These focused results are not complete Core/Python 3.9 runtime, actual Slurm CUDA, source scientific validation or real-patient release approval. **P4-07 and P4-08 remain OPEN**. The cumulative ledger remains **12/46 locally accepted scoped engineering deliverables, 34/46 OPEN and 0/46 independently accepted for real patient data**. Full exact-HEAD HPC acceptance is intentionally postponed.
