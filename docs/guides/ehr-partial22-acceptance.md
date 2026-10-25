@@ -6,8 +6,10 @@
 
 The private Core candidate adds two complementary checks:
 
-1. scripts/ehr_partial_acceptance.py — a deterministic 22-requirement audit against the exact 46-task ledger. Maps the partial requirements to **20 unique focused test files** and records their outstanding independent acceptance conditions. The default is an inventory check; it does not run tests or authorize a release.
-2. tests/test_ehr_partial_core_integration.py — imports **21 actual Core modules** from the editable checkout, without surrogate modules, and checks that a synthetic S12 manifest works with S25 incremental planning, S28 lineage and S29 observability. This must be executed in the full repository environment.
+1. scripts/ehr_partial_acceptance.py — a deterministic 22-requirement audit against the exact 46-task ledger. Maps the partial requirements to **21 unique focused test files** and records their outstanding independent acceptance conditions. The default is an inventory check; it does not run tests or authorize a release.
+2. tests/test_ehr_partial_core_integration.py — imports **22 actual Core modules** from the editable checkout, without surrogate modules, and checks that a synthetic S12 manifest works with S25 incremental planning, S28 lineage and S29 observability. This must be executed in the full repository environment.
+
+Separately, P3-08 now has the opt-in `rebuild_verification` module: checks the real synthetic artifact's private-file SHA-256 before recording an S25 checkpoint declaration. Its 16 focused isolated synthetic tests passed locally; the full-Core S12/S25 integration test is committed but not executed. **Storage immutability and independent signing are still absent.**
 
 The first utility also has 14 synthetic local regression cases in tests/test_ehr_partial_acceptance.py: **14/14 PASS on Python 3.13.5** with Python 3.9–3.13 AST parsing. The real-Core integration suite is committed but **has not passed execution in the complete Core environment**. The GitHub-hosted Core workflows currently fail and returned no usable execution-step logs during the audit.
 
@@ -37,7 +39,7 @@ To test the original-Core imports without submitting HPC work:
 python -m pytest -q tests/test_ehr_partial_core_integration.py
 ~~~
 
-For a *complete focused retest* of the 20 mapped regression files, using an exact clean checkout and approved local Python installation (this may take substantially longer):
+For a *complete focused retest* of the 21 mapped regression files, using an exact clean checkout and approved local Python installation (this may take substantially longer):
 
 ~~~bash
 export THOMASLAB_EXPECTED_SHA="$(git rev-parse HEAD)"
