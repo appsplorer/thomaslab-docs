@@ -85,6 +85,8 @@ nav:
       - 'Adaptive EHR engineering build plan': guides/ehr-platform-build-plan.md
       - 'Synthetic scalability benchmarks (S26/S27)': reference/functions/synthetic_scale.md
       - 'Lineage and clinical observability (S28/S29)': reference/functions/lineage_observability.md
+      - 'Clinical time-zero and censoring gate (S30)': reference/functions/study_safety_gate.md
+      - 'Cross-hospital held-out-site transport (S31)': reference/functions/site_transport_gate.md
   - 'Start here':
       - 'Home': index.md
       - 'First Session': getting-started/first-session.md
