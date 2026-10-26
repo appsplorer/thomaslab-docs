@@ -45,7 +45,7 @@ The workbench must reuse Core's existing modules, not introduce a parallel clini
 python -m pytest -q tests/test_synthetic_etl_materializer.py tests/test_mapping_drift.py tests/test_mapping_handoff.py
 ```
 
-The focused S45 suite ran **51/51 PASS on local Python 3.13** with Python 3.9–3.13 AST syntax checks. These are isolated contract tests. Full original-Core imports, the old regression suite, Python 3.9 **runtime**, Core CI, HPC, real hospitals and publication-level scientific review remain **NOT ACCEPTED**.
+The focused S45 suite ran **60/60 PASS on local Python 3.13** with Python 3.9–3.13 AST syntax checks. These are isolated contract tests. Full original-Core imports, the old regression suite, Python 3.9 **runtime**, Core CI, HPC, real hospitals and publication-level scientific review remain **NOT ACCEPTED**.
 
 ### Machine-readable acceptance
 
