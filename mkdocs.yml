@@ -84,6 +84,7 @@ nav:
       - 'Real dataset acceptance backlog (24 Oct)': guides/real-dataset-acceptance-plan.md
       - 'Adaptive EHR engineering build plan': guides/ehr-platform-build-plan.md
       - '22 partial milestones: acceptance backlog': guides/ehr-partial22-acceptance.md
+      - 'S37–S41 research-readiness candidates': guides/ehr-s37-s41-readiness.md
       - 'Verified synthetic rebuild checkpoint': reference/functions/rebuild_verification.md
       - 'Synthetic scalability benchmarks (S26/S27)': reference/functions/synthetic_scale.md
       - 'Lineage and clinical observability (S28/S29)': reference/functions/lineage_observability.md
