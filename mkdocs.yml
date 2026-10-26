@@ -85,6 +85,7 @@ nav:
       - 'Adaptive EHR engineering build plan': guides/ehr-platform-build-plan.md
       - '22 partial milestones: acceptance backlog': guides/ehr-partial22-acceptance.md
       - 'S37–S41 research-readiness candidates': guides/ehr-s37-s41-readiness.md
+      - 'S46 governed EHR staging and synthetic acceptance': guides/governed-etl-s46-acceptance.md
       - 'Verified synthetic rebuild checkpoint': reference/functions/rebuild_verification.md
       - 'Adaptive clinical terminology dictionary (S42)': reference/functions/adaptive_dictionary.md
       - 'Offline terminology JSON catalogue (S43)': reference/functions/clinical_terminology_catalog.md
