@@ -88,6 +88,7 @@ nav:
       - 'Verified synthetic rebuild checkpoint': reference/functions/rebuild_verification.md
       - 'Adaptive clinical terminology dictionary (S42)': reference/functions/adaptive_dictionary.md
       - 'Offline terminology JSON catalogue (S43)': reference/functions/clinical_terminology_catalog.md
+      - 'Clinical graph & mapping review (S44)': reference/functions/s44_clinical_intelligence_capabilities.md
       - 'Synthetic scalability benchmarks (S26/S27)': reference/functions/synthetic_scale.md
       - 'Lineage and clinical observability (S28/S29)': reference/functions/lineage_observability.md
       - 'Clinical time-zero and censoring gate (S30)': reference/functions/study_safety_gate.md
