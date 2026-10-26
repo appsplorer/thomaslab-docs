@@ -43,7 +43,7 @@ assert triage['tasks'][0]['review_lane'] == 'CLINICAL_EXPERT_REQUIRED'
 | Clinical knowledge graph | S42 relationship table + S44 bounded traversal | Licensed, complete graph provenance, curator-approved semantics and scale |
 | Risk-calibrated mapping | S43 candidate abstention + S44 triage | Gold-standard calibration, clinically measured unsafe-match rate |
 | Active-learning review | S08 review queue + S44 reviewer priority | Actual human feedback loop, reviewer assignment/role authority, adaptive model validation |
-| Incremental ingestion/cache | S25 dependency invalidation + S37 byte-verified checkpoint | Approved source CDC, durable result verification at actual scale |
+| Incremental ingestion/cache | S25 dependency invalidation + S25 byte-verified checkpoint | Approved source CDC, durable result verification at actual scale |
 | Quality observability | S29 synthetic site/period counters | Live feeds, OHDSI DQD-style tests, clinical anomaly thresholds |
 | Temporal integrity | S30 timing/censoring/coverage + S36 synthetic mart | Clinical time-zero adjudication, true cohort/mart execution |
 | Lineage | S28 private synthetic lineage | Institutional key management and independent record-level audit |
