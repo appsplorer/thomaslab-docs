@@ -86,6 +86,7 @@ nav:
       - '22 partial milestones: acceptance backlog': guides/ehr-partial22-acceptance.md
       - 'S37–S41 research-readiness candidates': guides/ehr-s37-s41-readiness.md
       - 'Verified synthetic rebuild checkpoint': reference/functions/rebuild_verification.md
+      - 'Adaptive clinical terminology dictionary (S42)': reference/functions/adaptive_dictionary.md
       - 'Synthetic scalability benchmarks (S26/S27)': reference/functions/synthetic_scale.md
       - 'Lineage and clinical observability (S28/S29)': reference/functions/lineage_observability.md
       - 'Clinical time-zero and censoring gate (S30)': reference/functions/study_safety_gate.md
