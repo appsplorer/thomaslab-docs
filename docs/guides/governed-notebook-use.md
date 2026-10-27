@@ -1,7 +1,7 @@
 # Using Thomas Lab notebooks with governed research data
 
 The interactive notebook framework is intended for Jupyter, PyCharm notebooks,
-and Kaggle synthetic/public demonstrations. It does **not** provision user
+and Kaggle **synthetic-only** demonstrations. It does **not** provision user
 accounts, approve datasets, enforce institution-wide storage ACLs, anonymize
 patient records, or confer HIPAA/IRB approval.
 
@@ -10,8 +10,9 @@ patient records, or confer HIPAA/IRB approval.
 1. The institution approves the data-use agreement, study personnel, storage
    volume, compute environment, notebook host, and safe artifact directories.
 2. A named lab data steward classifies each source as `PUBLIC`, `SYNTHETIC`,
-   `INTERNAL_APPROVED`, or `RESTRICTED`. Unclassified is denied. Kaggle accepts
-   only public/synthetic inputs, even if a user edits the local host name.
+   `INTERNAL_APPROVED`, or `RESTRICTED`. Unclassified is denied. Kaggle notebook execution accepts
+   only SYNTHETIC inputs, even if a user edits the local host name. Licensed
+   public research data belong on independently approved local/HPC compute.
 3. The steward registers and independently approves a site/grain-specific
    dataset adapter following full-source validation. Inferred mapping
    suggestions remain drafts until reviewed.

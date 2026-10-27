@@ -69,6 +69,37 @@ markdown_extensions:
       custom_checkbox: true
 
 nav:
+  - 'Choose your role and environment':
+      - 'Role-based paths': getting-started/role-paths.md
+      - 'HPC A-to-Z setup': guides/hpc-a-to-z.md
+      - 'Common healthcare baselines': guides/healthcare-foundation.md
+      - 'All of Us, MIMIC-IV and hospital EHR': guides/dataset-access-and-adapters.md
+      - 'All of Us disclosure controls': guides/aou-disclosure.md
+      - 'Source-aware clinical methods API': guides/clinical-dataset-methods.md
+      - 'Cross-dataset clinical quality contracts': guides/cross-dataset-clinical-quality.md
+      - 'Clinical ML leakage and follow-up': guides/clinical-leakage-and-followup.md
+      - 'Method evidence status': guides/method-readiness.md
+      - 'Glossary': getting-started/glossary.md
+      - 'Release and responsibility roadmap': guides/release-roadmap.md
+      - 'Real dataset acceptance backlog (24 Oct)': guides/real-dataset-acceptance-plan.md
+      - 'Adaptive EHR engineering build plan': guides/ehr-platform-build-plan.md
+      - '22 partial milestones: acceptance backlog': guides/ehr-partial22-acceptance.md
+      - 'S37–S41 research-readiness candidates': guides/ehr-s37-s41-readiness.md
+      - 'S46 governed EHR staging and synthetic acceptance': guides/governed-etl-s46-acceptance.md
+      - 'Verified synthetic rebuild checkpoint': reference/functions/rebuild_verification.md
+      - 'Adaptive clinical terminology dictionary (S42)': reference/functions/adaptive_dictionary.md
+      - 'Offline terminology JSON catalogue (S43)': reference/functions/clinical_terminology_catalog.md
+      - 'Clinical graph & mapping review (S44)': reference/functions/s44_clinical_intelligence_capabilities.md
+      - 'Adaptive EHR ETL, drift and review handoff (S45)': reference/functions/adaptive_ehr_auto_mapping_v2.md
+      - 'Synthetic scalability benchmarks (S26/S27)': reference/functions/synthetic_scale.md
+      - 'Lineage and clinical observability (S28/S29)': reference/functions/lineage_observability.md
+      - 'Clinical time-zero and censoring gate (S30)': reference/functions/study_safety_gate.md
+      - 'Cross-hospital held-out-site transport (S31)': reference/functions/site_transport_gate.md
+      - 'Governed HPC candidate matrix (S32)': reference/functions/hpc_acceptance_contract.md
+      - 'Centralized/federated synthetic aggregates (S33)': reference/functions/federated_aggregate.md
+      - 'Jupyter synthetic dataset explorer (S34)': reference/functions/synthetic_explorer.md
+      - 'Phenotype candidate registry (S35)': reference/functions/phenotype_library.md
+      - 'Study mart and methods reports (S36)': reference/functions/synthetic_study_mart.md
   - 'Start here':
       - 'Home': index.md
       - 'First Session': getting-started/first-session.md
@@ -223,6 +254,43 @@ nav:
       - 'Viz': api/viz.md
   - 'Complete function reference':
       - 'All modules': reference/functions/README.md
+      - 'aou disclosure': reference/functions/aou_disclosure.md
+      - 'healthcare sources': reference/functions/healthcare_sources.md
+      - 'healthcare foundation': reference/functions/healthcare_foundation.md
+      - 'healthcare omop': reference/functions/healthcare_omop.md
+      - 'healthcare aou domains': reference/functions/healthcare_aou_domains.md
+      - 'healthcare aou query': reference/functions/healthcare_aou_query.md
+      - 'healthcare mimic': reference/functions/healthcare_mimic.md
+      - 'healthcare hospital': reference/functions/healthcare_hospital.md
+      - 'healthcare cohorts': reference/functions/healthcare_cohorts.md
+      - 'healthcare quality': reference/functions/healthcare_quality.md
+      - 'clinical leakage': reference/functions/clinical_leakage.md
+      - 'clinical follow-up': reference/functions/clinical_followup.md
+      - 'adaptive schema discovery': reference/functions/schema_discovery.md
+      - 'governed file schema intake': reference/functions/schema_intake.md
+      - 'clinical domain and grain suggestions': reference/functions/clinical_domain_inference.md
+      - 'candidate clinical table relationships': reference/functions/relationships.md
+      - 'governed SQLite and FHIR metadata intake': reference/functions/structured_ingest.md
+      - 'remote PostgreSQL and FHIR connector contracts': reference/functions/remote_ingest.md
+      - 'ranked EHR field suggestions and abstention': reference/functions/field_suggestions.md
+      - 'role-aware EHR mapping review queue': reference/functions/review_queue.md
+      - 'fingerprint-bound approved mapping memory': reference/functions/mapping_memory.md
+      - 'canonical patient encounter and clinical event staging': reference/functions/canonical_dataset.md
+      - 'OMOP CDM 5.4.3 target definitions and proposed extensions': reference/functions/omop54_contract.md
+      - 'research release manifest and immutable archive preflight': reference/functions/release_manifest.md
+      - 'source-use classification and institutional retention contract': reference/functions/source_use_contract.md
+      - 'audit journal, disclosure screening and restricted egress': reference/functions/audit_egress.md
+      - 'site-scoped HMAC pseudonymous identity': reference/functions/site_identity.md
+      - 'controlled terminology source release registry': reference/functions/terminology_registry.md
+      - 'governed Athena full-package importer': reference/functions/athena_import.md
+      - 'reviewed typed multi-table ETL dependency graph': reference/functions/etl_graph.md
+      - 'allowlisted ETL intermediate-representation compiler': reference/functions/etl_compiler.md
+      - 'protected site-identity and as-of joins': reference/functions/protected_joins.md
+      - 'Synthetic OMOP core field-shape and source-value builder': reference/functions/omop_core_builder.md
+      - 'Versioned nonstandard administration, note, PGx and imaging sidecars': reference/functions/extension_tables.md
+      - 'Synthetic quarantine and source-to-target reconciliation': reference/functions/quarantine_reconcile.md
+      - 'Atomic synthetic candidate staging and signoff declarations': reference/functions/atomic_release_stage.md
+      - 'Incremental dependency planning and resumable checkpoints': reference/functions/incremental_rebuild.md
       - 'Annotation': reference/functions/annotation.md
       - 'Bleeding': reference/functions/bleeding.md
       - 'Cardiovascular': reference/functions/cardiovascular.md

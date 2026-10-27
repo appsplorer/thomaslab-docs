@@ -18,3 +18,18 @@ mkdocs serve
 ```
 
 **Safety:** The material is for research and education, not patient care or autonomous clinical decisions. Clinical-data use requires institutional approval, independent scientific review, and an approved research environment.
+
+## Candidate UGA / general HPC and safety handbook
+
+[PR #31](https://github.com/appsplorer/thomaslab-docs/pull/31) adds the
+[HPC A-to-Z guide](docs/guides/hpc-a-to-z.md), [role-based paths](docs/getting-started/role-paths.md),
+[dataset-neutral baselines](docs/guides/healthcare-foundation.md),
+[method readiness](docs/guides/method-readiness.md), and
+[engineering/research gates](docs/guides/release-roadmap.md).
+
+Its corresponding **private software candidate** is
+[Core PR #34](https://github.com/appsplorer/thomaslab-core/pull/34).
+Documentation builds only certify the static site, **not** the correctness,
+merge status or scientific readiness of that software candidate. UGA HPC
+access, private clinical datasets, licensing/IP and IRB/DUA decisions remain
+separate institutional approvals.
